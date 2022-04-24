@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_7" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ed8211ff-fccf-451c-9a4e-0b2075ebdfee">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter1.xml"/>
+	<queryString language="JSON">
+		<![CDATA[user]]>
+	</queryString>
+	<field name="date" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="firstName"/>
+		<fieldDescription><![CDATA[date]]></fieldDescription>
+	</field>
+	<field name="documentList" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="documentList"/>
+		<fieldDescription><![CDATA[documentList]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="381" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="557" height="381" uuid="05a4dede-97de-4836-9195-114755ff921a"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("documentList")]]></dataSourceExpression>
+				<subreportExpression><![CDATA["subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
