@@ -1,0 +1,173 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="disaster">
+      <h2 data-cy="disasterDetailsHeading" class="d-flex justify-content-between">
+        <span jhiTranslate="sendaiMonitorApp.disaster.detail.title">Disaster</span>
+
+        <span class="h4 text-success">{{disaster?.approvalStatus }}</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <!-- <jhi-alert></jhi-alert> -->
+
+      <section class="row">
+
+        <dl class="col row-md jh-entity-details">
+          <dt><span  jhiTranslate="sendaiMonitorApp.disaster.caseNumber">Case Number</span></dt>
+          <dd>
+            <span>{{ disaster.caseId }}</span>
+          </dd>
+          <dt class="text-left"><span jhiTranslate="sendaiMonitorApp.disaster.name">Name</span></dt>
+          <dd>
+            <span>{{ disaster?.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disasterCategory.detail.title">Disaster Category</span></dt>
+          <dd>
+            <span>{{ disasterCategory?.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disasterType.detail.title">Disaster Type</span></dt>
+          <dd>
+            <span>{{ disasterType?.name }}</span>
+          </dd>
+        </dl>
+
+        <dl class="col row-md jh-entity-details">
+          <dt class="text-left"><span jhiTranslate="sendaiMonitorApp.disaster.location">Location</span></dt>
+          <dd>
+            <span>{{ getLocation()}}</span>
+          </dd>
+          <dt class="text-left"><span jhiTranslate="sendaiMonitorApp.department.detail.title">Department</span></dt>
+          <dd>
+            <span>{{ department?.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.estimatedDamage">Estimated Damage</span></dt>
+          <dd>
+            <span>{{ disaster.currency }} {{ disaster.estimatedDamage }}</span>
+          </dd>
+        </dl>
+
+        <dl class="col row-md jh-entity-details">
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.declared">Declared</span></dt>
+          <dd>
+            <span>{{ disaster.isDeclared ? "Yes" : "No" }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.declarationDate">Declaration Date</span></dt>
+          <dd>
+            <span>{{ disaster.declarationDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.closureDate">Closure Date</span></dt>
+          <dd>
+            <span>{{ disaster.closureDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+      </section>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.description">Description</span></dt>
+          <dd>
+            <span>{{ disaster.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.cause">Cause</span></dt>
+          <dd>
+            <span>{{ disaster.cause }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.intervention">Intervention</span></dt>
+          <dd>
+            <span *ngFor="let interv of disaster.disasterInterventionRequired" class="me-2">{{ interv?.name }}</span>
+            
+          </dd>
+        </dl>
+
+      <section>
+
+      </section>
+
+      <div class="d-flex justify-content-between mb-4">
+        <div>
+          <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+          </button>
+    
+          <button type="button" [routerLink]="['/disaster', disaster.disasterId, 'edit']" class="btn btn-primary" [disabled]="editDisabled">
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+          </button>
+    
+          <button type="button" class="btn btn-primary" (click)="downloadAggregateReport('pdf', disaster.disasterId!)">
+            <fa-icon icon="eye"></fa-icon>
+            <span *ngIf="fetchingReport">...fetching...</span>
+            <span *ngIf="!fetchingReport">Print Preview</span>
+          </button>
+        </div>
+
+        <div>
+          <button type="button" (click)="addCasualty(disaster?.disasterId!)" class="btn btn-primary" [disabled]="editDisabled">
+            <fa-icon icon="plus"></fa-icon>&nbsp;<span >Add Casualty</span>
+          </button>
+          <button type="button" (click)="viewCasualties(disaster?.disasterId!)" class="btn btn-primary">
+            <fa-icon icon="eye"></fa-icon>&nbsp;<span >View Casualties</span>
+          </button>
+        </div>
+      </div>
+        
+      <ngb-accordion>
+        <ngb-panel title="Human Population">
+          <ng-template ngbPanelContent>
+
+            <jhi-human-population-update [disasterId]="disaster?.disasterId!" [disabled]="editDisabled"></jhi-human-population-update>
+            
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Infrasctruture">
+          <ng-template ngbPanelContent>
+            
+            <jhi-infrastructure-update [disasterId]="disaster?.disasterId!" [disabled]="editDisabled"></jhi-infrastructure-update>
+            
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Livestock">
+          <ng-template ngbPanelContent>
+
+            <jhi-live-stock-update  [disasterId]="disaster?.disasterId!" [disabled]="editDisabled"></jhi-live-stock-update>
+      
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Crops">
+          <ng-template ngbPanelContent>
+            
+            <jhi-crop-update [disasterId]="disaster?.disasterId!" [disabled]="editDisabled"></jhi-crop-update>
+      
+          </ng-template>
+        </ngb-panel>
+
+        <ngb-panel title="Households">
+          <ng-template ngbPanelContent>
+            
+            <jhi-household-update [disasterId]="disaster?.disasterId!" [disabled]="editDisabled"></jhi-household-update>
+      
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Gallery">
+          <ng-template ngbPanelContent>
+      
+            <jhi-file-data-upload [disasterId]="disaster?.disasterId!"></jhi-file-data-upload>
+            <jhi-file-data-list [disasterId]="disaster?.disasterId!"></jhi-file-data-list>
+      
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+      <jhi-disaster-approval 
+      [disaster]="disaster" 
+      [disasterApprover]="disasterApprover" 
+      [disabled]="editDisabled"
+      [canDisaApprove]="canDisaApprove"
+      > </jhi-disaster-approval>
+
+    </div>
+
+  </div>
+</div>

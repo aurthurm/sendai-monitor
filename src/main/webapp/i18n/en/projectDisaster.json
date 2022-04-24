@@ -1,0 +1,25 @@
+{
+  "sendaiMonitorApp": {
+    "projectDisaster": {
+      "home": {
+        "title": "Project Disasters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Disaster",
+        "createOrEditLabel": "Create or edit a Project Disaster",
+        "notFound": "No Project Disasters found"
+      },
+      "created": "A new Project Disaster is created with identifier {{ param }}",
+      "updated": "A Project Disaster is updated with identifier {{ param }}",
+      "deleted": "A Project Disaster is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Disaster {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Disaster"
+      },
+      "projectDisasterId": "Project Disaster Id",
+      "projectId": "Project Id",
+      "disastertId": "Disastert Id"
+    }
+  }
+}

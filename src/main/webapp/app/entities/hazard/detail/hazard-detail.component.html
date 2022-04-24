@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="hazard">
+      <h2 data-cy="hazardDetailsHeading"><span jhiTranslate="sendaiMonitorApp.hazard.detail.title">Hazard</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.hazard.hazardId">Hazard Id</span></dt>
+        <dd>
+          <span>{{ hazard.hazardId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.hazard.type">Type</span></dt>
+        <dd>
+          <span>{{ hazard.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.hazard.locationId">Location Id</span></dt>
+        <dd>
+          <span>{{ hazard.locationId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.hazard.mitigation">Mitigation</span></dt>
+        <dd>
+          <span>{{ hazard.mitigation }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.hazard.description">Description</span></dt>
+        <dd>
+          <span>{{ hazard.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.hazard.severity">Severity</span></dt>
+        <dd>
+          <span>{{ hazard.severity }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/hazard', hazard.hazardId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

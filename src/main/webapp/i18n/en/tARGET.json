@@ -1,0 +1,9 @@
+{
+  "sendaiMonitorApp": {
+    "TARGET": {
+      "null": "",
+      "HAZARD": "HAZARD",
+      "DISASTER": "DISASTER"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "sendaiMonitorApp": {
+    "casualty": {
+      "home": {
+        "title": "Casualties",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Casualty",
+        "createOrEditLabel": "Create or edit a Casualty",
+        "notFound": "No Casualties found"
+      },
+      "created": "A new Casualty is created with identifier {{ param }}",
+      "updated": "A Casualty is updated with identifier {{ param }}",
+      "deleted": "A Casualty is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Casualty {{ id }}?"
+      },
+      "detail": {
+        "title": "Casualty"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "casualtyId": "Casualty Id",
+      "disasterId": "Disaster Id",
+      "nationalId": "National Id",
+      "anonymous": "Anonymous",
+      "dob": "Dob",
+      "dobEstimated": "Dob Estimated",
+      "age": "Age",
+      "sex": "Sex",
+      "dependents": "Dependents",
+      "occupation": "Occupation",
+      "nationality": "Nationality",
+      "displaced": "Displaced",
+      "affected": "Affected",
+      "injured": "Injured",
+      "missing": "Missing",
+      "dead": "Dead",
+      "disabilityBefore": "Disability Before",
+      "disabilityAfter": "Disability After",
+      "replay": "Replay"
+    }
+  }
+}

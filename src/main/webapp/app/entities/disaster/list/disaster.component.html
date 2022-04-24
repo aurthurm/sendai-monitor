@@ -1,0 +1,146 @@
+<div>
+  <h2 id="page-heading" data-cy="DisasterHeading">
+    <div class="d-flex justify-content-between">
+    <span jhiTranslate="sendaiMonitorApp.disaster.home.title">Disasters</span>
+
+    <div class="d-flex mb-3">
+      <button class="btn btn-info">
+        <fa-icon icon="search"></fa-icon>
+      </button>
+      <input
+        id="disaster_search"
+        data-cy="disaster_search"
+        type="text"
+        class="form-control"
+        name="disaster_search"
+        placeholder="Search ..."
+        (keyup)="search($event)"
+      />
+    </div>
+  </div>
+
+
+    <div class="d-flex justify-content-between">
+      <div>
+        <button class="btn" (click)="filter('all')" [disabled]="isLoading" [ngClass]="filterBy == 'all' ? 'btn-primary' : 'btn-secondary'">
+          <span>All</span>
+        </button>
+        <button class="btn" (click)="filter('approved')" [disabled]="isLoading"  [ngClass]="filterBy == 'approved' ? 'btn-primary' : 'btn-secondary'">
+          <span>Approved</span>
+        </button>
+        <button class="btn" (click)="filter('pending')" [disabled]="isLoading"  [ngClass]="filterBy == 'pending' ? 'btn-primary' : 'btn-secondary'">
+          <span>Pending Approval</span>
+        </button>
+        <button class="btn" (click)="filter('requestchanges')" [disabled]="isLoading"  [ngClass]="filterBy == 'requestchanges' ? 'btn-primary' : 'btn-secondary'">
+          <span>Request Changes</span>
+        </button>
+      </div>
+
+      <div>
+        <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span jhiTranslate="sendaiMonitorApp.disaster.home.refreshListLabel">Refresh List</span>
+        </button>
+  
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-disaster"
+          [routerLink]="['/disaster/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="sendaiMonitorApp.disaster.home.createLabel"> Create a new Disaster </span>
+        </button>
+      </div>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="disasters?.length === 0">
+    <span jhiTranslate="sendaiMonitorApp.disaster.home.notFound">No disasters found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="disasters && disasters.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="departmentId">
+            <span jhiTranslate="sendaiMonitorApp.disaster.caseNumber">Case Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="departmentId">
+            <span jhiTranslate="sendaiMonitorApp.disaster.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="declarationDate">
+            <span>Disaster Category</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="closureDate">
+            <span >Disaster Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="location">
+            <span >Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let disaster of disasters; trackBy: trackDisasterId" data-cy="entityTable">
+          <td>{{ disaster.caseId }}</td>
+          <td>{{ disaster.name }}</td>
+          <td>{{ disaster.disasterCategory?.name }}</td>
+          <td>{{ disaster.disasterType?.name }}</td>
+          <td>{{ disaster.approvalStatus }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/disaster', disaster.disasterId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="sendaiMonitorApp.disaster.open">Open</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/disaster', disaster.disasterId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+                [disabled]="canEdit(disaster) === false"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <!-- <button type="submit" (click)="delete(disaster)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="disasters && disasters.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

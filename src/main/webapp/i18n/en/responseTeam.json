@@ -1,0 +1,26 @@
+{
+  "sendaiMonitorApp": {
+    "responseTeam": {
+      "home": {
+        "title": "Response Teams",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Response Team",
+        "createOrEditLabel": "Create or edit a Response Team",
+        "notFound": "No Response Teams found"
+      },
+      "created": "A new Response Team is created with identifier {{ param }}",
+      "updated": "A Response Team is updated with identifier {{ param }}",
+      "deleted": "A Response Team is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Response Team {{ id }}?"
+      },
+      "detail": {
+        "title": "Response Team"
+      },
+      "responseTeamId": "Response Team Id",
+      "disasterId": "Disaster Id",
+      "name": "Name",
+      "teamLead": "Team Lead"
+    }
+  }
+}

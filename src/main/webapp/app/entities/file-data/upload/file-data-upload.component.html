@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-start">
+  <div class="col-12">
+    <form name="uploadForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="uploadForm">
+
+      <div class="form-group d-flex justify-content-between my-3">
+
+          <!-- <div> 
+            <label for="file">Files to Upload</label>
+          </div> -->
+
+          <div>
+            <input 
+              formControlName="file"
+              id="file" 
+              type="file" 
+              multiple
+              class="form-control"
+              (change)="onFileChange($event)">
+          </div>
+
+          <div >
+            <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            class="btn btn-primary"
+          >
+            <fa-icon icon="save"></fa-icon>&nbsp;<span >Upload File</span>
+          </button>
+          </div>
+      </div>
+
+    </form>
+
+    <hr>
+
+  </div>
+</div>

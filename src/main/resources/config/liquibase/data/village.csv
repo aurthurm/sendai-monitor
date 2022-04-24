@@ -1,0 +1,3 @@
+name,ward_id,village_id,created_by,created_date,last_modified_by,last_modified_date,latitude,longitude,level
+Village 1,f913364e-84ac-4017-93f2-4146605745da,f155afc0-ee3c-4ef3-9a4e-a60d825a3721,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,,,5
+Village 2,f913364e-84ac-4017-93f2-4146605745da,e6b3f98d-bfe2-496b-9a3a-bbb721ebed2a,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,,,5

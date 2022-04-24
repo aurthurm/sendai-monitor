@@ -1,0 +1,6 @@
+disaster_category_id,name,created_by,created_date,last_modified_by,last_modified_date
+f8988bc1-0148-41ca-9c51-3ae90a81dd90,Agricultural,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+42b3cf1e-93a4-44d0-94d8-f60bdba0e828,Human Epidemics,admin,2021-04-08 12:00:42,admin,2021-04-08 12:00:42
+5e337fa8-2782-4a4d-b098-52a21107c78d,Hydrological,admin,2021-04-09 12:00:42,admin,2021-04-09 12:00:42
+345643cc-4316-41f0-8b49-65a5b7d71256,Industrial,admin,2021-04-10 12:00:42,admin,2021-04-10 12:00:42
+3b484ee9-9dcf-4a82-9dfc-6ecac06b6a3a,Transport,admin,2021-04-11 12:00:42,admin,2021-04-11 12:00:42

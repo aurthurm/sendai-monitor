@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="form">
+      <jhi-alert-error></jhi-alert-error>
+
+      <div *ngIf="isSaving" class="d-flex justify-content-center">
+        <div class="spinner-border text-success" role="status">
+          <span class="sr-only">...Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isSaving" formArrayName="infrastructures">
+
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.infrastructureType.detail.title" for="field_infractructureTypeId">Infractructure Type</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.infrastructure.damaged" for="field_damaged">Damaged</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.infrastructure.destroyed" for="field_destroyed">Destroyed</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.infrastructure.value" for="field_value">Value</label>
+          </div>
+          <!-- <div class="col pt-2 d-flex justify-content-end"></div> -->
+        </div>
+
+        <section *ngFor="let inForm of infrastructures.controls; let i = index">
+          <div [formGroupName]="i">
+
+            <div class="row mb-3">
+              <div class="col">
+                <select class="form-control " name="infractructureTypeId" formControlName="infractructureTypeId" id="field_infractructureTypeId" data-cy="infractructureTypeId">
+                  <option [ngValue]="null" disabled></option>
+                  <option *ngFor="let infra of infrastructureTypes" [value]="infra?.infractructureTypeId" disabled>
+                    {{ infra.name }}
+                  </option>
+                </select>
+              </div>
+    
+              <div class="col">
+                <input type="number" class="form-control " name="damaged" id="field_damaged" data-cy="damaged" formControlName="damaged" />
+              </div>
+    
+              <div class="col">
+                <input type="number" class="form-control " name="destroyed" id="field_destroyed" data-cy="destroyed" formControlName="destroyed" />
+              </div>
+    
+              <div class="col">
+                <input type="number" class="form-control " name="value" id="field_value" data-cy="value" formControlName="value" />
+              </div>
+
+              <!-- <div class="col d-flex justify-content-end">
+                <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-danger" (click)="removeInfrastructureRow(i)">
+                  <fa-icon icon="ban"></fa-icon>&nbsp;<span >Remove</span>
+                </button>
+              </div> -->
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <!-- <hr>
+      <div class="mb-4 d-flex justify-content-end">
+        <button
+          type="button"
+          id="save-entity"
+          class="btn btn-primary"
+          (click)="addInfrastructureRow()"
+        >
+          <fa-icon icon="plus"></fa-icon>&nbsp;<span >Add</span>
+        </button>
+      </div>
+      <hr> -->
+
+      <div>
+
+        <button
+          *ngIf="!isSaving" 
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="form.invalid || isSaving || disabled"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save All</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

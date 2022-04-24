@@ -1,0 +1,28 @@
+{
+  "sendaiMonitorApp": {
+    "liveStock": {
+      "home": {
+        "title": "Live Stocks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Live Stock",
+        "createOrEditLabel": "Create or edit a Live Stock",
+        "notFound": "No Live Stocks found"
+      },
+      "created": "A new Live Stock is created with identifier {{ param }}",
+      "updated": "A Live Stock is updated with identifier {{ param }}",
+      "deleted": "A Live Stock is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Live Stock {{ id }}?"
+      },
+      "detail": {
+        "title": "Live Stock"
+      },
+      "liveStockId": "Live Stock Id",
+      "disasterId": "Disaster Id",
+      "casualtyId": "Casualty Id",
+      "liveStockTypeId": "Live Stock Type Id",
+      "liveStockAffected": "Live Stock Affected",
+      "estimatedLoss": "Estimated Loss"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ward">
+      <h2 data-cy="wardDetailsHeading"><span jhiTranslate="sendaiMonitorApp.ward.detail.title">Ward</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.ward.wardId">Ward Id</span></dt>
+        <dd>
+          <span>{{ ward.wardId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.ward.districtId">District Id</span></dt>
+        <dd>
+          <span>{{ ward.districtId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.ward.name">Name</span></dt>
+        <dd>
+          <span>{{ ward.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.ward.latitude">Latitude</span></dt>
+        <dd>
+          <span>{{ ward.latitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.ward.longitude">Longitude</span></dt>
+        <dd>
+          <span>{{ ward.longitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.ward.level">Level</span></dt>
+        <dd>
+          <span>{{ ward.level }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ward', ward.wardId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

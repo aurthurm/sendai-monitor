@@ -1,0 +1,12 @@
+{
+  "sendaiMonitorApp": {
+    "LOCATION": {
+      "null": "",
+      "NATIONAL": "NATIONAL",
+      "PROVINCE": "PROVINCE",
+      "DISTRICT": "DISTRICT",
+      "WARD": "WARD",
+      "VILLAGE": "VILLAGE"
+    }
+  }
+}

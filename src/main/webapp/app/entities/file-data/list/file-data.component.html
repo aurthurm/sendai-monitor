@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-start">
+  <div class="col-12">
+
+    <button class="btn btn-info mb-4" (click)="fetchFiles()" [disabled]="isLoading">
+      <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+      <span jhiTranslate="sendaiMonitorApp.disaster.home.refreshListLabel">Refresh Gallery</span>
+    </button>
+
+    <ul class="row list-unstyled">
+      <li *ngFor="let file of files" class="col-3">
+        <img [src]="sanitizeImage(file?.data)" class="img-fluid" />
+      </li>
+   </ul>
+
+  </div>
+</div>

@@ -1,0 +1,15 @@
+intervention_id,name,created_by,created_date,last_modified_by,last_modified_date
+e26d5954-a496-11ec-b375-90ccdfa85f12,Build Bridges,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+e26d5954-a496-11ec-b375-90ccdfa85f13,Construct Roads,admin,2021-04-07 12:00:43,admin,2021-04-07 12:00:43
+e26d5954-a496-11ec-b375-90ccdfa85f14,Repair/Build water points,admin,2021-04-07 12:00:44,admin,2021-04-07 12:00:44
+e26d5954-a496-11ec-b375-90ccdfa85f15,Build School(s),admin,2021-04-07 12:00:45,admin,2021-04-07 12:00:45
+e26d5954-a496-11ec-b375-90ccdfa85f16,Build Health Institutions,admin,2021-04-07 12:00:46,admin,2021-04-07 12:00:46
+e26d5954-a496-11ec-b375-90ccdfa85f17,Restock Live Stocks,admin,2021-04-07 12:00:47,admin,2021-04-07 12:00:47
+e26d5954-a496-11ec-b375-90ccdfa85f18,Build House(s)/Shelter,admin,2021-04-07 12:00:48,admin,2021-04-07 12:00:48
+e26d5954-a496-11ec-b375-90ccdfa85f19,Construct irrigation system,admin,2021-04-07 12:00:49,admin,2021-04-07 12:00:49
+e26d5954-a496-11ec-b375-90ccdfa85f20,Monetary payouts,admin,2021-04-07 12:00:50,admin,2021-04-07 12:00:50
+e26d5954-a496-11ec-b375-90ccdfa85f21,Seed distribution,admin,2021-04-07 12:00:51,admin,2021-04-07 12:00:51
+e26d5954-a496-11ec-b375-90ccdfa85f22,Food handouts,admin,2021-04-07 12:00:52,admin,2021-04-07 12:00:52
+e26d5954-a496-11ec-b375-90ccdfa85f23,Clothing handouts,admin,2021-04-07 12:00:53,admin,2021-04-07 12:00:53
+e26d5954-a496-11ec-b375-90ccdfa85f24,Provide health services,admin,2021-04-07 12:00:54,admin,2021-04-07 12:00:54
+e26d5954-a496-11ec-b375-90ccdfa85f25,Other (Specify),admin,2021-04-07 12:00:55,admin,2021-04-07 12:00:55

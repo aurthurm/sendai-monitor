@@ -1,0 +1,77 @@
+<div>   
+  
+  <button class="btn btn-info my-4" (click)="getInfrastructures()" [disabled]="isLoading">
+    <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+    <span jhiTranslate="sendaiMonitorApp.disaster.home.refreshListLabel">Refresh List</span>
+  </button>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="infrastructures?.length === 0">
+    <span jhiTranslate="sendaiMonitorApp.infrastructure.home.notFound">No infrastructures found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="infrastructures && infrastructures.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="getInfrastructures()">
+          <th scope="col" jhiSortBy="anonymous">
+            <span jhiTranslate="sendaiMonitorApp.infrastructureType.detail.title">Infrastructure Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.disaster.detail.title">Disaster</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.casualty.detail.title">Casualty</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.infrastructure.damaged">Damaged</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.infrastructure.destroyed">Destroyed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.infrastructure.value">Value</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let infrastructure of infrastructures; trackBy: trackInfrastructureId" data-cy="entityTable">
+          <td>{{ getInfrastructureType(infrastructure.infractructureTypeId!)?.name }}</td>
+          <td>{{ disaster?.name }}</td>
+          <td>{{ getCasualty(infrastructure.casualtyId!)?.firstName }} {{ getCasualty(infrastructure.casualtyId!)?.lastName }}</td>
+          <td>{{ infrastructure.damaged }}</td>
+          <td>{{ infrastructure.destroyed }}</td>
+          <td>{{ infrastructure.value }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/infrastructure', infrastructure.infractructureId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/infrastructure', infrastructure.infractructureId, 'edit']"
+                class="btn btn-primary btn-sm mx-1"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

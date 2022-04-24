@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-response-team-heading"
+        data-cy="ResponseTeamCreateUpdateHeading"
+        jhiTranslate="sendaiMonitorApp.responseTeam.home.createOrEditLabel"
+      >
+        Create or edit a Response Team
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.responseTeam.responseTeamId" for="field_responseTeamId"
+            >Response Team Id</label
+          >
+          <input
+            type="text"
+            class="form-control col"
+            name="responseTeamId"
+            id="field_responseTeamId"
+            data-cy="responseTeamId"
+            formControlName="responseTeamId"
+            [readonly]="editForm.get('responseTeamId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.responseTeam.disasterId" for="field_disasterId">Disaster Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="disasterId"
+            id="field_disasterId"
+            data-cy="disasterId"
+            formControlName="disasterId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.responseTeam.name" for="field_name">Name</label>
+          <input type="text" class="form-control col" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.responseTeam.teamLead" for="field_teamLead">Team Lead</label>
+          <input type="text" class="form-control col" name="teamLead" id="field_teamLead" data-cy="teamLead" formControlName="teamLead" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

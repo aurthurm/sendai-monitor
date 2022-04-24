@@ -1,0 +1,24 @@
+{
+  "sendaiMonitorApp": {
+    "householdType": {
+      "home": {
+        "title": "Household Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Household Type",
+        "createOrEditLabel": "Create or edit a Household Type",
+        "notFound": "No Household Types found"
+      },
+      "created": "A new Household Type is created with identifier {{ param }}",
+      "updated": "A Household Type is updated with identifier {{ param }}",
+      "deleted": "A Household Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Household Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Household Type"
+      },
+      "householdTypeId": "Household Type Id",
+      "name": "Name"
+    }
+  }
+}

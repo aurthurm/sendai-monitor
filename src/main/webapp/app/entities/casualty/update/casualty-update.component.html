@@ -1,0 +1,225 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-casualty-heading" data-cy="CasualtyCreateUpdateHeading" jhiTranslate="sendaiMonitorApp.casualty.home.createOrEditLabel">
+        Create or edit a Casualty
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.casualtyId" for="field_casualtyId">Casualty Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="casualtyId"
+            id="field_casualtyId"
+            data-cy="casualtyId"
+            formControlName="casualtyId"
+            [readonly]="editForm.get('casualtyId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">         
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.disaster.detail.title" for="field_disasterId">Disaster</label>
+            <select class="form-control col" name="disasterId" formControlName="disasterId" id="field_disasterId" data-cy="disasterId">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let disaster of disasters" [value]="disaster?.disasterId">
+                {{ disaster.name }}
+              </option>
+            </select>          
+          </div>
+          <div class="col-6 row">          
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.anonymous" for="field_anonymous">Anonymous</label>
+            <input type="checkbox" class="form-check col" name="anonymous" id="field_anonymous" data-cy="anonymous" formControlName="anonymous" />            
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.firstName" for="field_firstName">First Name</label>
+            <input
+              type="text"
+              class="form-control col"
+              name="firstName"
+              id="field_firstName"
+              data-cy="firstName"
+              formControlName="firstName"
+            />
+          </div>
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.lastName" for="field_lastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control col"
+              name="lastName"
+              id="field_lastName"
+              data-cy="lastName"
+              formControlName="lastName"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.nationalId" for="field_nationalId">National Id</label>
+            <input
+              type="text"
+              class="form-control col"
+              name="nationalId"
+              id="field_nationalId"
+              data-cy="nationalId"
+              formControlName="nationalId"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.dob" for="field_dob">Dob</label>
+              <input
+                id="field_dob"
+                data-cy="dob"
+                type="date"
+                class="form-control col"
+                name="dob"
+                formControlName="dob"
+                placeholder="YYYY-MM-DD"
+              />
+            </div>
+            <div class="col-6 row">
+              <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.dobEstimated" for="field_dobEstimated">Dob Estimated</label>
+              <input
+                type="checkbox"
+                class="form-check col"
+                name="dobEstimated"
+                id="field_dobEstimated"
+                data-cy="dobEstimated"
+                formControlName="dobEstimated"
+              />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.age" for="field_age">Age</label>
+            <input type="number" class="form-control col" name="age" id="field_age" data-cy="age" formControlName="age" />
+          </div>
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.sex" for="field_sex">Sex</label>
+            <select class="form-control col" name="sex" formControlName="sex" id="field_sex" data-cy="sex">
+              <option [ngValue]="null">{{ 'sendaiMonitorApp.SEX.null' | translate }}</option>
+              <option *ngFor="let sEX of sEXValues" [value]="sEX">{{ 'sendaiMonitorApp.SEX.' + sEX | translate }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.dependents" for="field_dependents">Dependents</label>
+            <input
+              type="number"
+              class="form-control col"
+              name="dependents"
+              id="field_dependents"
+              data-cy="dependents"
+              formControlName="dependents"
+            />
+          </div>
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.occupation" for="field_occupation">Occupation</label>
+            <input
+              type="text"
+              class="form-control col"
+              name="occupation"
+              id="field_occupation"
+              data-cy="occupation"
+              formControlName="occupation"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6 row">
+            <label class="form-label col-4" jhiTranslate="sendaiMonitorApp.casualty.nationality" for="field_nationality">Nationality</label>
+            <input
+              type="text"
+              class="form-control col"
+              name="nationality"
+              id="field_nationality"
+              data-cy="nationality"
+              formControlName="nationality"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-3 row">
+            <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.displaced" for="field_displaced">Displaced</label>
+            <input type="checkbox" class="form-check col" name="displaced" id="field_displaced" data-cy="displaced" formControlName="displaced" />
+          </div>
+          <div class="col-3 row">
+            <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.affected" for="field_affected">Affected</label>
+            <input type="checkbox" class="form-check col" name="affected" id="field_affected" data-cy="affected" formControlName="affected" />
+          </div>
+          <div class="col-3 row">
+            <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.injured" for="field_injured">Injured</label>
+            <input type="checkbox" class="form-check col" name="injured" id="field_injured" data-cy="injured" formControlName="injured" />
+          </div>
+          <div class="col-3 row">
+            <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.missing" for="field_missing">Missing</label>
+            <input type="checkbox" class="form-check col" name="missing" id="field_missing" data-cy="missing" formControlName="missing" />
+          </div>
+          <div class="col-3 row">
+            <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.dead" for="field_dead">Dead</label>
+            <input type="checkbox" class="form-check col" name="dead" id="field_dead" data-cy="dead" formControlName="dead" />
+          </div>
+          <div class="col-3 row">
+            <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.disabilityBefore" for="field_disabilityBefore"
+              >Disability Before</label
+            >
+            <input
+              type="checkbox"
+              class="form-check col"
+              name="disabilityBefore"
+              id="field_disabilityBefore"
+              data-cy="disabilityBefore"
+              formControlName="disabilityBefore"
+            />
+          </div>
+          <div class="col-3 row">
+          <label class="form-label col" jhiTranslate="sendaiMonitorApp.casualty.disabilityAfter" for="field_disabilityAfter"
+              >Disability After</label
+            >
+            <input
+              type="checkbox"
+              class="form-check col"
+              name="disabilityAfter"
+              id="field_disabilityAfter"
+              data-cy="disabilityAfter"
+              formControlName="disabilityAfter"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

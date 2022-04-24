@@ -1,0 +1,100 @@
+
+ <div class="d-flex justify-content-center align-items-center vh-100" *ngIf="!account">
+  <div class="pr-4">
+      <img src="../../content/images/dcp.png" class="img-fluid" alt="" id="login-image" >
+  </div>
+  <div  class="align-self-center px-4 text-white" style="max-width: 70%">
+
+      <h4 class="font-weight-bold mb-4">Sign in</h4>
+
+      <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
+          <strong>Failed to sign in!</strong> Please check your credentials and try again.
+      </div>
+
+      <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
+          <div class="form-group my-2">
+              <label class="username-label" for="username" jhiTranslate="global.form.username.label">Login</label>
+              <input type="text" class="form-control mt-2" name="username" id="username" placeholder="{{ 'global.form.username.placeholder' | translate }}"
+                      formControlName="username" #username>
+          </div>
+
+          <div class="form-group my-2">
+              <label for="password" jhiTranslate="login.form.password">Password</label>
+              <input type="password" class="form-control mt-2" name="password" id="password" placeholder="{{ 'login.form.password.placeholder' | translate }}"
+                      formControlName="password">
+          </div>
+
+          <div class="form-check mt-4">
+              <label class="form-check-label" for="rememberMe">
+                  <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe">
+                  <span jhiTranslate="login.form.rememberme">Remember me</span>
+              </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-4" jhiTranslate="login.form.button">Sign in</button>
+      </form>
+
+      <div class="mt-3 alert alert-warning">
+          <a class="alert-link"  jhiTranslate="login.password.forgot">Did you forget your password?</a>
+      </div>
+  </div>
+</div>
+
+
+<div *ngIf="account">
+
+  <div class="col-md-12 mx-auto">
+    <h6 class="mb-4 h6">DASHBOARD</h6>
+    <hr>
+    <div class="d-flex justify-content-start text-center mb-4" *ngIf="account">
+     <div class="card border-danger bg-white py-2 px-4 rounded me-4">
+      <div class="d-flex justify-content-between">
+        <div class="h1 mr-4 text-danger">
+          <fa-icon icon="database"></fa-icon>
+        </div>
+        <div class="text-end ps-4">
+          <span class="text-muted" style="font-weight: bold;">Total Disasters</span>
+          <p class="h2">{{ simpleStats?.total }}</p>
+        </div>
+      </div>
+     </div>
+      <div class="card border-success bg-white py-2 px-4 rounded me-4">
+        <div class="d-flex justify-content-between">
+          <div class="h1 mr-4 text-success">
+            <fa-icon icon="check"></fa-icon>
+          </div>
+          <div class="text-end ps-4">
+            <span class="text-muted" style="font-weight: bold;">Approved</span>
+            <p class="h2">{{ simpleStats?.approved }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card border-warning bg-white py-2 px-4 rounded me-4">
+        <div class="d-flex justify-content-between">
+          <div class="h1 mr-4 text-warning">
+            <fa-icon icon="clock"></fa-icon>
+          </div>
+          <div class="text-end ps-4">
+            <span class="text-muted" style="font-weight: bold;">Pending Approval</span>
+            <p class="h2">{{ simpleStats?.notApproved }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card border-info bg-white py-2 px-4 rounded me-4">
+        <div class=" d-flex justify-content-between">
+          <div class="h1 mr-4 text-info">
+            <fa-icon icon="pen"></fa-icon>
+          </div>
+          <div class="text-end ps-4">
+            <span class="text-muted" style="font-weight: bold;">Requested Changes</span>
+            <p class="h2">{{ simpleStats?.requestChanges }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

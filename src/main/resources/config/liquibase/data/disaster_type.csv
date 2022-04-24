@@ -1,0 +1,31 @@
+disaster_type_id,disaster_category_id,name,created_by,created_date,last_modified_by,last_modified_date
+9d042e41-16b0-402b-ae19-85c8540ed8cc,,Drought,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+0c7f132d-488a-43b5-920f-7cb0387f931b,,Drowning,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+dc1b7002-8640-429e-bfaf-4dd469cdcd4a,,Flooding,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+f5f50aa8-9bbe-47be-8812-7e3d148fcef6,,Landslides,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+7f607eec-1946-4c73-bcf1-50dad3a8386c,,Lightining,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+8b5a3a6c-c45f-4768-96db-cf4669e745ed,,Strorms,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+5967a766-a494-11ec-b375-90ccdfa85f11,,Cyclone,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+66a780c8-a494-11ec-b375-90ccdfa85f11,,Crop Pests,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+6e898f03-a494-11ec-b375-90ccdfa85f11,,Livestock Epidemics,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+7b580c24-a494-11ec-b375-90ccdfa85f11,,Road Accidents,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+87eb4957-a494-11ec-b375-90ccdfa85f11,,Rail Accidents,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+87eb4957-a494-11ec-b375-90ccdfa85f12,,Air Accidents,admin,2021-04-07 12:00:43,admin,2021-04-07 12:00:43
+87eb4957-a494-11ec-b375-90ccdfa85f13,,Water Accidents,admin,2021-04-07 12:00:44,admin,2021-04-07 12:00:44
+87eb4957-a494-11ec-b375-90ccdfa85f14,,Malaria,admin,2021-04-07 12:00:45,admin,2021-04-07 12:00:45
+87eb4957-a494-11ec-b375-90ccdfa85f15,,Cholera,admin,2021-04-07 12:00:46,admin,2021-04-07 12:00:46
+87eb4957-a494-11ec-b375-90ccdfa85f16,,HIV,admin,2021-04-07 12:00:47,admin,2021-04-07 12:00:47
+87eb4957-a494-11ec-b375-90ccdfa85f17,,Other,admin,2021-04-07 12:00:48,admin,2021-04-07 12:00:48
+87eb4957-a494-11ec-b375-90ccdfa85f18,,Chemical Spillages,admin,2021-04-07 12:00:49,admin,2021-04-07 12:00:49
+87eb4957-a494-11ec-b375-90ccdfa85f19,,Explosions,admin,2021-04-07 12:00:50,admin,2021-04-07 12:00:50
+87eb4957-a494-11ec-b375-90ccdfa85f20,,Mine Accidents,admin,2021-04-07 12:00:51,admin,2021-04-07 12:00:51
+87eb4957-a494-11ec-b375-90ccdfa85f21,,Construction Accidents,admin,2021-04-07 12:00:52,admin,2021-04-07 12:00:52
+87eb4957-a494-11ec-b375-90ccdfa85f22,,Workplace Accidents,admin,2021-04-07 12:00:53,admin,2021-04-07 12:00:53
+87eb4957-a494-11ec-b375-90ccdfa85f23,,COVID19,admin,2021-04-07 12:00:54,admin,2021-04-07 12:00:54
+87eb4957-a494-11ec-b375-90ccdfa85f24,,Health Related,admin,2021-04-07 12:00:55,admin,2021-04-07 12:00:55
+87eb4957-a494-11ec-b375-90ccdfa85f25,,Fires and Explosion,admin,2021-04-07 12:00:56,admin,2021-04-07 12:00:56
+87eb4957-a494-11ec-b375-90ccdfa85f26,,Veld Fires,admin,2021-04-07 12:00:57,admin,2021-04-07 12:00:57
+87eb4957-a494-11ec-b375-90ccdfa85f27,,Stampeds,admin,2021-04-07 12:00:58,admin,2021-04-07 12:00:58
+87eb4957-a494-11ec-b375-90ccdfa85f28,,Riots,admin,2021-04-07 12:00:59,admin,2021-04-07 12:00:59
+87eb4957-a494-11ec-b375-90ccdfa85f29,,Displacement of Populations/ Forced migration,admin,2021-04-07 12:00:60,admin,2021-04-07 12:00:60
+87eb4957-a494-11ec-b375-90ccdfa85f30,,Other Fires,admin,2021-04-07 12:00:61,admin,2021-04-07 12:00:61

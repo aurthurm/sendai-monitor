@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-partner-intervention-heading"
+        data-cy="PartnerInterventionCreateUpdateHeading"
+        jhiTranslate="sendaiMonitorApp.partnerIntervention.home.createOrEditLabel"
+      >
+        Create or edit a Partner Intervention
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.partnerIntervention.inteventionId" for="field_inteventionId"
+            >Intevention Id</label
+          >
+          <input
+            type="text"
+            class="form-control col"
+            name="inteventionId"
+            id="field_inteventionId"
+            data-cy="inteventionId"
+            formControlName="inteventionId"
+            [readonly]="editForm.get('inteventionId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.partnerIntervention.partnerId" for="field_partnerId">Partner Id</label>
+          <input type="text" class="form-control col" name="partnerId" id="field_partnerId" data-cy="partnerId" formControlName="partnerId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.partnerIntervention.disasterId" for="field_disasterId"
+            >Disaster Id</label
+          >
+          <input
+            type="text"
+            class="form-control col"
+            name="disasterId"
+            id="field_disasterId"
+            data-cy="disasterId"
+            formControlName="disasterId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.partnerIntervention.projectId" for="field_projectId">Project Id</label>
+          <input type="text" class="form-control col" name="projectId" id="field_projectId" data-cy="projectId" formControlName="projectId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sendaiMonitorApp.partnerIntervention.hazardId" for="field_hazardId">Hazard Id</label>
+          <input type="text" class="form-control col" name="hazardId" id="field_hazardId" data-cy="hazardId" formControlName="hazardId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sendaiMonitorApp.partnerIntervention.amountReceived" for="field_amountReceived"
+            >Amount Received</label
+          >
+          <input
+            type="number"
+            class="form-control col"
+            name="amountReceived"
+            id="field_amountReceived"
+            data-cy="amountReceived"
+            formControlName="amountReceived"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="sendaiMonitorApp.partnerIntervention.assistanceOffered" for="field_assistanceOffered"
+            >Assistance Offered</label
+          >
+          <input
+            type="text"
+            class="form-control col"
+            name="assistanceOffered"
+            id="field_assistanceOffered"
+            data-cy="assistanceOffered"
+            formControlName="assistanceOffered"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

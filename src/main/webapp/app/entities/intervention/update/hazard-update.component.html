@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-hazard-heading" data-cy="HazardCreateUpdateHeading" jhiTranslate="sendaiMonitorApp.hazard.home.createOrEditLabel">
+        Create or edit a Hazard
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.hazard.hazardId" for="field_hazardId">Hazard Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="hazardId"
+            id="field_hazardId"
+            data-cy="hazardId"
+            formControlName="hazardId"
+            [readonly]="editForm.get('hazardId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.hazard.type" for="field_type">Type</label>
+          <input type="text" class="form-control col" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.hazard.locationId" for="field_locationId">Location Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="locationId"
+            id="field_locationId"
+            data-cy="locationId"
+            formControlName="locationId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.hazard.mitigation" for="field_mitigation">Mitigation</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="mitigation"
+            id="field_mitigation"
+            data-cy="mitigation"
+            formControlName="mitigation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.hazard.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.hazard.severity" for="field_severity">Severity</label>
+          <input type="text" class="form-control col" name="severity" id="field_severity" data-cy="severity" formControlName="severity" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

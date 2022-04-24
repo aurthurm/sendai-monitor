@@ -1,0 +1,11 @@
+export enum LOCATION {
+  NATIONAL = 'NATIONAL',
+
+  PROVINCE = 'PROVINCE',
+
+  DISTRICT = 'DISTRICT',
+
+  WARD = 'WARD',
+
+  VILLAGE = 'VILLAGE',
+}

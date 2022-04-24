@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-beneficiary-heading"
+        data-cy="BeneficiaryCreateUpdateHeading"
+        jhiTranslate="sendaiMonitorApp.beneficiary.home.createOrEditLabel"
+      >
+        Create or edit a Beneficiary
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-3" jhiTranslate="sendaiMonitorApp.beneficiary.beneficiaryId" for="field_beneficiaryId"
+            >Beneficiary Id</label
+          >
+          <input
+            type="text"
+            class="form-control col"
+            name="beneficiaryId"
+            id="field_beneficiaryId"
+            data-cy="beneficiaryId"
+            formControlName="beneficiaryId"
+            [readonly]="editForm.get('beneficiaryId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-3" jhiTranslate="sendaiMonitorApp.beneficiary.projectId" for="field_projectId">Project Id</label>
+          <input type="text" class="form-control col" name="projectId" id="field_projectId" data-cy="projectId" formControlName="projectId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-3" jhiTranslate="sendaiMonitorApp.beneficiary.amountReceived" for="field_amountReceived"
+            >Amount Received</label
+          >
+          <input
+            type="number"
+            class="form-control col"
+            name="amountReceived"
+            id="field_amountReceived"
+            data-cy="amountReceived"
+            formControlName="amountReceived"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-3" jhiTranslate="sendaiMonitorApp.beneficiary.valueOfGoodsReceived" for="field_valueOfGoodsReceived"
+            >Value Of Goods Received</label
+          >
+          <input
+            type="number"
+            class="form-control col"
+            name="valueOfGoodsReceived"
+            id="field_valueOfGoodsReceived"
+            data-cy="valueOfGoodsReceived"
+            formControlName="valueOfGoodsReceived"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

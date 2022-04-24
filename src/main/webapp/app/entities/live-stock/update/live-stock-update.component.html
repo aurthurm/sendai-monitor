@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="form">
+  
+      <jhi-alert-error></jhi-alert-error>
+
+      <div *ngIf="isSaving" class="d-flex justify-content-center">
+        <div class="spinner-border text-success" role="status">
+          <span class="sr-only">...Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isSaving" formArrayName="liveStocks">
+
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label" for="field_liveStockTypeId" >Live Stock Type:</label>
+          </div>
+          <div class="col">
+            <label class="form-label" for="field_liveStockAffected" >Died:</label>
+          </div>
+          <div class="col">
+            <label class="form-label" for="field_liveStockAffected" >Missing:</label>
+          </div>
+          <div class="col">
+            <label class="form-label" for="field_liveStockAffected" >Ill:</label>
+          </div>
+          <div class="col">
+            <label class="form-label" for="field_injured" >Injured:</label>
+          </div>
+          <div class="col">
+            <label class="form-label" for="field_estimatedLoss" >Estimated Loss:</label>
+          </div>
+        </div>  
+
+        <section *ngFor="let quantity of liveStocks.controls; let i = index">  
+            <div 
+            [formGroupName]="i" 
+            class="row mb-3">
+
+              <div class="col">
+                <select class="form-control" name="liveStockTypeId" formControlName="liveStockTypeId" id="field_liveStockTypeId" data-cy="liveStockTypeId">
+                  <option [ngValue]="null" disabled></option>
+                  <option *ngFor="let liveSt of livestockTypes" [value]="liveSt?.liveStockTypeId" disabled>
+                    {{ liveSt.name }}
+                  </option>
+                </select>
+              </div> 
+
+              <div class="col">  
+                <input
+                type="number"
+                class="form-control"
+                name="died"
+                id="field_died"
+                data-cy="died"
+                formControlName="died"
+                />
+              </div>
+              <div class="col">  
+                <input
+                type="number"
+                class="form-control"
+                name="missing"
+                id="field_missing"
+                data-cy="missing"
+                formControlName="missing"
+                />
+              </div>
+              <div class="col">  
+                <input
+                type="number"
+                class="form-control"
+                name="ill"
+                id="field_ill"
+                data-cy="ill"
+                formControlName="ill"
+                />
+              </div>
+
+              <div class="col">  
+                <input
+                type="number"
+                class="form-control"
+                name="injured"
+                id="field_injured"
+                data-cy="injured"
+                formControlName="injured"
+                  />
+              </div>  
+              <div class="col">  
+                <input
+                type="number"
+                class="form-control"
+                name="estimatedLoss"
+                id="field_estimatedLoss"
+                data-cy="estimatedLoss"
+                formControlName="estimatedLoss"
+                  />
+              </div> 
+
+            </div>  
+          </section>
+
+          <div>
+            <button
+              *ngIf="!isSaving"
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="form.invalid || isSaving || disabled"
+              class="btn btn-primary"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+          </div> 
+        </div>
+    </form>
+  </div>
+</div>

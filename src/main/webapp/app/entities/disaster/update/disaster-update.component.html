@@ -1,0 +1,259 @@
+<div class="d-flex justify-content-center my-4 py-4">
+  <div class="col-3">
+
+    <ul class="listree">
+      <li (click)="toggleTree($event, 'national', treeData)">
+        <div class="listree-submenu-heading collapsed" style="font-weight: bolder; font-style:italic"
+          [class.listree-selected]="treeData?.id === treeNode?.id">{{ treeData?.name }}</div>
+        <ul class="listree-submenu-items" style="display: none;">
+          <li *ngFor="let province of treeData?.provinces; trackBy: trackId"
+            (click)="toggleTree($event, 'province', province)">
+            <div class="listree-submenu-heading collapsed" style="font-family: Arial, Helvetica, sans-serif;"
+              [class.listree-selected]="treeNode.id === province.id">{{ province?.name}}</div>
+            <ul class="listree-submenu-items" style="display: none;">
+              <li *ngFor="let district of province?.districts; trackBy: trackId"
+                (click)="toggleTree($event, 'district', district)">
+                <div class="listree-submenu-heading collapsed" style="font-family: fantasy;"
+                  [class.listree-selected]="treeNode.id === district.id">{{ district?.name}}</div>
+                <ul class="listree-submenu-items" style="display: none;">
+                  <li *ngFor="let ward of district?.wards; trackBy: trackId" (click)="toggleTree($event, 'ward', ward)">
+                    <div class="listree-submenu-heading collapsed" [class.listree-selected]="treeNode.id === ward.id">{{
+                      ward?.name}}</div>
+                    <ul class="listree-submenu-items" style="display: none;">
+                      <li *ngFor="let village of ward?.villages; trackBy: trackId"
+                        (click)="toggleTree($event, 'village', village)">
+                        <div class="listree-submenu-heading expanded"
+                          [class.listree-selected]="treeNode.id === village.id">{{village?.name}}</div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="col-8 ms-4">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-disaster-heading" class="mb-4" data-cy="DisasterCreateUpdateHeading">
+        <span *ngIf="editForm.get('disasterId')!.value == null">Create</span>
+        <span *ngIf="editForm.get('disasterId')!.value != null">Edit</span>
+        a Disaster
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none mt-4">
+          <label class="form-label" jhiTranslate="sendaiMonitorApp.disaster.disasterId" for="field_disasterId">Disaster
+            Id</label>
+          <input type="text" class="form-control" name="disasterId" id="field_disasterId" data-cy="disasterId"
+            formControlName="disasterId" [readonly]="editForm.get('disasterId')!.value != null" />
+        </div>
+
+        <div class="row">
+          <!-- Left Column -->
+          <div class="col">
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_caseId">Location</label>
+              <input type="text" class="form-control col" name="caseId" id="field_caseId" data-cy="caseId"
+                [value]="treeNode?.name" [readonly]="true" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_caseId">Case Number</label>
+              <input type="text" class="form-control col" name="caseId" id="field_caseId" data-cy="caseId"
+                formControlName="caseId" [readonly]="true" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disasterCategory.detail.title"
+                for="field_disasterCategoryId">Disaster Category</label>
+              <select class="form-control col" required name="disasterCategoryId" formControlName="disasterCategoryId"
+                id="field_disasterCategoryId" data-cy="disasterCategoryId">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let disasterCategory of disasterCategories"
+                  [value]="disasterCategory?.disasterCategoryId">
+                  {{ disasterCategory.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disasterType.detail.title"
+                for="field_disasterTypeId">Disaster Type</label>
+              <select class="form-control col" required name="disasterTypeId" formControlName="disasterTypeId"
+                id="field_disasterTypeId" data-cy="disasterTypeId">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let disasterType of disasterTypes" [value]="disasterType?.disasterTypeId">
+                  {{ disasterType.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.name"
+                for="field_name">Name</label>
+              <input autocomplete="off" type="text" class="form-control col" required name="type" id="field_name"
+                data-cy="name" formControlName="name" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.incidentDate"
+                for="field_incidentDate">Incident Date</label>
+              <input required id="field_incidentDate" data-cy="incidentDate" type="date" class="form-control col"
+                name="incidentDate" formControlName="incidentDate" placeholder="YYYY-MM-DD" required />
+            </div>
+            <div class="row mb-3">
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" [(ngModel)]="isDeclaredDefaultValue" col-4 fw-bold type="radio" formControlName="isDeclared" id="exampleRadios1" [value]="false">
+                <label class="form-check-label" for="exampleRadios1">
+                  Declared a disaster
+                </label>
+             </div>
+             <div class="form-check form-check-inline">
+                <input required class="form-check-input" [(ngModel)]="isDeclaredDefaultValue" col-4 fw-bold type="radio" formControlName="isDeclared" id="exampleRadios2" [value]="true">
+                <label class="form-check-label" for="exampleRadios2">
+                  Not declared a disaster
+                </label>
+             </div>
+            </div>
+            
+           
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.declarationDate"
+                for="field_declarationDate">Declaration Date</label>
+              <input id="field_declarationDate" data-cy="declarationDate" type="date" class="form-control col"
+                name="declarationDate" formControlName="declarationDate" placeholder="YYYY-MM-DD" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_targetPopulation">Population</label>
+              <input type="number" class="form-control col" name="targetPopulation" id="field_targetPopulation"
+                data-cy="caseId" formControlName="targetPopulation" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_targetPopulationEstimate">Population Estimated</label>
+              <input type="checkbox" class="form-check col" name="targetPopulationEstimate"
+                id="field_targetPopulationEstimate" data-cy="targetPopulationEstimate"
+                formControlName="targetPopulationEstimate" />
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_affectedPopulation"
+                jhiTranslate="sendaiMonitorApp.disaster.affectedPopulation">Affected Population</label>
+              <input type="number" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+                data-cy="affectedPopulation" formControlName="affectedPopulation" />
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Longitude</label>
+              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+                data-cy="affectedPopulation" formControlName="longitude" />
+            </div>
+          </div>
+
+
+
+          <!-- Right Column -->
+          <div class="col">
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.department.detail.title"
+                for="field_departmentId">Department</label>
+              <select required class="form-control col" name="departmentId" formControlName="departmentId"
+                id="field_departmentId" data-cy="departmentId">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let department of departments" [value]="department?.departmentId">
+                  {{ department.name }}
+                </option>
+
+              </select>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.description"
+                for="field_description">Description</label>
+              <textarea rows="4" class="form-control col" name="description" id="field_description"
+                data-cy="description" formControlName="description"></textarea>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.cause"
+                for="field_cause">Cause</label>
+              <textarea rows="4" class="form-control col" name="cause" id="field_cause" data-cy="cause"
+                formControlName="cause"></textarea>
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.intervention"
+                for="field_intervention">Required Intervention</label>
+              <ng-multiselect-dropdown rows="4" [settings]="dropdownSettings" [data]="dropdownList"
+                (onSelect)="onItemSelect($event)" [ngModel]="disasterInterventions"
+                [ngModelOptions]="{standalone: true}" (onDeSelect)="onItemDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)" class="col p-0">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.otherIntervention"
+                for="field_intervention">Other Intervention</label>
+              <textarea rows="4" class="form-control col" name="intervention" id="field_intervention"
+                data-cy="intervention" formControlName="intervention"></textarea>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.estimatedDamage"
+                for="field_estimatedDamage">Estimated Damage</label>
+              <div class="col row">
+                <span class="col-3">
+                  <select class="form-control col" name="currency" formControlName="currency" id="field_currency"
+                    data-cy="currency">
+                    <option value="ZWD">ZW</option>
+                    <option value="USD">USD</option>
+                  </select>
+                </span>
+                <div class="col">
+                  <input type="text" class="form-control col" name="estimatedDamage" id="field_estimatedDamage"
+                    data-cy="estimatedDamage" formControlName="estimatedDamage" autocomplete="off" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Name</label>
+              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+                data-cy="affectedPopulation" formControlName="deepTank" />
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Latitude</label>
+              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+                data-cy="affectedPopulation" formControlName="latitude" />
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.closureDate"
+                for="field_closureDate">Closure Date</label>
+              <input id="field_closureDate" data-cy="closureDate" type="date" class="form-control col"
+                name="closureDate" formControlName="closureDate" placeholder="YYYY-MM-DD" />
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary"
+              (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button type="submit" id="save-entity" data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving" class="btn btn-primary ms-4">
+              <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

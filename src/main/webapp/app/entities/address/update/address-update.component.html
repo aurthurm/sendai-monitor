@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-address-heading" data-cy="AddressCreateUpdateHeading" jhiTranslate="sendaiMonitorApp.address.home.createOrEditLabel">
+        Create or edit a Address
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.address.addressId" for="field_addressId">Address Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="addressId"
+            id="field_addressId"
+            data-cy="addressId"
+            formControlName="addressId"
+            [readonly]="editForm.get('addressId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.address.casualtyId" for="field_casualtyId">Casualty Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="casualtyId"
+            id="field_casualtyId"
+            data-cy="casualtyId"
+            formControlName="casualtyId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.address.street" for="field_street">Street</label>
+          <input type="text" class="form-control col" name="street" id="field_street" data-cy="street" formControlName="street" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.address.countryId" for="field_countryId">Country Id</label>
+          <input type="text" class="form-control col" name="countryId" id="field_countryId" data-cy="countryId" formControlName="countryId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.address.provinceId" for="field_provinceId">Province Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="provinceId"
+            id="field_provinceId"
+            data-cy="provinceId"
+            formControlName="provinceId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.address.districtId" for="field_districtId">District Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="districtId"
+            id="field_districtId"
+            data-cy="districtId"
+            formControlName="districtId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

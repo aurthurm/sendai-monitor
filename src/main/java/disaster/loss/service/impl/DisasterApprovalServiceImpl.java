@@ -1,0 +1,103 @@
+package disaster.loss.service.impl;
+
+import java.util.Optional;
+
+import disaster.loss.domain.Disaster;
+import disaster.loss.domain.enumeration.DATA_APPROVAL;
+import disaster.loss.repository.DisasterRepository;
+import disaster.loss.security.SecurityUtils;
+import disaster.loss.web.rest.AccountResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import disaster.loss.domain.DisasterApproval;
+import disaster.loss.repository.DisasterApprovalRepository;
+import disaster.loss.service.DisasterApprovalService;
+
+/**
+ * Service Implementation for managing {@link DisasterApproval}.
+ */
+@Service
+@Transactional
+public class DisasterApprovalServiceImpl implements DisasterApprovalService  {
+
+    private final Logger log = LoggerFactory.getLogger(DisasterApprovalServiceImpl.class);
+
+    private final DisasterRepository disasterRepository;
+
+    private final DisasterApprovalRepository disasterApprovalRepository;
+
+    public DisasterApprovalServiceImpl(DisasterRepository disasterRepository, DisasterApprovalRepository disasterApprovalRepository) {
+        this.disasterRepository = disasterRepository;
+        this.disasterApprovalRepository = disasterApprovalRepository;
+    }
+
+    @Override
+    public DisasterApproval save(DisasterApproval disasterApproval) {
+        log.debug("Request to save DisasterApproval : {}", disasterApproval);
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        userLogin.ifPresent(disasterApproval::setStatus);
+        DisasterApproval saved =  disasterApprovalRepository.save(disasterApproval);
+        //
+        Disaster disaster = disasterRepository.findByDisasterId(saved.getDisasterId());
+        disaster.setApprovalStatus(saved.getApproval());
+        userLogin.ifPresent(disaster::setApprovedBy);
+        disasterRepository.save(disaster);
+        //
+        return saved;
+    }
+
+    @Override
+    public Optional<DisasterApproval> partialUpdate(DisasterApproval disasterApproval) {
+        log.debug("Request to partially update DisasterApproval : {}", disasterApproval);
+
+        return disasterApprovalRepository
+            .findById(disasterApproval.getDisasterApprovalId())
+            .map(existingCrop -> {
+                if (disasterApproval.getDisasterId() != null) {
+                    existingCrop.setDisasterId(disasterApproval.getDisasterId());
+                }
+                if (disasterApproval.getApproval() != null) {
+                    existingCrop.setApproval(disasterApproval.getApproval());
+                }
+                if (disasterApproval.getStatus() != null) {
+                    existingCrop.setStatus(disasterApproval.getStatus());
+                }
+                if (disasterApproval.getComment() != null) {
+                    existingCrop.setComment(disasterApproval.getComment());
+                }
+
+                return existingCrop;
+            })
+            .map(disasterApprovalRepository::save);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<DisasterApproval> findAll(Pageable pageable) {
+        log.debug("Request to get all Crops");
+        return disasterApprovalRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<DisasterApproval> findOne(String id) {
+        log.debug("Request to get DisasterApproval : {}", id);
+        return disasterApprovalRepository.findById(id);
+    }
+
+    @Override
+    public void delete(String id) {
+        log.debug("Request to delete DisasterApproval : {}", id);
+        disasterApprovalRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<DisasterApproval> findByDisasterId(String disasterId, Pageable pageable) {
+        return disasterApprovalRepository.findByDisasterId(disasterId, pageable);
+    }
+}

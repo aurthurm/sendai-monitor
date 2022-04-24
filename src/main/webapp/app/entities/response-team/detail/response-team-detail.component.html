@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="responseTeam">
+      <h2 data-cy="responseTeamDetailsHeading"><span jhiTranslate="sendaiMonitorApp.responseTeam.detail.title">Response Team</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.responseTeam.responseTeamId">Response Team Id</span></dt>
+        <dd>
+          <span>{{ responseTeam.responseTeamId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.responseTeam.disasterId">Disaster Id</span></dt>
+        <dd>
+          <span>{{ responseTeam.disasterId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.responseTeam.name">Name</span></dt>
+        <dd>
+          <span>{{ responseTeam.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.responseTeam.teamLead">Team Lead</span></dt>
+        <dd>
+          <span>{{ responseTeam.teamLead }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/response-team', responseTeam.responseTeamId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

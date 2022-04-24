@@ -1,0 +1,39 @@
+.row-md.jh-entity-details {
+  dt {
+    text-align: left;
+  }
+}
+
+.listree-submenu-heading {
+  cursor: pointer;
+}
+ul.listree {
+  list-style: none;
+}
+ul.listree-submenu-items {
+  list-style: none;
+  border-left: 1px dashed black;
+  white-space: nowrap;
+  margin-right: 4px;
+  padding-left: 20px;
+}
+div.listree-submenu-heading.collapsed:before {
+  content: "+";
+  margin-right: 4px;
+}
+div.listree-submenu-heading.expanded:before {
+  content: "-";
+  margin-right: 4px;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-width: 800px;
+  overflow-y: hidden;
+}
+
+.listree-selected {
+  background-color: #ECECEC;
+  color: #1c1c1c;
+  font-weight: 700;
+}

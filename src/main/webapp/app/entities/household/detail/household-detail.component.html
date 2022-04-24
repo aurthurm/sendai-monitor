@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="household">
+      <h2 data-cy="householdDetailsHeading">
+        <span jhiTranslate="sendaiMonitorApp.household.detail.title">Household</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.household.householdId">Infractructure Id</span></dt>
+        <dd>
+          <span>{{ household.householdId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.household.disasterId">Disaster Id</span></dt>
+        <dd>
+          <span>{{ household.disasterId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.household.casualtyId">Casualty Id</span></dt>
+        <dd>
+          <span>{{ household.numberOfHouseholds }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.household.householdTypeId">Infractructure Type Id</span></dt>
+        <dd>
+          <span>{{ household.numberChildHeaded }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.household.damaged">Damaged</span></dt>
+        <dd>
+          <span>{{ household.numberFemaleHeaded }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.household.destroyed">Destroyed</span></dt>
+        <dd>
+          <span>{{ household.numberOfPeopleAffected }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.household.value">Value</span></dt>
+
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/household', household.householdId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

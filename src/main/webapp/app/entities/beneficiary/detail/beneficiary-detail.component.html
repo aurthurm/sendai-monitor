@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="beneficiary">
+      <h2 data-cy="beneficiaryDetailsHeading"><span jhiTranslate="sendaiMonitorApp.beneficiary.detail.title">Beneficiary</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.beneficiary.beneficiaryId">Beneficiary Id</span></dt>
+        <dd>
+          <span>{{ beneficiary.beneficiaryId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.beneficiary.projectId">Project Id</span></dt>
+        <dd>
+          <span>{{ beneficiary.projectId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.beneficiary.amountReceived">Amount Received</span></dt>
+        <dd>
+          <span>{{ beneficiary.amountReceived }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.beneficiary.valueOfGoodsReceived">Value Of Goods Received</span></dt>
+        <dd>
+          <span>{{ beneficiary.valueOfGoodsReceived }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/beneficiary', beneficiary.beneficiaryId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

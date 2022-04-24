@@ -1,0 +1,117 @@
+<div>
+  <h2 id="page-heading" data-cy="HouseholdHeading">
+    <span jhiTranslate="sendaiMonitorApp.household.home.title">Households</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sendaiMonitorApp.household.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-household"
+        [routerLink]="['/household/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sendaiMonitorApp.household.home.createLabel"> Create a new Household </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="households?.length === 0">
+    <span jhiTranslate="sendaiMonitorApp.household.home.notFound">No households found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="households && households.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="householdId">
+            <span jhiTranslate="sendaiMonitorApp.household.householdId">Infractructure Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="disasterId">
+            <span jhiTranslate="sendaiMonitorApp.household.disasterId">Disaster Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="casualtyId">
+            <span jhiTranslate="sendaiMonitorApp.household.casualtyId">Casualty Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="householdTypeId">
+            <span jhiTranslate="sendaiMonitorApp.household.householdTypeId">Infractructure Type Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="damaged">
+            <span jhiTranslate="sendaiMonitorApp.household.damaged">Damaged</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="destroyed">
+            <span jhiTranslate="sendaiMonitorApp.household.destroyed">Destroyed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let household of households; trackBy: trackInfractructureId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/household', household.householdId, 'view']">{{ household.householdId }}</a>
+          </td>
+          <td>{{ household.disasterId }}</td>
+          <td>{{ household.numberOfHouseholds }}</td>
+          <td>{{ household.numberChildHeaded }}</td>
+          <td>{{ household.numberFemaleHeaded }}</td>
+          <td>{{ household.numberOfPeopleAffected }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/household', household.householdId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/household', household.householdId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(household)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="households && households.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "sendaiMonitorApp": {
+    "hazard": {
+      "home": {
+        "title": "Hazards",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Hazard",
+        "createOrEditLabel": "Create or edit a Hazard",
+        "notFound": "No Hazards found"
+      },
+      "created": "A new Hazard is created with identifier {{ param }}",
+      "updated": "A Hazard is updated with identifier {{ param }}",
+      "deleted": "A Hazard is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Hazard {{ id }}?"
+      },
+      "detail": {
+        "title": "Hazard"
+      },
+      "hazardId": "Hazard Id",
+      "type": "Type",
+      "locationId": "Location Id",
+      "mitigation": "Mitigation",
+      "description": "Description",
+      "severity": "Severity"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "sendaiMonitorApp": {
+    "infrastructure": {
+      "home": {
+        "title": "Infrastructures",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Infrastructure",
+        "createOrEditLabel": "Create or edit a Infrastructure",
+        "notFound": "No Infrastructures found"
+      },
+      "created": "A new Infrastructure is created with identifier {{ param }}",
+      "updated": "A Infrastructure is updated with identifier {{ param }}",
+      "deleted": "A Infrastructure is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Infrastructure {{ id }}?"
+      },
+      "detail": {
+        "title": "Infrastructure"
+      },
+      "infractructureId": "Infractructure Id",
+      "disasterId": "Disaster Id",
+      "casualtyId": "Casualty Id",
+      "infractructureTypeId": "Infractructure Type Id",
+      "damaged": "Damaged",
+      "destroyed": "Destroyed",
+      "value": "Value"
+    }
+  }
+}

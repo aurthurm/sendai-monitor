@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="partnerIntervention">
+      <h2 data-cy="partnerInterventionDetailsHeading">
+        <span jhiTranslate="sendaiMonitorApp.partnerIntervention.detail.title">Partner Intervention</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.inteventionId">Intevention Id</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.inteventionId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.partnerId">Partner Id</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.partnerId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.disasterId">Disaster Id</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.disasterId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.projectId">Project Id</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.projectId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.hazardId">Hazard Id</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.hazardId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.amountReceived">Amount Received</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.amountReceived }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.partnerIntervention.assistanceOffered">Assistance Offered</span></dt>
+        <dd>
+          <span>{{ partnerIntervention.assistanceOffered }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/partner-intervention', partnerIntervention.inteventionId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

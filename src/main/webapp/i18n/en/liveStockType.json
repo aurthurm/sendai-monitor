@@ -1,0 +1,24 @@
+{
+  "sendaiMonitorApp": {
+    "liveStockType": {
+      "home": {
+        "title": "Live Stock Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Live Stock Type",
+        "createOrEditLabel": "Create or edit a Live Stock Type",
+        "notFound": "No Live Stock Types found"
+      },
+      "created": "A new Live Stock Type is created with identifier {{ param }}",
+      "updated": "A Live Stock Type is updated with identifier {{ param }}",
+      "deleted": "A Live Stock Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Live Stock Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Live Stock Type"
+      },
+      "liveStockTypeId": "Live Stock Type Id",
+      "name": "Name"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "sendaiMonitorApp": {
+    "disaster": {
+      "home": {
+        "title": "Disasters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Record a new Disaster",
+        "createOrEditLabel": "Record or edit a Disaster",
+        "notFound": "No Disasters found"
+      },
+      "created": "A new Disaster is created with identifier {{ param }}",
+      "updated": "A Disaster is updated with identifier {{ param }}",
+      "deleted": "A Disaster is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Disaster {{ id }}?"
+      },
+      "detail": {
+        "title": "Disaster"
+      },
+      "name": "Name",
+      "disasterId": "Disaster Id",
+      "departmentId": "Department Id",
+      "hazardId": "Hazard Id",
+      "type": "Type",
+      "cause": "Cause",
+      "location": "Location",
+      "locationId": "Location Id",
+      "description": "Description",
+      "disasterCategoryId": "Disaster Category Id",
+      "disasterTypeId": "Disaster Type Id",
+      "caseId": "Case Id",
+      "caseNumber":"case Number",
+      "estimatedDamage": "Estimated Damage",
+      "declared": "Declared",
+      "isDeclared": "Is Declared",
+      "declarationDate": "Declaration Date",
+      "incidentDate": "Incident Date",
+      "closureDate": "Closure Date",
+      "intervention": "Required Intervention",
+      "otherIntervention": "Other Intervention",
+      "open": "Open",
+      "affectedPopulation":"Affected Population"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "sendaiMonitorApp": {
+    "SEX": {
+      "null": "",
+      "FEMALE": "FEMALE",
+      "MALE": "MALE",
+      "UNKNOWN": "UNKNOWN"
+    }
+  }
+}

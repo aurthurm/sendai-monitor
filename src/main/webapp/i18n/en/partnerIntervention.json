@@ -1,0 +1,29 @@
+{
+  "sendaiMonitorApp": {
+    "partnerIntervention": {
+      "home": {
+        "title": "Partner Interventions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Partner Intervention",
+        "createOrEditLabel": "Create or edit a Partner Intervention",
+        "notFound": "No Partner Interventions found"
+      },
+      "created": "A new Partner Intervention is created with identifier {{ param }}",
+      "updated": "A Partner Intervention is updated with identifier {{ param }}",
+      "deleted": "A Partner Intervention is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Partner Intervention {{ id }}?"
+      },
+      "detail": {
+        "title": "Partner Intervention"
+      },
+      "inteventionId": "Intevention Id",
+      "partnerId": "Partner Id",
+      "disasterId": "Disaster Id",
+      "projectId": "Project Id",
+      "hazardId": "Hazard Id",
+      "amountReceived": "Amount Received",
+      "assistanceOffered": "Assistance Offered"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="form">
+      <jhi-alert-error></jhi-alert-error>
+
+      <div *ngIf="isSaving" class="d-flex justify-content-center">
+        <div class="spinner-border text-success" role="status">
+          <span class="sr-only">...Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isSaving" formArrayName="households">
+
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.householdType.detail.title" for="field_householdTypeId">Household Type</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.household.households" for="field_damaged"># of households</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.household.child" for="field_damaged"># Child Headed</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.household.female" for="field_destroyed"># Female Headed</label>
+          </div>
+          <div class="col">
+            <label class="form-label" jhiTranslate="sendaiMonitorApp.household.affected" for="field_value"># of People Affected</label>
+          </div>
+          <!-- <div class="col pt-2 d-flex justify-content-end"></div> -->
+        </div>
+
+        <section *ngFor="let inForm of households.controls; let i = index">
+          <div [formGroupName]="i">
+
+            <div class="row mb-3">
+              <div class="col">
+                <select class="form-control " name="householdTypeId" formControlName="householdTypeId" id="field_householdTypeId" data-cy="householdTypeId">
+                  <option [ngValue]="null" disabled></option>
+                  <option *ngFor="let infra of householdTypes" [value]="infra?.householdTypeId" disabled>
+                    {{ infra.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <input type="number" class="form-control " name="numberOfHouseholds" id="field_numberOfhouseholds" data-cy="numberOfhouseholds" formControlName="numberOfHouseholds" />
+              </div>
+              <div class="col">
+                <input type="number" class="form-control " name="numberChildHeaded" id="field_numberChildHeaded" data-cy="numberChildHeaded" formControlName="numberChildHeaded" />
+              </div>
+    
+              <div class="col">
+                <input type="number" class="form-control " name="numberFemaleHeaded" id="field_numberFemaleHeaded" data-cy="numberFemaleHeaded" formControlName="numberFemaleHeaded" />
+              </div>
+    
+              <div class="col">
+                <input type="number" class="form-control " name="numberOfPeopleAffected" id="field_numberOfPeopleAffected" data-cy="numberOfPeopleAffected" formControlName="numberOfPeopleAffected" />
+              </div>
+
+              <!-- <div class="col d-flex justify-content-end">
+                <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-danger" (click)="removeHouseholdRow(i)">
+                  <fa-icon icon="ban"></fa-icon>&nbsp;<span >Remove</span>
+                </button>
+              </div> -->
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <!-- <hr>
+      <div class="mb-4 d-flex justify-content-end">
+        <button
+          type="button"
+          id="save-entity"
+          class="btn btn-primary"
+          (click)="addHouseholdRow()"
+        >
+          <fa-icon icon="plus"></fa-icon>&nbsp;<span >Add</span>
+        </button>
+      </div>
+      <hr> -->
+
+      <div>
+
+        <button
+          *ngIf="!isSaving" 
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="form.invalid || isSaving || disabled"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save All</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

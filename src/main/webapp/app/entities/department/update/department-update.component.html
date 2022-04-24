@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-department-heading"
+        data-cy="DepartmentCreateUpdateHeading"
+        jhiTranslate="sendaiMonitorApp.department.home.createOrEditLabel"
+      >
+        Create or edit a Department
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3 d-none">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.departmentId" for="field_departmentId">Department Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="departmentId"
+            id="field_departmentId"
+            data-cy="departmentId"
+            formControlName="departmentId"
+            [readonly]="editForm.get('departmentId')!.value != null"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.name" for="field_name">Name</label>
+          <input type="text" class="form-control col" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.phoneNumber" for="field_phoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.countryId" for="field_countryId">Country Id</label>
+          <input type="text" class="form-control col" name="countryId" id="field_countryId" data-cy="countryId" formControlName="countryId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.provinceId" for="field_provinceId">Province Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="provinceId"
+            id="field_provinceId"
+            data-cy="provinceId"
+            formControlName="provinceId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.districtId" for="field_districtId">District Id</label>
+          <input
+            type="text"
+            class="form-control col"
+            name="districtId"
+            id="field_districtId"
+            data-cy="districtId"
+            formControlName="districtId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.wardId" for="field_wardId">Ward Id</label>
+          <input type="text" class="form-control col" name="wardId" id="field_wardId" data-cy="wardId" formControlName="wardId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.villageId" for="field_villageId">Village Id</label>
+          <input type="text" class="form-control col" name="villageId" id="field_villageId" data-cy="villageId" formControlName="villageId" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

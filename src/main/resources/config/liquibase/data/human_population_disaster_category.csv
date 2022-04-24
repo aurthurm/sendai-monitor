@@ -1,0 +1,6 @@
+human_population_disaster_category_id,name,status,created_by,created_date,last_modified_by,last_modified_date
+f026ee93-a5b7-11ec-adfd-90ccdfa85f11,ill,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+0850d6f2-a5b8-11ec-adfd-90ccdfa85f11,displaced,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+113b3ae1-a5b8-11ec-adfd-90ccdfa85f11,injuries,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
+186894a2-a5b8-11ec-adfd-90ccdfa85f11,missing,,admin,2021-04-07 12:00:43,admin,2021-04-07 12:00:43
+1edabdc2-a5b8-11ec-adfd-90ccdfa85f11,deaths,,admin,2021-04-07 12:00:44,admin,2021-04-07 12:00:44

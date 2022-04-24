@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="address">
+      <h2 data-cy="addressDetailsHeading"><span jhiTranslate="sendaiMonitorApp.address.detail.title">Address</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.address.addressId">Address Id</span></dt>
+        <dd>
+          <span>{{ address.addressId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.address.casualtyId">Casualty Id</span></dt>
+        <dd>
+          <span>{{ address.casualtyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.address.street">Street</span></dt>
+        <dd>
+          <span>{{ address.street }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.address.countryId">Country Id</span></dt>
+        <dd>
+          <span>{{ address.countryId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.address.provinceId">Province Id</span></dt>
+        <dd>
+          <span>{{ address.provinceId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.address.districtId">District Id</span></dt>
+        <dd>
+          <span>{{ address.districtId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/address', address.addressId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

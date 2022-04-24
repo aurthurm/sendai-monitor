@@ -1,0 +1,74 @@
+<div>   
+  
+  <button class="btn btn-info my-4" (click)="getHouseholds()" [disabled]="isLoading">
+    <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+    <span jhiTranslate="sendaiMonitorApp.disaster.home.refreshListLabel">Refresh List</span>
+  </button>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="households?.length === 0">
+    <span jhiTranslate="sendaiMonitorApp.household.home.notFound">No households found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="households && households.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="getHouseholds()">
+          <th scope="col" jhiSortBy="anonymous">
+            <span jhiTranslate="sendaiMonitorApp.householdType.detail.title">Household Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.disaster.detail.title">Disaster</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+        
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.household.damaged">Damaged</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.household.destroyed">Destroyed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.household.value">Value</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let household of households; trackBy: trackHouseholdId" data-cy="entityTable">
+          <td>{{ getHouseholdType(household.householdTypeId!)?.name }}</td>
+          <td>{{ disaster?.name }}</td>
+          <td>{{ household.numberOfHouseholds }}</td>
+          <td>{{ household.numberChildHeaded }}</td>
+          <td>{{ household.numberFemaleHeaded }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/household', household.householdId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/household', household.householdId, 'edit']"
+                class="btn btn-primary btn-sm mx-1"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

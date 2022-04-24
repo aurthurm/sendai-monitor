@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="liveStock">
+      <h2 data-cy="liveStockDetailsHeading"><span jhiTranslate="sendaiMonitorApp.liveStock.detail.title">Live Stock</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.liveStock.liveStockId">Live Stock Id</span></dt>
+        <dd>
+          <span>{{ liveStock.liveStockId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.liveStock.disasterId">Disaster Id</span></dt>
+        <dd>
+          <span>{{ liveStock.disasterId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.liveStock.casualtyId">Casualty Id</span></dt>
+        <dd>
+          <span>{{ liveStock.casualtyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.liveStock.liveStockTypeId">Live Stock Type Id</span></dt>
+        <dd>
+          <span>{{ liveStock.liveStockTypeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.liveStock.liveStockAffected">Live Stock Affected</span></dt>
+        <dd>
+          <span>{{ liveStock.died }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.liveStock.estimatedLoss">Estimated Loss</span></dt>
+        <dd>
+          <span>{{ liveStock.estimatedLoss }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/live-stock', liveStock.liveStockId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.grid-view {
+  display: grid; 
+  grid-auto-flow: row dense; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "grid-gender DISABLED . . . ."
+    "grid-gender ENABLED . . . ."; 
+}
+
+.grid-gender { grid-area: grid-gender; }
+.DISABLED { grid-area: DISABLED; }
+.ENABLED { grid-area: ENABLED; }

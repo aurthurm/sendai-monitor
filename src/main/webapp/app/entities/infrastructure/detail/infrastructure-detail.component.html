@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="infrastructure">
+      <h2 data-cy="infrastructureDetailsHeading">
+        <span jhiTranslate="sendaiMonitorApp.infrastructure.detail.title">Infrastructure</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.infractructureId">Infractructure Id</span></dt>
+        <dd>
+          <span>{{ infrastructure.infractructureId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.disasterId">Disaster Id</span></dt>
+        <dd>
+          <span>{{ infrastructure.disasterId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.casualtyId">Casualty Id</span></dt>
+        <dd>
+          <span>{{ infrastructure.casualtyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.infractructureTypeId">Infractructure Type Id</span></dt>
+        <dd>
+          <span>{{ infrastructure.infractructureTypeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.damaged">Damaged</span></dt>
+        <dd>
+          <span>{{ infrastructure.damaged }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.destroyed">Destroyed</span></dt>
+        <dd>
+          <span>{{ infrastructure.destroyed }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.infrastructure.value">Value</span></dt>
+        <dd>
+          <span>{{ infrastructure.value }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/infrastructure', infrastructure.infractructureId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

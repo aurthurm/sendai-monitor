@@ -1,0 +1,49 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { CropComponent } from '../list/crop.component';
+import { CropDetailComponent } from '../detail/crop-detail.component';
+import { CropUpdateComponent } from '../update/crop-update.component';
+import { CropRoutingResolveService } from './crop-routing-resolve.service';
+
+const cropRoute: Routes = [
+  {
+    path: '',
+    component: CropComponent,
+    data: {
+      defaultSort: 'cropId,asc',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':cropId/view',
+    component: CropDetailComponent,
+    resolve: {
+      crop: CropRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'new',
+    component: CropUpdateComponent,
+    resolve: {
+      crop: CropRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':cropId/edit',
+    component: CropUpdateComponent,
+    resolve: {
+      crop: CropRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(cropRoute)],
+  exports: [RouterModule],
+})
+export class CropRoutingModule {}

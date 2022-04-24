@@ -1,0 +1,25 @@
+{
+  "sendaiMonitorApp": {
+    "disasterType": {
+      "home": {
+        "title": "Disaster Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Disaster Type",
+        "createOrEditLabel": "Create or edit a Disaster Type",
+        "notFound": "No Disaster Types found"
+      },
+      "created": "A new Disaster Type is created with identifier {{ param }}",
+      "updated": "A Disaster Type is updated with identifier {{ param }}",
+      "deleted": "A Disaster Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Disaster Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Disaster Type"
+      },
+      "disasterTypeId": "Disaster Type Id",
+      "disasterCategoryId": "Disaster Category Id",
+      "name": "Name"
+    }
+  }
+}

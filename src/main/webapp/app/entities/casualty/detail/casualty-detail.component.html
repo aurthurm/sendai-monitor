@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="casualty">
+      <h2 data-cy="casualtyDetailsHeading"><span jhiTranslate="sendaiMonitorApp.casualty.detail.title">Casualty</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <section class="row">
+
+        <dl class="col row-md jh-entity-details">
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.anonymous">Anonymous</span></dt>
+          <dd>
+            <span>{{ casualty.anonymous }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ casualty.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ casualty.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.disaster.detail.title">Disaster</span></dt>
+          <dd>
+            <span>{{ disaster?.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.nationalId">National Id</span></dt>
+          <dd>
+            <span>{{ casualty.nationalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.dob">Dob</span></dt>
+          <dd>
+            <span>{{ casualty.dob | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.dobEstimated">Dob Estimated</span></dt>
+          <dd>
+            <span>{{ casualty.dobEstimated }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.age">Age</span></dt>
+          <dd>
+            <span>{{ casualty.age }}</span>
+          </dd>
+        </dl>
+        <dl class="col row-md jh-entity-details">
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.sex">Sex</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'sendaiMonitorApp.SEX.' + casualty.sex }}">{{ casualty.sex }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.dependents">Dependents</span></dt>
+          <dd>
+            <span>{{ casualty.dependents }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.occupation">Occupation</span></dt>
+          <dd>
+            <span>{{ casualty.occupation }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.nationality">Nationality</span></dt>
+          <dd>
+            <span>{{ casualty.nationality }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.displaced">Displaced</span></dt>
+          <dd>
+            <span>{{ casualty.displaced }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.affected">Affected</span></dt>
+          <dd>
+            <span>{{ casualty.affected }}</span>
+          </dd>
+        </dl>
+        <dl class="col row-md jh-entity-details">
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.injured">Injured</span></dt>
+          <dd>
+            <span>{{ casualty.injured }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.missing">Missing</span></dt>
+          <dd>
+            <span>{{ casualty.missing }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.dead">Dead</span></dt>
+          <dd>
+            <span>{{ casualty.dead }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.disabilityBefore">Disability Before</span></dt>
+          <dd>
+            <span>{{ casualty.disabilityBefore }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.disabilityAfter">Disability After</span></dt>
+          <dd>
+            <span>{{ casualty.disabilityAfter }}</span>
+          </dd>
+          <dt><span jhiTranslate="sendaiMonitorApp.casualty.replay">Replay</span></dt>
+          <dd>
+            <span>{{ casualty.replay }}</span>
+          </dd>
+        </dl>
+      </section>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/casualty', casualty.casualtyId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

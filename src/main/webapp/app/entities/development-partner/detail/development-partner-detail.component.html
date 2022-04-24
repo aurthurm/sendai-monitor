@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="developmentPartner">
+      <h2 data-cy="developmentPartnerDetailsHeading">
+        <span jhiTranslate="sendaiMonitorApp.developmentPartner.detail.title">Development Partner</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.developmentPartner.partnerId">Partner Id</span></dt>
+        <dd>
+          <span>{{ developmentPartner.partnerId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.developmentPartner.name">Name</span></dt>
+        <dd>
+          <span>{{ developmentPartner.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.developmentPartner.description">Description</span></dt>
+        <dd>
+          <span>{{ developmentPartner.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/development-partner', developmentPartner.partnerId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

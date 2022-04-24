@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projectDisaster">
+      <h2 data-cy="projectDisasterDetailsHeading">
+        <span jhiTranslate="sendaiMonitorApp.projectDisaster.detail.title">Project Disaster</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sendaiMonitorApp.projectDisaster.projectDisasterId">Project Disaster Id</span></dt>
+        <dd>
+          <span>{{ projectDisaster.projectDisasterId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.projectDisaster.projectId">Project Id</span></dt>
+        <dd>
+          <span>{{ projectDisaster.projectId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sendaiMonitorApp.projectDisaster.disastertId">Disastert Id</span></dt>
+        <dd>
+          <span>{{ projectDisaster.disastertId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/project-disaster', projectDisaster.projectDisasterId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

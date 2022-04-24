@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="CasualtyHeading">
+    <span jhiTranslate="sendaiMonitorApp.casualty.home.title">Casualties</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sendaiMonitorApp.casualty.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <!-- <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-casualty"
+        [routerLink]="['/casualty/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sendaiMonitorApp.casualty.home.createLabel"> Create a new Casualty </span>
+      </button> -->
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="casualties?.length === 0">
+    <span jhiTranslate="sendaiMonitorApp.casualty.home.notFound">No casualties found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="casualties && casualties.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="anonymous">
+            <span jhiTranslate="sendaiMonitorApp.casualty.anonymous">Anonymous</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anonymous">
+            <span jhiTranslate="sendaiMonitorApp.casualty.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anonymous">
+            <span jhiTranslate="sendaiMonitorApp.casualty.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="disasterId">
+            <span jhiTranslate="sendaiMonitorApp.disaster.detail.title">Disaster</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationalId">
+            <span jhiTranslate="sendaiMonitorApp.casualty.nationalId">National Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dob"><span jhiTranslate="sendaiMonitorApp.casualty.dob">Dob</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="age"><span jhiTranslate="sendaiMonitorApp.casualty.age">Age</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sex"><span jhiTranslate="sendaiMonitorApp.casualty.sex">Sex</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dependents">
+            <span jhiTranslate="sendaiMonitorApp.casualty.dependents">Dependents</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="occupation">
+            <span jhiTranslate="sendaiMonitorApp.casualty.occupation">Occupation</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nationality">
+            <span jhiTranslate="sendaiMonitorApp.casualty.nationality">Nationality</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let casualty of casualties; trackBy: trackCasualtyId" data-cy="entityTable">
+          <td>{{ casualty.anonymous }}</td>
+          <td>{{ casualty.firstName }}</td>
+          <td>{{ casualty.lastName }}</td>
+          <td>{{ getDisaster(casualty.disasterId!)?.name }}</td>
+          <td>{{ casualty.nationalId }}</td>
+          <td>{{ casualty.dob | formatMediumDatetime }}</td>
+          <td>{{ casualty.age }}</td>
+          <td jhiTranslate="{{ 'sendaiMonitorApp.SEX.' + casualty.sex }}">{{ casualty.sex }}</td>
+          <td>{{ casualty.dependents }}</td>
+          <td>{{ casualty.occupation }}</td>
+          <td>{{ casualty.nationality }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/casualty', casualty.casualtyId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/casualty', casualty.casualtyId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(casualty)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="casualties && casualties.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

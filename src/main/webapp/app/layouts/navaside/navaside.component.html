@@ -1,0 +1,57 @@
+<nav class="bg-green">
+    <div class="d-flex flex-column justify-content-between vh-100">
+        <div>
+            <div class="text-center pt-2">
+                <a routerLink="/">
+                    <span class="hipster img-fluid rounded ml-4"></span>
+                </a>
+            </div>
+            <ul class="nav flex-column mt-4">
+                <li class="nav-item">
+                    <a class="d-flex align-items-center nav-link" routerLink="/"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <fa-icon icon="home"></fa-icon>
+                        <span class="nav-text mx-2">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center nav-link" routerLink="/dashboard"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <fa-icon icon="dashboard"></fa-icon>
+                        <span class="nav-text mx-2">DashBoard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center nav-link" routerLink="disaster/new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <fa-icon icon="plus"></fa-icon>                    
+                        <span class="nav-text mx-2">Add Disaster</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center nav-link" routerLink="disaster" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <fa-icon icon="bolt"></fa-icon>                    
+                        <span class="nav-text mx-2">Disasters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center nav-link" routerLink="report" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
+                        <fa-icon icon="chart-column"></fa-icon>                    
+                        <span class="nav-text mx-2">Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="mb-4">
+            <h6 class="mt-4 mb-1 text-muted">
+                <span class="nav-text mx-3">Account</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a class="d-flex align-items-center nav-link" (click)="logout()" >
+                        <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>                    
+                        <span class="nav-text ml-2">Sign out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
