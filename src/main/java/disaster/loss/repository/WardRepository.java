@@ -1,11 +1,14 @@
 package disaster.loss.repository;
 
+import disaster.loss.domain.District;
 import disaster.loss.domain.Ward;
 import disaster.loss.service.dto.VillageDTO;
 
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +22,7 @@ public interface WardRepository extends JpaRepository<Ward, String> {
 	List<Ward> findByDistrictId(String districtId);
 
 	Ward getByWardId(String locationId);
+
+	Page<Ward> findByDistrictId(String districtId, Pageable pageable);
 
 }

@@ -12,6 +12,7 @@ export type EntityArrayResponseType = HttpResponse<IWard[]>;
 
 @Injectable({ providedIn: 'root' })
 export class WardService {
+ 
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/wards');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
@@ -30,6 +31,10 @@ export class WardService {
 
   find(id: string): Observable<EntityResponseType> {
     return this.http.get<IWard>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByDistrictId(districtId: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IWard[]>(`${this.resourceUrl+'/district'}/${districtId}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

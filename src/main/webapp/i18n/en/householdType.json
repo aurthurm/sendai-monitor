@@ -2,22 +2,22 @@
   "sendaiMonitorApp": {
     "householdType": {
       "home": {
-        "title": "Household Types",
+        "title": "Dwellings Types",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Household Type",
-        "createOrEditLabel": "Create or edit a Household Type",
-        "notFound": "No Household Types found"
+        "createLabel": "Create a new Dwellings Type",
+        "createOrEditLabel": "Create or edit a Dwellings Type",
+        "notFound": "No Dwellings Types found"
       },
-      "created": "A new Household Type is created with identifier {{ param }}",
-      "updated": "A Household Type is updated with identifier {{ param }}",
-      "deleted": "A Household Type is deleted with identifier {{ param }}",
+      "created": "A new Dwellings Type is created with identifier {{ param }}",
+      "updated": "A Dwellings Type is updated with identifier {{ param }}",
+      "deleted": "A Dwellings Type is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Household Type {{ id }}?"
+        "question": "Are you sure you want to delete Dwellings Type {{ id }}?"
       },
       "detail": {
-        "title": "Household Type"
+        "title": "Dwelling(s) Type"
       },
-      "householdTypeId": "Household Type Id",
+      "householdTypeId": "Dwellings Type Id",
       "name": "Name"
     }
   }

@@ -2,11 +2,11 @@
   "sendaiMonitorApp": {
     "household": {
       "home": {
-        "title": "Households",
+        "title": "Dwellings",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Household",
-        "createOrEditLabel": "Create or edit a Household",
-        "notFound": "No Households found"
+        "createLabel": "Create a new Dwelling",
+        "createOrEditLabel": "Create or edit a Dwelling",
+        "notFound": "No Dwellings found"
       },
       "created": "A new Household is created with identifier {{ param }}",
       "updated": "A Household is updated with identifier {{ param }}",
@@ -15,16 +15,16 @@
         "question": "Are you sure you want to delete Household {{ id }}?"
       },
       "detail": {
-        "title": "Household"
+        "title": "Dwellings"
       },
-      "householdId": "Household Id",
+      "householdId": "Dwellings Id",
       "disasterId": "Disaster Id",
       "casualtyId": "Casualty Id",
-      "householdTypeId": "Household Type Id",
+      "householdTypeId": "Dwellings Type Id",
       "child": "# Child headed",
       "female": "# Female Headed",
       "affected": "# of people affected",
-      "households": "# of household(s)"
+      "households": "# of Dwelling(s)"
     }
   }
 }
