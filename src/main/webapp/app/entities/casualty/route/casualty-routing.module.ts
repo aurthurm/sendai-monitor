@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { CasualtyComponent } from '../list/casualty.component';
 import { CasualtyDetailComponent } from '../detail/casualty-detail.component';
+import { CasualtyUploadComponent } from '../upload/casualty-upload.component';
 import { CasualtyUpdateComponent } from '../update/casualty-update.component';
 import { CasualtyRoutingResolveService } from './casualty-routing-resolve.service';
 
@@ -22,6 +23,11 @@ const casualtyRoute: Routes = [
     resolve: {
       casualty: CasualtyRoutingResolveService,
     },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':disasterId/upload',
+    component: CasualtyUploadComponent,
     canActivate: [UserRouteAccessService],
   },
   {

@@ -195,6 +195,10 @@ export class DisasterDetailComponent implements OnInit {
     })
   }
 
+  uploadCasualties(disasterId: string): void {
+    this.router.navigate([`/casualty/${disasterId}/upload`]);
+  }
+
   addCasualty(disasterId: string): void {
     this.router.navigate(['/casualty/new'], {
       queryParams: {

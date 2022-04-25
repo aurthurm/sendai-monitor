@@ -18,6 +18,12 @@ export class CasualtyService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
+  uploadFile(file: File, disasterId: string): Observable<EntityArrayResponseType> {
+    const data: FormData = new FormData();
+    data.append('file', file);
+    return this.http.post<ICasualty[]>(`${this.resourceUrl}/upload-csv/${disasterId}`, data, { observe: 'response' });
+  }
+
   create(casualty: ICasualty): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(casualty);
     return this.http
