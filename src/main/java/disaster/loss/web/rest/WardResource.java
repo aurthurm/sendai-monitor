@@ -1,5 +1,6 @@
 package disaster.loss.web.rest;
 
+import disaster.loss.domain.District;
 import disaster.loss.domain.Ward;
 import disaster.loss.repository.WardRepository;
 import disaster.loss.service.WardService;
@@ -144,6 +145,20 @@ public class WardResource {
     public ResponseEntity<List<Ward>> getAllWards(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Wards");
         Page<Ward> page = wardService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    
+    /**
+     * {@code GET  /districts} : get all the wards by district.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of wards in body.
+     */
+    @GetMapping("/wards/district/{districtId}")
+    public ResponseEntity<List<Ward>> getAllDistrictsByProvinceId(@PathVariable String districtId, @org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get a page of Districts");
+        Page<Ward> page = wardRepository.findByDistrictId(districtId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

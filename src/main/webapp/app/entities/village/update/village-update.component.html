@@ -22,8 +22,33 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.village.wardId" for="field_wardId">Ward Id</label>
-          <input type="text" class="form-control col" name="wardId" id="field_wardId" data-cy="wardId" formControlName="wardId" />
+          <label class="form-label col-2 " 
+            for="field_intervention">Province</label>
+          <ng-multiselect-dropdown rows="4" required [settings]="dropdownSettings" [data]="dropdownList"
+            (onSelect)="onItemSelect($event)" [ngModel]="provinces"
+            [ngModelOptions]="{standalone: true}" (onDeSelect)="onItemDeSelect($event)"
+            class="col p-0">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2 " 
+            for="field_intervention">District</label>
+          <ng-multiselect-dropdown rows="4" [settings]="districtDropdownSettings" required [data]="districtDropdownList"
+            (onSelect)="onDistrictItemSelect($event)" [ngModel]="districts"
+            [ngModelOptions]="{standalone: true}" (onDeSelect)="onDistrictItemDeSelect($event)"
+            class="col p-0">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label col-2 " 
+            for="field_intervention">Ward</label>
+          <ng-multiselect-dropdown rows="4" required [settings]="wardDropdownSettings" [data]="wardDropdownList"
+            (onSelect)="onWardItemSelect($event)" [ngModel]="wards"
+            [ngModelOptions]="{standalone: true}" (onDeSelect)="onWardItemDeSelect($event)"
+            class="col p-0">
+          </ng-multiselect-dropdown>
         </div>
 
         <div class="row mb-3">
@@ -41,7 +66,7 @@
           <input type="text" class="form-control col" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3 d-none">
           <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.village.level" for="field_level">Level</label>
           <input type="number" class="form-control col" name="level" id="field_level" data-cy="level" formControlName="level" />
         </div>

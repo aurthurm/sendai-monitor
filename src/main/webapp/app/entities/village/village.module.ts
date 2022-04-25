@@ -5,9 +5,11 @@ import { VillageDetailComponent } from './detail/village-detail.component';
 import { VillageUpdateComponent } from './update/village-update.component';
 import { VillageDeleteDialogComponent } from './delete/village-delete-dialog.component';
 import { VillageRoutingModule } from './route/village-routing.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
-  imports: [SharedModule, VillageRoutingModule],
+  imports: [SharedModule, VillageRoutingModule, NgMultiSelectDropDownModule.forRoot()],
   declarations: [VillageComponent, VillageDetailComponent, VillageUpdateComponent, VillageDeleteDialogComponent],
   entryComponents: [VillageDeleteDialogComponent],
 })

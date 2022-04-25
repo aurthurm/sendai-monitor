@@ -9,9 +9,9 @@ import { IWard, Ward } from '../ward.model';
 
 import { WardService } from '../service/ward.service';
 import { ProvinceService } from '../../province/service/province.service';
-import { IProvince, Province } from '../../province/province.model';
+import { IProvince } from '../../province/province.model';
 import { DistrictService } from '../../district/service/district.service';
-import { IDistrict, District } from '../../district/district.model';
+import { IDistrict} from '../../district/district.model';
 
 @Component({
   selector: 'jhi-ward-update',
@@ -52,8 +52,6 @@ export class WardUpdateComponent implements OnInit {
       }
     })
 
-    
-
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'provinceId',
@@ -79,6 +77,7 @@ export class WardUpdateComponent implements OnInit {
       }
     })
   }
+
   onItemDeSelect(item: any): void {
     this.districtDropdownList = [];
     console.log(this.districtDropdownList) // eslint-disable-line
