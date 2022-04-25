@@ -149,6 +149,20 @@ public class DistrictResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    
+    /**
+     * {@code GET  /districts} : get all the districts by province.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of districts in body.
+     */
+    @GetMapping("/districts/province/{provinceId}")
+    public ResponseEntity<List<District>> getAllDistrictsByProvinceId(@PathVariable String provinceId, @org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get a page of Districts");
+        Page<District> page = districtRepository.findByProvinceId(provinceId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 
     /**
      * {@code GET  /districts/:id} : get the "id" district.

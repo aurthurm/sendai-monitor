@@ -12,6 +12,7 @@ export type EntityArrayResponseType = HttpResponse<IDistrict[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DistrictService {
+  
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/districts');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
@@ -32,6 +33,10 @@ export class DistrictService {
 
   find(id: string): Observable<EntityResponseType> {
     return this.http.get<IDistrict>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByProvinceId(provinceId: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IDistrict[]>(`${this.resourceUrl+'/province'}/${provinceId}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

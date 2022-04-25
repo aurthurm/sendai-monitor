@@ -1,20 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-
+import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { IWard, Ward } from '../ward.model';
+
 import { WardService } from '../service/ward.service';
+import { ProvinceService } from '../../province/service/province.service';
+import { IProvince, Province } from '../../province/province.model';
+import { DistrictService } from '../../district/service/district.service';
+import { IDistrict, District } from '../../district/district.model';
 
 @Component({
   selector: 'jhi-ward-update',
   templateUrl: './ward-update.component.html',
 })
 export class WardUpdateComponent implements OnInit {
-  isSaving = false;
 
+  isSaving = false;
+  dropdownList: any[] = [];
+  dropdownSettings: IDropdownSettings = {};
+  provinces: IProvince[] = [];
+
+  districtId ="";
+  wardLevel = 4;
+  districtDropdownList: any[] = [];
+  districtDropdownSettings: IDropdownSettings = {};
+  districts: IDistrict[] = [];
   editForm = this.fb.group({
     wardId: [],
     districtId: [],
@@ -24,12 +38,58 @@ export class WardUpdateComponent implements OnInit {
     level: [],
   });
 
-  constructor(protected wardService: WardService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(protected wardService: WardService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder,
+    protected provinceService: ProvinceService,protected districtService: DistrictService,) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ ward }) => {
       this.updateForm(ward);
     });
+
+    this.provinceService.query().subscribe(res => {
+      if (res.body) {
+        this.dropdownList = res.body;
+      }
+    })
+
+    
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'provinceId',
+      textField: 'name',
+      allowSearchFilter: true,
+      itemsShowLimit: 3,
+    };
+
+    this.districtDropdownSettings = {
+      singleSelection: true,
+      idField: 'districtId',
+      textField: 'name',
+      allowSearchFilter: true,
+      itemsShowLimit: 3,
+    };
+  }
+
+  onItemSelect(item: any): void {
+    //this.provinces.push(item);
+    this.districtService.findByProvinceId(item.provinceId).subscribe(res => {
+      if (res.body) {
+        this.districtDropdownList = res.body;
+      }
+    })
+  }
+  onItemDeSelect(item: any): void {
+    this.districtDropdownList = [];
+    console.log(this.districtDropdownList) // eslint-disable-line
+  }
+
+  onDistrictItemSelect(item: any): void {
+    this.districtId = item.districtId;
+  }
+  onDistrictItemDeSelect(item: any): void {
+    this.districtId = "";
+    console.log(this.districts) // eslint-disable-line
   }
 
   previousState(): void {
@@ -68,11 +128,11 @@ export class WardUpdateComponent implements OnInit {
   protected updateForm(ward: IWard): void {
     this.editForm.patchValue({
       wardId: ward.wardId,
-      districtId: ward.districtId,
+      districtId: this.districtId,
       name: ward.name,
       latitude: ward.latitude,
       longitude: ward.longitude,
-      level: ward.level,
+      level: this.wardLevel,
     });
   }
 
@@ -80,11 +140,11 @@ export class WardUpdateComponent implements OnInit {
     return {
       ...new Ward(),
       wardId: this.editForm.get(['wardId'])!.value,
-      districtId: this.editForm.get(['districtId'])!.value,
+      districtId: this.districtId,
       name: this.editForm.get(['name'])!.value,
       latitude: this.editForm.get(['latitude'])!.value,
       longitude: this.editForm.get(['longitude'])!.value,
-      level: this.editForm.get(['level'])!.value,
+      level: this.wardLevel,
     };
   }
 }
