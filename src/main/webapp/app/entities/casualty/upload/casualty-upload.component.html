@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+      <button type="submit" (click)="previousState()" class="btn btn-info mb-4" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <form name="editForm" role="form" novalidate (ngSubmit)="upload()">
+          <h2 id="jhi-patient-heading" >Upload Results via CSV</h2>
+
+          <div>
+              <jhi-alert-error></jhi-alert-error>
+          </div>
+
+          <div class="row mb-4">
+              <div class="form-group col-6">
+                  <label for="file">CSV File</label> 
+                  <input type="file" name="file" id="file" class="form-control" (change)="selectFiles($event)">
+              </div>
+          </div>
+
+          <button type="submit" id="save-entity" data-sample-create="false" class="btn btn-primary" [disabled]="!selectedFile || loading">
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Upload File</span>
+          </button>
+
+      </form>
+
+      <hr>
+
+      <section *ngIf="casualties.length > 0">
+          <h3>Output Detail</h3>
+          <hr>
+          <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+              <tr>
+                <th scope="col"><span>Anonymous</span></th>
+                <th scope="col"><span>First Name</span></th>
+                <th scope="col"><span>Last Name</span></th>
+                <th scope="col"><span>National Id</span></th>
+                <th scope="col"><span>Dob</span></th>
+                <th scope="col"><span>Age</span></th>
+                <th scope="col"><span>Sex</span></th>
+                <th scope="col"><span>Nationality</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let casualty of casualties; trackBy: trackCasualtyId" data-cy="entityTable">
+                <td>{{ casualty.anonymous }}</td>
+                <td>{{ casualty.firstName }}</td>
+                <td>{{ casualty.lastName }}</td>
+                <td>{{ casualty.nationalId }}</td>
+                <td>{{ casualty.dob | formatMediumDatetime }}</td>
+                <td>{{ casualty.age }}</td>
+                <td jhiTranslate="{{ 'sendaiMonitorApp.SEX.' + casualty.sex }}">{{ casualty.sex }}</td>
+                <td>{{ casualty.nationality }}</td>
+              </tr>
+            </tbody>
+          </table>
+      </section>
+  </div>
+</div>

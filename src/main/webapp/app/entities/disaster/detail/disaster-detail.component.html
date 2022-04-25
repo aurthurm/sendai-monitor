@@ -107,6 +107,9 @@
           <button type="button" (click)="addCasualty(disaster?.disasterId!)" class="btn btn-primary" [disabled]="editDisabled">
             <fa-icon icon="plus"></fa-icon>&nbsp;<span >Add Casualty</span>
           </button>
+          <button type="button" (click)="uploadCasualties(disaster?.disasterId!)" class="btn btn-primary" [disabled]="editDisabled">
+            <fa-icon icon="cloud"></fa-icon>&nbsp;<span >Upload Casualties</span>
+          </button>
           <button type="button" (click)="viewCasualties(disaster?.disasterId!)" class="btn btn-primary">
             <fa-icon icon="eye"></fa-icon>&nbsp;<span >View Casualties</span>
           </button>
