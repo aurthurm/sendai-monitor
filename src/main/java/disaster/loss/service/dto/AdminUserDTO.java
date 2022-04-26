@@ -13,181 +13,207 @@ import javax.validation.constraints.*;
  */
 public class AdminUserDTO {
 
-    private Long id;
+	private Long id;
 
-    @NotBlank
-    @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 1, max = 50)
-    private String login;
+	@NotBlank
+	@Pattern(regexp = Constants.LOGIN_REGEX)
+	@Size(min = 1, max = 50)
+	private String login;
 
-    @Size(max = 50)
-    private String firstName;
+	@Size(max = 50)
+	private String firstName;
 
-    @Size(max = 50)
-    private String lastName;
+	@Size(max = 50)
+	private String lastName;
 
-    @Email
-    @Size(min = 5, max = 254)
-    private String email;
+	@Email
+	@Size(min = 5, max = 254)
+	private String email;
 
-    @Size(max = 256)
-    private String imageUrl;
+	@Size(max = 256)
+	private String imageUrl;
 
-    private boolean activated = false;
+	private boolean activated = false;
 
-    @Size(min = 2, max = 10)
-    private String langKey;
+	@Size(min = 2, max = 10)
+	private String langKey;
 
-    private String createdBy;
+	private String createdBy;
 
-    private Instant createdDate;
+	private Instant createdDate;
 
-    private String lastModifiedBy;
+	private String activationKey;
 
-    private Instant lastModifiedDate;
+	private String resetKey;
 
-    private Set<String> authorities;
+	private String lastModifiedBy;
 
-    public AdminUserDTO() {
-        // Empty constructor needed for Jackson.
-    }
+	private Instant lastModifiedDate;
 
-    public AdminUserDTO(User user) {
-        this.id = user.getId();
-        this.login = user.getLogin();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.activated = user.isActivated();
-        this.imageUrl = user.getImageUrl();
-        this.langKey = user.getLangKey();
-        this.createdBy = user.getCreatedBy();
-        this.createdDate = user.getCreatedDate();
-        this.lastModifiedBy = user.getLastModifiedBy();
-        this.lastModifiedDate = user.getLastModifiedDate();
-        this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
-    }
+	private Set<String> authorities;
 
-    public Long getId() {
-        return id;
-    }
+	private String departmentId;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public AdminUserDTO() {
+		// Empty constructor needed for Jackson.
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public AdminUserDTO(User user) {
+		this.id = user.getId();
+		this.login = user.getLogin();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.email = user.getEmail();
+		this.activated = user.isActivated();
+		this.imageUrl = user.getImageUrl();
+		this.langKey = user.getLangKey();
+		this.createdBy = user.getCreatedBy();
+		this.createdDate = user.getCreatedDate();
+		this.lastModifiedBy = user.getLastModifiedBy();
+		this.lastModifiedDate = user.getLastModifiedDate();
+		this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+		this.resetKey = user.getResetKey();
+		this.activationKey = user.getActivationKey();
+		this.departmentId = user.getDepartmentId();
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public boolean isActivated() {
-        return activated;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-    public String getLangKey() {
-        return langKey;
-    }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
-    public void setLangKey(String langKey) {
-        this.langKey = langKey;
-    }
+	public boolean isActivated() {
+		return activated;
+	}
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+	public String getLangKey() {
+		return langKey;
+	}
 
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
+	public void setLangKey(String langKey) {
+		this.langKey = langKey;
+	}
 
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
+	public String getCreatedBy() {
+		return createdBy;
+	}
 
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
+	public Instant getCreatedDate() {
+		return createdDate;
+	}
 
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
+	public void setCreatedDate(Instant createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
+	public String getLastModifiedBy() {
+		return lastModifiedBy;
+	}
 
-    public Set<String> getAuthorities() {
-        return authorities;
-    }
+	public void setLastModifiedBy(String lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
 
-    public void setAuthorities(Set<String> authorities) {
-        this.authorities = authorities;
-    }
+	public Instant getLastModifiedDate() {
+		return lastModifiedDate;
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "AdminUserDTO{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated=" + activated +
-            ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
-            ", createdDate=" + createdDate +
-            ", lastModifiedBy='" + lastModifiedBy + '\'' +
-            ", lastModifiedDate=" + lastModifiedDate +
-            ", authorities=" + authorities +
-            "}";
-    }
+	public void setLastModifiedDate(Instant lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	public Set<String> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<String> authorities) {
+		this.authorities = authorities;
+	}
+
+	public String getResetKey() {
+		return resetKey;
+	}
+
+	public void setResetKey(String resetKey) {
+		this.resetKey = resetKey;
+	}
+
+	public String getActivationKey() {
+		return activationKey;
+	}
+
+	public void setActivationKey(String activationKey) {
+		this.activationKey = activationKey;
+	}
+
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	@Override
+	public String toString() {
+		return "AdminUserDTO [id=" + id + ", login=" + login + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", imageUrl=" + imageUrl + ", activated=" + activated + ", langKey=" + langKey
+				+ ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", activationKey=" + activationKey
+				+ ", resetKey=" + resetKey + ", lastModifiedBy=" + lastModifiedBy + ", lastModifiedDate="
+				+ lastModifiedDate + ", authorities=" + authorities + ", departmentId=" + departmentId + "]";
+	}
+
+	// prettier-ignore
+	
 }

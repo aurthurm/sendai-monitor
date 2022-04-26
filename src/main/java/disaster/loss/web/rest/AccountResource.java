@@ -130,7 +130,9 @@ public class AccountResource {
             userDTO.getLastName(),
             userDTO.getEmail(),
             userDTO.getLangKey(),
-            userDTO.getImageUrl()
+            userDTO.getImageUrl(),
+            userDTO.getDepartmentId()
+            
         );
     }
 
@@ -154,14 +156,16 @@ public class AccountResource {
      * @param mail the mail of the user.
      */
     @PostMapping(path = "/account/reset-password/init")
-    public void requestPasswordReset(@RequestBody String mail) {
+    public User requestPasswordReset(@RequestBody String mail) {
         Optional<User> user = userService.requestPasswordReset(mail);
         if (user.isPresent()) {
             mailService.sendPasswordResetMail(user.get());
+            return user.get();
         } else {
             // Pretend the request has been successful to prevent checking which emails really exist
             // but log that an invalid attempt has been made
             log.warn("Password reset requested for non existing mail");
+            return null;
         }
     }
 

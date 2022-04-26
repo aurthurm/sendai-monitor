@@ -81,6 +81,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private Instant resetDate = null;
+    
+    @Column(name = "department_id")
+	private String departmentId;
 
     @JsonIgnore
     @ManyToMany
@@ -198,7 +201,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    @Override
+    public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -215,18 +226,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return getClass().hashCode();
     }
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
-    }
+ // prettier-ignore
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", activated=" + activated + ", langKey=" + langKey
+				+ ", imageUrl=" + imageUrl + ", activationKey=" + activationKey + ", resetKey=" + resetKey
+				+ ", resetDate=" + resetDate + ", departmentId=" + departmentId + ", authorities=" + authorities + "]";
+	}
+
+    
+   
 }
