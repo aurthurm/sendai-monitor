@@ -3,7 +3,7 @@ package disaster.loss.repository;
 import java.util.List;
 import java.util.Optional;
 
-import disaster.loss.domain.enumeration.DATA_APPROVAL;
+import disaster.loss.domain.enumeration.APPROVALSTATUS;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,11 +34,11 @@ public interface DisasterRepository extends JpaRepository<Disaster, String> {
 
     Long countByIsDeclared(boolean b);
 
-    Long countByApprovalStatus(DATA_APPROVAL requestchanges);
+    Long countByApprovalStatus(APPROVALSTATUS requestchanges);
 
     Optional<Disaster> getByDisasterId(String disasterId);
 
-    Page<Disaster> findByApprovalStatus(DATA_APPROVAL approvalStatus, Pageable pageable);
+    Page<Disaster> findByApprovalStatus(APPROVALSTATUS approvalStatus, Pageable pageable);
 
     Disaster findByDisasterId(String disasterId);
 }

@@ -75,7 +75,7 @@ export class DisasterUpdateComponent implements OnInit {
     targetPopulation: [],
     targetPopulationEstimate: [],
     affectedPopulation: [],
-    deepTank: [],
+    dipTank: [],
     longitude:[],
     latitude:[],
   });
@@ -320,7 +320,7 @@ export class DisasterUpdateComponent implements OnInit {
       targetPopulation: disaster.targetPopulation,
       targetPopulationEstimate: disaster.targetPopulationEstimate,
       affectedPopulation: disaster.affectedPopulation,
-      deepTank: disaster.deepTank,
+      dipTank: disaster.dipTank,
       longitude: disaster.longitude,
       latitude: disaster.latitude,
     });
@@ -361,7 +361,7 @@ export class DisasterUpdateComponent implements OnInit {
       targetPopulation: this.editForm.get(['targetPopulation'])!.value,
       targetPopulationEstimate: this.editForm.get(['targetPopulationEstimate'])!.value,
       affectedPopulation: this.editForm.get(['affectedPopulation'])!.value,
-      deepTank: this.editForm.get(['deepTank'])!.value,
+      dipTank: this.editForm.get(['dipTank'])!.value,
       longitude: this.editForm.get(['longitude'])!.value,
     latitude: this.editForm.get(['latitude'])!.value,
 

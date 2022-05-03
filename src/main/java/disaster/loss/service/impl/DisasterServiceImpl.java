@@ -1,16 +1,11 @@
 package disaster.loss.service.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
-import disaster.loss.domain.IdServer;
-import disaster.loss.domain.enumeration.DATA_APPROVAL;
-import disaster.loss.repository.CustomDisasterRepository;
-import disaster.loss.repository.RequiredDisasterInterventionRepository;
-import disaster.loss.repository.IdServerRepository;
-import disaster.loss.repository.interfaces.ICountGroupBy;
-import disaster.loss.service.dto.DisasterSimpleCountDTO;
-import disaster.loss.service.dto.IDisasterApprovalDTO;
-import disaster.loss.service.dto.IdServerTemplateDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +16,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import disaster.loss.domain.Disaster;
-import disaster.loss.domain.RequiredDisasterIntervention;
+import disaster.loss.domain.DisasterApproval;
 import disaster.loss.domain.HumanPopulation;
 import disaster.loss.domain.HumanPopulationDisasterCategory;
+import disaster.loss.domain.IdServer;
+import disaster.loss.domain.RequiredDisasterIntervention;
+import disaster.loss.domain.enumeration.APPROVALSTATUS;
 import disaster.loss.domain.enumeration.DISABILITY;
 import disaster.loss.domain.enumeration.HUMAN_POPULATION;
+import disaster.loss.repository.CustomDisasterRepository;
 import disaster.loss.repository.DisasterRepository;
+import disaster.loss.repository.IdServerRepository;
+import disaster.loss.repository.RequiredDisasterInterventionRepository;
+import disaster.loss.repository.interfaces.ICountGroupBy;
 import disaster.loss.service.DisasterService;
 import disaster.loss.service.HumanPopulationDisasterCategoryService;
 import disaster.loss.service.HumanPopulationService;
+import disaster.loss.service.dto.DisasterSimpleCountDTO;
+import disaster.loss.service.dto.IDisasterApprovalDTO;
+import disaster.loss.service.dto.IdServerTemplateDTO;
 
 /**
  * Service Implementation for managing {@link Disaster}.
@@ -219,8 +224,8 @@ public class DisasterServiceImpl implements DisasterService {
                 existingDisaster.setAffectedPopulation(disaster.getAffectedPopulation());
             }
 
-            if (disaster.getDeepTank() != null) {
-                existingDisaster.setDeepTank(disaster.getDeepTank());
+            if (disaster.getDipTank() != null) {
+                existingDisaster.setDipTank(disaster.getDipTank());
             }
 
             if (disaster.getLatitude() != null) {
@@ -249,7 +254,7 @@ public class DisasterServiceImpl implements DisasterService {
         }else if (filterBy==null){
         	return disasterRepository.findAll(pageable);
         }
-        return disasterRepository.findByApprovalStatus(DATA_APPROVAL.valueOf(filterBy.toUpperCase()), pageable);
+        return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);
 	}
 
 	@Override
@@ -275,9 +280,9 @@ public class DisasterServiceImpl implements DisasterService {
 
         Long total = disasterRepository.count();
         Long declared = disasterRepository.countByIsDeclared(true);
-        Long approved = disasterRepository.countByApprovalStatus(DATA_APPROVAL.APPROVED);
-        Long notApproved = disasterRepository.countByApprovalStatus(DATA_APPROVAL.PENDING);
-        Long requestChanges= disasterRepository.countByApprovalStatus(DATA_APPROVAL.REQUESTCHANGES);
+        Long approved = disasterRepository.countByApprovalStatus(APPROVALSTATUS.APPROVED);
+        Long notApproved = disasterRepository.countByApprovalStatus(APPROVALSTATUS.PENDING);
+        Long requestChanges= disasterRepository.countByApprovalStatus(APPROVALSTATUS.REQUESTCHANGES);
         Long notDeclared = total - declared;
 
         counts.setTotal(total);
@@ -301,16 +306,5 @@ public class DisasterServiceImpl implements DisasterService {
 		disasterRepository.deleteById(id);
 	}
 
-    @Override
-    public Disaster approval(IDisasterApprovalDTO approval) {
-        Optional<Disaster> disasterOpt = disasterRepository.getByDisasterId(approval.getDisasterId());
-        if(disasterOpt.isPresent()){
-            Disaster disaster = disasterOpt.get();
-            disaster.setApprovalStatus(approval.getApproval());
-            disaster.setApprovalComment(approval.getComment());
-            return disasterRepository.save(disaster);
-        } else {
-            return null;
-        }
-    }
+   
 }

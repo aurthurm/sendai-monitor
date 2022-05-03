@@ -231,20 +231,5 @@ public class DisasterResource {
         return ResponseEntity.ok().body(page);
     }
 
-    /**
-     * {@code POST  /disasters/approval}
-     *
-     * @param approval the disaster to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new disaster, or with status {@code 400 (Bad Request)} if the disaster has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/disasters/approval")
-    public ResponseEntity<Disaster> createDisaster(@RequestBody IDisasterApprovalDTO approval) throws URISyntaxException {
-        log.debug("REST request to save Disaster : {}", approval);
-        Disaster result = disasterService.approval(approval);
-        return ResponseEntity
-            .created(new URI("/api/disasters/" + result.getDisasterId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getDisasterId()))
-            .body(result);
-    }
+   
 }

@@ -1,6 +1,6 @@
 package disaster.loss.service.dto;
 
-import disaster.loss.domain.enumeration.DATA_APPROVAL;
+import disaster.loss.domain.enumeration.APPROVALSTATUS;
 
 public class DisasterSimpleCountDTO {
 

@@ -1,12 +1,12 @@
 package disaster.loss.service.dto;
 
-import disaster.loss.domain.enumeration.DATA_APPROVAL;
+import disaster.loss.domain.enumeration.APPROVALSTATUS;
 
 public class IDisasterApprovalDTO {
 
     private String disasterId;
 
-   private DATA_APPROVAL approval;
+   private APPROVALSTATUS approval;
 
    private String comment;
 
@@ -18,11 +18,11 @@ public class IDisasterApprovalDTO {
         this.disasterId = disasterId;
     }
 
-    public DATA_APPROVAL getApproval() {
+    public APPROVALSTATUS getApproval() {
         return approval;
     }
 
-    public void setApproval(DATA_APPROVAL approval) {
+    public void setApproval(APPROVALSTATUS approval) {
         this.approval = approval;
     }
 

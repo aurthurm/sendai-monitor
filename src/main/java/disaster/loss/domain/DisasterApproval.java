@@ -14,7 +14,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
-import disaster.loss.domain.enumeration.DATA_APPROVAL;
+import disaster.loss.domain.enumeration.APPROVALSTATUS;
 
 /**
  * A Crop.
@@ -35,12 +35,13 @@ public class DisasterApproval extends AbstractAuditingEntity implements Serializ
 	@Column(name = "disaster_id")
 	private String disasterId;
 
+	// shows resolved requests for changes
 	@Column(name = "status")
 	private String status;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "approval")
-	private DATA_APPROVAL approval;
+	private APPROVALSTATUS approval;
 
 	@Column(name = "comment")
 	private String comment;
@@ -69,11 +70,11 @@ public class DisasterApproval extends AbstractAuditingEntity implements Serializ
 		this.status = status;
 	}
 
-	public DATA_APPROVAL getApproval() {
+	public APPROVALSTATUS getApproval() {
 		return approval;
 	}
 
-	public void setApproval(DATA_APPROVAL approval) {
+	public void setApproval(APPROVALSTATUS approval) {
 		this.approval = approval;
 	}
 

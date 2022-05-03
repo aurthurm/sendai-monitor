@@ -81,7 +81,7 @@ export interface IDisaster {
   targetPopulation?: string;
   targetPopulationEstimate?: string;
   affectedPopulation?: string;
-  deepTank?: string;
+  dipTank?: string;
   longitude?: string;
   latitude?: string;
   

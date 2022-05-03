@@ -21,9 +21,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import disaster.loss.domain.enumeration.DATA_APPROVAL;
+import disaster.loss.domain.enumeration.APPROVALSTATUS;
 import disaster.loss.domain.enumeration.LOCATION;
-import disaster.loss.domain.enumeration.TRUE_FALSE;
+import disaster.loss.domain.enumeration.ELIGABLEFORVERIFICATION;
 
 /**
  * A Disaster.
@@ -69,19 +69,12 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "approval_status")
-	private DATA_APPROVAL approvalStatus;
-
-	@Column(name = "approval_comment")
-	private String approvalComment;
-
-	@Column(name = "approved_by")
-	private String approvedBy;
+	@Column(name = "verification_mode")
+	private String verification_mode;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "eligible_for_approval")
-	private TRUE_FALSE eligibleForApproval;
+	private ELIGABLEFORVERIFICATION eligibleForApproval;
 
 	@Column(name = "disaster_category_id")
 	private String disasterCategoryId;
@@ -101,6 +94,7 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 	 * insertable = false, updatable = false) private
 	 * List<FulfilledDisasterIntervention> disasterInterventionFulfilled;
 	 */
+
 	@Column(name = "disaster_type_id")
 	private String disasterTypeId;
 
@@ -138,8 +132,8 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "affected_population_estimated")
 	private Boolean affectedPopulationEstimated;
 
-	@Column(name = "deep_tank")
-	private String deepTank;
+	@Column(name = "dip_tank")
+	private String dipTank;
 
 	@Column(name = "longitude")
 	private String longitude;
@@ -406,35 +400,11 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		this.disasterType = disasterType;
 	}
 
-	public DATA_APPROVAL getApprovalStatus() {
-		return approvalStatus;
-	}
-
-	public void setApprovalStatus(DATA_APPROVAL approvalStatus) {
-		this.approvalStatus = approvalStatus;
-	}
-
-	public String getApprovalComment() {
-		return approvalComment;
-	}
-
-	public void setApprovalComment(String approvalComment) {
-		this.approvalComment = approvalComment;
-	}
-
-	public String getApprovedBy() {
-		return approvedBy;
-	}
-
-	public void setApprovedBy(String approvedBy) {
-		this.approvedBy = approvedBy;
-	}
-
-	public TRUE_FALSE getEligibleForApproval() {
+	public ELIGABLEFORVERIFICATION getEligibleForApproval() {
 		return eligibleForApproval;
 	}
 
-	public void setEligibleForApproval(TRUE_FALSE eligibleForApproval) {
+	public void setEligibleForApproval(ELIGABLEFORVERIFICATION eligibleForApproval) {
 		this.eligibleForApproval = eligibleForApproval;
 	}
 
@@ -454,12 +424,20 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		this.affectedPopulation = affectedPopulation;
 	}
 
-	public String getDeepTank() {
-		return deepTank;
+	public String getVerification_mode() {
+		return verification_mode;
 	}
 
-	public void setDeepTank(String deepTank) {
-		this.deepTank = deepTank;
+	public void setVerification_mode(String verification_mode) {
+		this.verification_mode = verification_mode;
+	}
+
+	public String getDipTank() {
+		return dipTank;
+	}
+
+	public void setDipTank(String dipTank) {
+		this.dipTank = dipTank;
 	}
 
 	public String getLongitude() {
@@ -509,16 +487,15 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		return "Disaster [disasterId=" + disasterId + ", departmentId=" + departmentId + ", name=" + name
 				+ ", hazardId=" + hazardId + ", type=" + type + ", cause=" + cause + ", location=" + location
 				+ ", currency=" + currency + ", locationId=" + locationId + ", description=" + description
-				+ ", approvalStatus=" + approvalStatus + ", approvalComment=" + approvalComment + ", approvedBy="
-				+ approvedBy + ", eligibleForApproval=" + eligibleForApproval + ", disasterCategoryId="
-				+ disasterCategoryId + ", disasterCategory=" + disasterCategory + ", disasterInterventionRequired="
-				+ disasterInterventionRequired + ", disasterTypeId=" + disasterTypeId + ", disasterType=" + disasterType
-				+ ", caseId=" + caseId + ", estimatedDamage=" + estimatedDamage + ", isDeclared=" + isDeclared
-				+ ", declarationDate=" + declarationDate + ", closureDate=" + closureDate + ", incidentDate="
-				+ incidentDate + ", population=" + population + ", PopulationEstimated=" + PopulationEstimated
-				+ ", affectedPopulation=" + affectedPopulation + ", affectedPopulationEstimated="
-				+ affectedPopulationEstimated + ", deepTank=" + deepTank + ", longitude=" + longitude + ", latitude="
-				+ latitude + "]";
+				+ ", verification_mode=" + verification_mode + ", eligibleForApproval=" + eligibleForApproval
+				+ ", disasterCategoryId=" + disasterCategoryId + ", disasterCategory=" + disasterCategory
+				+ ", disasterInterventionRequired=" + disasterInterventionRequired + ", disasterTypeId="
+				+ disasterTypeId + ", disasterType=" + disasterType + ", caseId=" + caseId + ", estimatedDamage="
+				+ estimatedDamage + ", isDeclared=" + isDeclared + ", declarationDate=" + declarationDate
+				+ ", closureDate=" + closureDate + ", incidentDate=" + incidentDate + ", population=" + population
+				+ ", PopulationEstimated=" + PopulationEstimated + ", affectedPopulation=" + affectedPopulation
+				+ ", affectedPopulationEstimated=" + affectedPopulationEstimated + ", deepTank=" + dipTank
+				+ ", longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
 
 }

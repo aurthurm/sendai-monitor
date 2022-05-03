@@ -1,6 +1,6 @@
 package disaster.loss.domain.enumeration;
 
-public enum DATA_APPROVAL {
+public enum APPROVALSTATUS {
 	PENDING,
 	APPROVED,
 	REQUESTCHANGES

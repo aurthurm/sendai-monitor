@@ -80,10 +80,5 @@ public interface DisasterService {
      */
     void delete(String id);
 
-    /**
-     * handle approvals pipelines for a disaster.
-     *
-     * @param approval the DTO of the entity.
-     */
-    Disaster approval(IDisasterApprovalDTO approval);
+
 }

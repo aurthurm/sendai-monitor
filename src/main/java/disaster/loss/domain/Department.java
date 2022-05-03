@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
+
+import disaster.loss.domain.enumeration.VERIFICATION;
 
 /**
  * A Department.
@@ -30,6 +34,10 @@ public class Department extends AbstractAuditingEntity implements Serializable {
 
 	@Column(name = "name")
 	private String name;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "verification")
+	private VERIFICATION verification;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 
