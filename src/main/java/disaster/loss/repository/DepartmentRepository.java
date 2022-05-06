@@ -1,6 +1,9 @@
 package disaster.loss.repository;
 
 import disaster.loss.domain.Department;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, String> {}
+public interface DepartmentRepository extends JpaRepository<Department, String> {
+
+	Page<Department> findByDepartmentId(String departmentId, Pageable pageable);}
