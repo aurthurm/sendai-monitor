@@ -69,8 +69,8 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "verification_mode")
-	private String verification_mode;
+	@Column(name = "approval_status")
+	private String approvalStatus;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "eligible_for_approval")
@@ -424,14 +424,6 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		this.affectedPopulation = affectedPopulation;
 	}
 
-	public String getVerification_mode() {
-		return verification_mode;
-	}
-
-	public void setVerification_mode(String verification_mode) {
-		this.verification_mode = verification_mode;
-	}
-
 	public String getDipTank() {
 		return dipTank;
 	}
@@ -454,6 +446,14 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 
 	@Override
@@ -487,15 +487,17 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		return "Disaster [disasterId=" + disasterId + ", departmentId=" + departmentId + ", name=" + name
 				+ ", hazardId=" + hazardId + ", type=" + type + ", cause=" + cause + ", location=" + location
 				+ ", currency=" + currency + ", locationId=" + locationId + ", description=" + description
-				+ ", verification_mode=" + verification_mode + ", eligibleForApproval=" + eligibleForApproval
+				+ ", approvalStatus=" + approvalStatus + ", eligibleForApproval=" + eligibleForApproval
 				+ ", disasterCategoryId=" + disasterCategoryId + ", disasterCategory=" + disasterCategory
 				+ ", disasterInterventionRequired=" + disasterInterventionRequired + ", disasterTypeId="
 				+ disasterTypeId + ", disasterType=" + disasterType + ", caseId=" + caseId + ", estimatedDamage="
 				+ estimatedDamage + ", isDeclared=" + isDeclared + ", declarationDate=" + declarationDate
 				+ ", closureDate=" + closureDate + ", incidentDate=" + incidentDate + ", population=" + population
 				+ ", PopulationEstimated=" + PopulationEstimated + ", affectedPopulation=" + affectedPopulation
-				+ ", affectedPopulationEstimated=" + affectedPopulationEstimated + ", deepTank=" + dipTank
+				+ ", affectedPopulationEstimated=" + affectedPopulationEstimated + ", dipTank=" + dipTank
 				+ ", longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
+
+	
 
 }

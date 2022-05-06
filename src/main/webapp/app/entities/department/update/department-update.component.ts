@@ -18,12 +18,7 @@ export class DepartmentUpdateComponent implements OnInit {
   editForm = this.fb.group({
     departmentId: [],
     name: [],
-    phoneNumber: [],
-    countryId: [],
-    provinceId: [],
-    districtId: [],
-    wardId: [],
-    villageId: [],
+    verification: [],
   });
 
   constructor(protected departmentService: DepartmentService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -71,12 +66,7 @@ export class DepartmentUpdateComponent implements OnInit {
     this.editForm.patchValue({
       departmentId: department.departmentId,
       name: department.name,
-      phoneNumber: department.phoneNumber,
-      countryId: department.countryId,
-      provinceId: department.provinceId,
-      districtId: department.districtId,
-      wardId: department.wardId,
-      villageId: department.villageId,
+      verification: department.verification,
     });
   }
 
@@ -85,12 +75,7 @@ export class DepartmentUpdateComponent implements OnInit {
       ...new Department(),
       departmentId: this.editForm.get(['departmentId'])!.value,
       name: this.editForm.get(['name'])!.value,
-      phoneNumber: this.editForm.get(['phoneNumber'])!.value,
-      countryId: this.editForm.get(['countryId'])!.value,
-      provinceId: this.editForm.get(['provinceId'])!.value,
-      districtId: this.editForm.get(['districtId'])!.value,
-      wardId: this.editForm.get(['wardId'])!.value,
-      villageId: this.editForm.get(['villageId'])!.value,
+      verification: this.editForm.get(['verification'])!.value,
     };
   }
 }

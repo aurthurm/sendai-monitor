@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="department">
-      <h2 data-cy="departmentDetailsHeading"><span jhiTranslate="sendaiMonitorApp.department.detail.title">Department</span></h2>
+      <h2 data-cy="departmentDetailsHeading"><span
+          jhiTranslate="sendaiMonitorApp.department.detail.title">Department</span></h2>
 
       <hr />
 
@@ -20,27 +21,7 @@
         </dd>
         <dt><span jhiTranslate="sendaiMonitorApp.department.phoneNumber">Phone Number</span></dt>
         <dd>
-          <span>{{ department.phoneNumber }}</span>
-        </dd>
-        <dt><span jhiTranslate="sendaiMonitorApp.department.countryId">Country Id</span></dt>
-        <dd>
-          <span>{{ department.countryId }}</span>
-        </dd>
-        <dt><span jhiTranslate="sendaiMonitorApp.department.provinceId">Province Id</span></dt>
-        <dd>
-          <span>{{ department.provinceId }}</span>
-        </dd>
-        <dt><span jhiTranslate="sendaiMonitorApp.department.districtId">District Id</span></dt>
-        <dd>
-          <span>{{ department.districtId }}</span>
-        </dd>
-        <dt><span jhiTranslate="sendaiMonitorApp.department.wardId">Ward Id</span></dt>
-        <dd>
-          <span>{{ department.wardId }}</span>
-        </dd>
-        <dt><span jhiTranslate="sendaiMonitorApp.department.villageId">Village Id</span></dt>
-        <dd>
-          <span>{{ department.villageId }}</span>
+          <span>{{ department.verification }}</span>
         </dd>
       </dl>
 

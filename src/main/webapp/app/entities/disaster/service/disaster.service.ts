@@ -92,7 +92,7 @@ export class DisasterService {
       .get<any>(`${this.resourceUrl}/statistics/count-group-by-type`, { observe: 'response' })
   }  
   
-  approval(approval: IDisasterApproval): Observable<EntityResponseType> {
+  saveApproval(approval: IDisasterApproval): Observable<EntityResponseType> {
     return this.http
       .post<IDisasterApproval>(`${this.resourceApprovalUrl}/`, approval, { observe: 'response' });
   }

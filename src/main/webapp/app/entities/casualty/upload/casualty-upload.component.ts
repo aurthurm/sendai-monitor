@@ -34,7 +34,7 @@ export class CasualtyUploadComponent implements OnInit {
     this.loading = true;
     const uploadFile = this.selectedFiles!.item(0);
     this.casualtyService.uploadFile(uploadFile!, this.disasterId).subscribe(res => {
-      this.casualties = res.body || [];
+      this.casualties = res.body?? [];
       this.loading = false;
     });
   }

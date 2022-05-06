@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import disaster.loss.domain.Disaster;
 import disaster.loss.domain.DisasterApproval;
 import disaster.loss.repository.DisasterApprovalRepository;
+import disaster.loss.repository.DisasterRepository;
 import disaster.loss.service.DisasterApprovalService;
 
 /**
@@ -24,16 +26,29 @@ public class DisasterApprovalServiceImpl implements DisasterApprovalService {
 
 	private final DisasterApprovalRepository disasterApprovalRepository;
 
-	public DisasterApprovalServiceImpl(DisasterApprovalRepository disasterApprovalRepository) {
+	private final DisasterRepository disasterRepository;
+
+	public DisasterApprovalServiceImpl(DisasterApprovalRepository disasterApprovalRepository,
+			DisasterRepository disasterRepository) {
 
 		this.disasterApprovalRepository = disasterApprovalRepository;
+		this.disasterRepository = disasterRepository;
 	}
 
 	@Override
 	public DisasterApproval save(DisasterApproval disasterApproval) {
 		log.debug("Request to save DisasterApproval : {}", disasterApproval);
 
-		return disasterApprovalRepository.save(disasterApproval);
+		DisasterApproval saved = disasterApprovalRepository.save(disasterApproval);
+
+		if (saved != null) {
+			Disaster dis = disasterRepository.findByDisasterId(disasterApproval.getDisasterId());
+			dis.setApprovalStatus(disasterApproval.getApproval().toString());
+			disasterRepository.save(dis);
+
+		}
+
+		return saved;
 
 	}
 

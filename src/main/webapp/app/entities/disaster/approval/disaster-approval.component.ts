@@ -28,7 +28,8 @@ export class DisasterApprovalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   this.disasterService.approvalsForDisaster(this.disaster?.disasterId ?? "").subscribe(res => {
+   console.log(this.disaster, "Disaster ID")  // eslint-disable-line no-console
+   this.disasterService.approvalsForDisaster(this.disaster?.disasterId).subscribe(res => {
      if(res.body){
       this.approvals = res.body
      }
@@ -50,7 +51,7 @@ export class DisasterApprovalComponent implements OnInit {
       approval: "PENDING",
       comment: this.comment,
     };
-    this.disasterService.approval(approval).subscribe(res => {
+    this.disasterService.saveApproval(approval).subscribe(res => {
       if (res.body){
         this.approvals.push(res.body)
       }
@@ -64,7 +65,7 @@ export class DisasterApprovalComponent implements OnInit {
       approval: "APPROVED",
       comment: this.comment,
     };
-    this.disasterService.approval(approval).subscribe(res => {
+    this.disasterService.saveApproval(approval).subscribe(res => {
       if (res.body){
         this.approvals.push(res.body)
       }
@@ -78,7 +79,7 @@ export class DisasterApprovalComponent implements OnInit {
       approval: "REQUESTCHANGES",
       comment: this.comment,
     };
-    this.disasterService.approval(approval).subscribe(res => {
+    this.disasterService.saveApproval(approval).subscribe(res => {
       if (res.body){
         this.approvals.push(res.body)
       }

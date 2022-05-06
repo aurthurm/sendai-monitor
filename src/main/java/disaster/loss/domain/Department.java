@@ -34,7 +34,7 @@ public class Department extends AbstractAuditingEntity implements Serializable {
 
 	@Column(name = "name")
 	private String name;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "verification")
 	private VERIFICATION verification;
@@ -67,6 +67,14 @@ public class Department extends AbstractAuditingEntity implements Serializable {
 		this.name = name;
 	}
 
+	public VERIFICATION getVerification() {
+		return verification;
+	}
+
+	public void setVerification(VERIFICATION verification) {
+		this.verification = verification;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -87,7 +95,7 @@ public class Department extends AbstractAuditingEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Department [departmentId=" + departmentId + ", name=" + name + "]";
+		return "Department [departmentId=" + departmentId + ", name=" + name + ", verification=" + verification + "]";
 	}
 
 }

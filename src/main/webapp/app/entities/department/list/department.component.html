@@ -38,24 +38,10 @@
           <th scope="col" jhiSortBy="name">
             <span jhiTranslate="sendaiMonitorApp.department.name">Name</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="phoneNumber">
-            <span jhiTranslate="sendaiMonitorApp.department.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="verification">
+            <span jhiTranslate="sendaiMonitorApp.department.verification">Verification</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="countryId">
-            <span jhiTranslate="sendaiMonitorApp.department.countryId">Country Id</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="provinceId">
-            <span jhiTranslate="sendaiMonitorApp.department.provinceId">Province Id</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="districtId">
-            <span jhiTranslate="sendaiMonitorApp.department.districtId">District Id</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="wardId">
-            <span jhiTranslate="sendaiMonitorApp.department.wardId">Ward Id</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="villageId">
-            <span jhiTranslate="sendaiMonitorApp.department.villageId">Village Id</span> <fa-icon icon="sort"></fa-icon>
-          </th>
+         
           <th scope="col"></th>
         </tr>
       </thead>
@@ -65,12 +51,7 @@
             <a [routerLink]="['/department', department.departmentId, 'view']">{{ department.name }}</a>
           </td>
           <td>{{ department.name }}</td>
-          <td>{{ department.phoneNumber }}</td>
-          <td>{{ department.countryId }}</td>
-          <td>{{ department.provinceId }}</td>
-          <td>{{ department.districtId }}</td>
-          <td>{{ department.wardId }}</td>
-          <td>{{ department.villageId }}</td>
+          <td>{{ department.verification }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

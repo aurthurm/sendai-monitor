@@ -44,12 +44,6 @@
             <column name="approval_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="approval_comment" type="text">
-                <constraints nullable="true" />
-            </column>
-            <column name="approved_by" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="eligible_for_approval" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -89,7 +83,7 @@
             <column name="affected_population_estimated" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="deep_tank" type="varchar(255)">
+            <column name="dip_tank" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="longitude" type="varchar(255)">

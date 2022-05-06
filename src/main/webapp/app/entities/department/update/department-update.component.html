@@ -31,54 +31,13 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.phoneNumber" for="field_phoneNumber">Phone Number</label>
-          <input
-            type="text"
-            class="form-control col"
-            name="phoneNumber"
-            id="field_phoneNumber"
-            data-cy="phoneNumber"
-            formControlName="phoneNumber"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.countryId" for="field_countryId">Country Id</label>
-          <input type="text" class="form-control col" name="countryId" id="field_countryId" data-cy="countryId" formControlName="countryId" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.provinceId" for="field_provinceId">Province Id</label>
-          <input
-            type="text"
-            class="form-control col"
-            name="provinceId"
-            id="field_provinceId"
-            data-cy="provinceId"
-            formControlName="provinceId"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.districtId" for="field_districtId">District Id</label>
-          <input
-            type="text"
-            class="form-control col"
-            name="districtId"
-            id="field_districtId"
-            data-cy="districtId"
-            formControlName="districtId"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.wardId" for="field_wardId">Ward Id</label>
-          <input type="text" class="form-control col" name="wardId" id="field_wardId" data-cy="wardId" formControlName="wardId" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.villageId" for="field_villageId">Village Id</label>
-          <input type="text" class="form-control col" name="villageId" id="field_villageId" data-cy="villageId" formControlName="villageId" />
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.department.verification" for="field_verification">Verification</label>
+          <select required class="form-control col" id="verification" name="verification" formControlName="verification" data-cy="verification">
+            <option  value=""></option>
+            <option  value="SELFVERIFICATION">SELF VERIFICATION</option>
+            <option  value="SECONDARYVERIFICATION">SECONDARY VERIFICATION</option>
+            <option  value="NONE">NONE</option>
+          </select>
         </div>
       </div>
 
