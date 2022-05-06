@@ -1,51 +1,43 @@
-package disaster.loss.domain;
+package disaster.loss.service.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-
+import disaster.loss.domain.Department;
 import disaster.loss.domain.enumeration.ELIGABLEFORVERIFICATION;
 
 /**
  * A Department.
  */
-@Entity
-@Table(name = "department")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Department extends AbstractAuditingEntity implements Serializable {
+
+public class DepartmentDTO  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@Column(name = "department_id", updatable = false, nullable = false)
+	
 	private String departmentId;
 
-	@Column(name = "name")
+
 	private String name;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "verification")
 	private ELIGABLEFORVERIFICATION verification;
+	
+	public DepartmentDTO() {
+		// Empty constructor needed for Jackson.
+	}
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
+	
+	public DepartmentDTO(Department dpt) {
+		super();
+		this.departmentId = dpt.getDepartmentId();
+		this.name = dpt.getName();
+		this.verification = dpt.getVerification();
+	}
 
 	public String getDepartmentId() {
 		return this.departmentId;
 	}
 
-	public Department departmentId(String departmentId) {
+	public DepartmentDTO departmentId(String departmentId) {
 		this.setDepartmentId(departmentId);
 		return this;
 	}
@@ -58,7 +50,7 @@ public class Department extends AbstractAuditingEntity implements Serializable {
 		return this.name;
 	}
 
-	public Department name(String name) {
+	public DepartmentDTO name(String name) {
 		this.setName(name);
 		return this;
 	}
@@ -80,10 +72,10 @@ public class Department extends AbstractAuditingEntity implements Serializable {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof Department)) {
+		if (!(o instanceof DepartmentDTO)) {
 			return false;
 		}
-		return departmentId != null && departmentId.equals(((Department) o).departmentId);
+		return departmentId != null && departmentId.equals(((DepartmentDTO) o).departmentId);
 	}
 
 	@Override

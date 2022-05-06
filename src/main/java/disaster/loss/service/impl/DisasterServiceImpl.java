@@ -16,24 +16,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import disaster.loss.domain.Disaster;
-import disaster.loss.domain.DisasterApproval;
 import disaster.loss.domain.HumanPopulation;
 import disaster.loss.domain.HumanPopulationDisasterCategory;
 import disaster.loss.domain.IdServer;
 import disaster.loss.domain.RequiredDisasterIntervention;
 import disaster.loss.domain.enumeration.APPROVALSTATUS;
 import disaster.loss.domain.enumeration.DISABILITY;
+import disaster.loss.domain.enumeration.ELIGABLEFORVERIFICATION;
 import disaster.loss.domain.enumeration.HUMAN_POPULATION;
 import disaster.loss.repository.CustomDisasterRepository;
 import disaster.loss.repository.DisasterRepository;
 import disaster.loss.repository.IdServerRepository;
 import disaster.loss.repository.RequiredDisasterInterventionRepository;
 import disaster.loss.repository.interfaces.ICountGroupBy;
+import disaster.loss.service.DepartmentService;
 import disaster.loss.service.DisasterService;
 import disaster.loss.service.HumanPopulationDisasterCategoryService;
 import disaster.loss.service.HumanPopulationService;
+import disaster.loss.service.dto.DepartmentDTO;
 import disaster.loss.service.dto.DisasterSimpleCountDTO;
-import disaster.loss.service.dto.IDisasterApprovalDTO;
 import disaster.loss.service.dto.IdServerTemplateDTO;
 
 /**
@@ -45,73 +46,84 @@ public class DisasterServiceImpl implements DisasterService {
 
 	private final Logger log = LoggerFactory.getLogger(DisasterServiceImpl.class);
 
+	private static class DisasterServiceImplResourceException extends RuntimeException {
+
+		private DisasterServiceImplResourceException(String message) {
+			super(message);
+		}
+	}
+
+	@Autowired
+	DepartmentService departmentService;
+
 	private final DisasterRepository disasterRepository;
 
-    private final CustomDisasterRepository customDisasterRepository;
+	private final CustomDisasterRepository customDisasterRepository;
 
 	private final HumanPopulationService humanPopulationService;
 
-    private final IdServerRepository idServerRepository;
+	private final IdServerRepository idServerRepository;
 
-    private final HumanPopulationDisasterCategoryService humanPopulationDisasterCategoryService;
+	private final HumanPopulationDisasterCategoryService humanPopulationDisasterCategoryService;
 
-    @Autowired
-    RequiredDisasterInterventionRepository disasterInterventionRepository;
+	@Autowired
+	RequiredDisasterInterventionRepository disasterInterventionRepository;
 
-	public DisasterServiceImpl(
-        DisasterRepository disasterRepository,
-        CustomDisasterRepository customDisasterRepository,
-        HumanPopulationService humanPopulationService,
-        IdServerRepository idServerRepository,
-        HumanPopulationDisasterCategoryService humanPopulationDisasterCategoryService
-    ) {
+	public DisasterServiceImpl(DisasterRepository disasterRepository, CustomDisasterRepository customDisasterRepository,
+			HumanPopulationService humanPopulationService, IdServerRepository idServerRepository,
+			HumanPopulationDisasterCategoryService humanPopulationDisasterCategoryService) {
 		this.disasterRepository = disasterRepository;
-        this.customDisasterRepository = customDisasterRepository;
-        this.humanPopulationService = humanPopulationService;
-        this.idServerRepository = idServerRepository;
-        this.humanPopulationDisasterCategoryService = humanPopulationDisasterCategoryService;
-    }
+		this.customDisasterRepository = customDisasterRepository;
+		this.humanPopulationService = humanPopulationService;
+		this.idServerRepository = idServerRepository;
+		this.humanPopulationDisasterCategoryService = humanPopulationDisasterCategoryService;
+	}
 
-    // Auto generate laboratory reference number/sampleId here
-    private IdServerTemplateDTO generateDisasterCaseNumber() {
-        IdServerTemplateDTO ids = new IdServerTemplateDTO();
+	// Auto generate laboratory reference number/sampleId here
+	private IdServerTemplateDTO generateDisasterCaseNumber() {
+		IdServerTemplateDTO ids = new IdServerTemplateDTO();
 
-        // retrieve the last saved number from the id server
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        String yearPrefix = Integer.toString(year).substring(2);
+		// retrieve the last saved number from the id server
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		String yearPrefix = Integer.toString(year).substring(2);
 
-        String prefix = "DCP" + yearPrefix;
+		String prefix = "DCP" + yearPrefix;
 
-        IdServer id = idServerRepository.findByPrefixIgnoreCase(prefix);
-        if (id == null) {
-            IdServer idServer = new IdServer();
-            idServer.setPrefix(prefix);
-            idServer.setNumber(1);
-            idServer.setDescription(prefix);
-            id = idServerRepository.save(idServer);
-        }
+		IdServer id = idServerRepository.findByPrefixIgnoreCase(prefix);
+		if (id == null) {
+			IdServer idServer = new IdServer();
+			idServer.setPrefix(prefix);
+			idServer.setNumber(1);
+			idServer.setDescription(prefix);
+			id = idServerRepository.save(idServer);
+		}
 
-        int num = id.getNumber();
-        id.setNumber(num + 1);
-        idServerRepository.save(id);
+		int num = id.getNumber();
+		id.setNumber(num + 1);
+		idServerRepository.save(id);
 
-        String padded = String.format("%05d", num);
+		String padded = String.format("%05d", num);
 
-        ids.setNumber(id.getNumber());
-        ids.setPaddedNumber(prefix + "-" + padded);
-        ids.setCurrentIdServer(id);
+		ids.setNumber(id.getNumber());
+		ids.setPaddedNumber(prefix + "-" + padded);
+		ids.setCurrentIdServer(id);
 
-        return ids;
-    }
+		return ids;
+	}
 
 	@Override
 	public Disaster save(Disaster disaster) {
 		log.debug("Request to save Disaster : {}", disaster);
 
-        if(disaster.getCaseId()==null && disaster.getCaseId()==null ){
-            IdServerTemplateDTO ids = generateDisasterCaseNumber();
-            disaster.setCaseId(ids.getPaddedNumber());
-        }
+		if (disaster.getCaseId() == null && disaster.getCaseId() == null) {
+			IdServerTemplateDTO ids = generateDisasterCaseNumber();
+			disaster.setCaseId(ids.getPaddedNumber());
+		}
+
+		DepartmentDTO dpt = departmentService.findOne(disaster.getDepartmentId()).map(DepartmentDTO::new)
+				.orElseThrow(() -> new DisasterServiceImplResourceException("User could not be found"));
+
+		disaster.setEligibleForApproval(ELIGABLEFORVERIFICATION.valueOf(dpt.getVerification().toString()));
 
 		Disaster saved = disasterRepository.save(disaster);
 
@@ -147,9 +159,9 @@ public class DisasterServiceImpl implements DisasterService {
 	}
 
 	private void saveDisasterIntervention(Disaster disaster, Disaster saved) {
-		if(saved!=null && disaster.getDisasterInterventionRequired()!=null) {
+		if (saved != null && disaster.getDisasterInterventionRequired() != null) {
 			disasterInterventionRepository.deleteByDisasterId(disaster.getDisasterId());
-			for(RequiredDisasterIntervention inter : disaster.getDisasterInterventionRequired()) {
+			for (RequiredDisasterIntervention inter : disaster.getDisasterInterventionRequired()) {
 
 				RequiredDisasterIntervention inv = new RequiredDisasterIntervention();
 				inv.setDisasterId(disaster.getDisasterId());
@@ -164,7 +176,7 @@ public class DisasterServiceImpl implements DisasterService {
 	public Optional<Disaster> partialUpdate(Disaster disaster) {
 		log.debug("Request to partially update Disaster : {}", disaster);
 
-		Optional<Disaster>  dis = disasterRepository.findById(disaster.getDisasterId()).map(existingDisaster -> {
+		Optional<Disaster> dis = disasterRepository.findById(disaster.getDisasterId()).map(existingDisaster -> {
 			if (disaster.getDepartmentId() != null) {
 				existingDisaster.setDepartmentId(disaster.getDepartmentId());
 			}
@@ -213,29 +225,28 @@ public class DisasterServiceImpl implements DisasterService {
 			if (disaster.getIncidentDate() != null) {
 				existingDisaster.setIncidentDate(disaster.getIncidentDate());
 			}
-            if (disaster.getCurrency() != null) {
-                existingDisaster.setCurrency(disaster.getCurrency());
-            }
+			if (disaster.getCurrency() != null) {
+				existingDisaster.setCurrency(disaster.getCurrency());
+			}
 
-            if (disaster.getPopulation() != null) {
+			if (disaster.getPopulation() != null) {
 				existingDisaster.setPopulation(disaster.getPopulation());
 			}
-            if (disaster.getAffectedPopulation() != null) {
-                existingDisaster.setAffectedPopulation(disaster.getAffectedPopulation());
-            }
+			if (disaster.getAffectedPopulation() != null) {
+				existingDisaster.setAffectedPopulation(disaster.getAffectedPopulation());
+			}
 
-            if (disaster.getDipTank() != null) {
-                existingDisaster.setDipTank(disaster.getDipTank());
-            }
+			if (disaster.getDipTank() != null) {
+				existingDisaster.setDipTank(disaster.getDipTank());
+			}
 
-            if (disaster.getLatitude() != null) {
-                existingDisaster.setLatitude(disaster.getLatitude());
-            }
+			if (disaster.getLatitude() != null) {
+				existingDisaster.setLatitude(disaster.getLatitude());
+			}
 
-            if (disaster.getLongitude() != null) {
-                existingDisaster.setLongitude(disaster.getLongitude());
-            }
-
+			if (disaster.getLongitude() != null) {
+				existingDisaster.setLongitude(disaster.getLongitude());
+			}
 
 			return existingDisaster;
 		}).map(disasterRepository::save);
@@ -249,12 +260,12 @@ public class DisasterServiceImpl implements DisasterService {
 	@Transactional(readOnly = true)
 	public Page<Disaster> findAll(String filterBy, Pageable pageable) {
 		log.debug("Request to get all Disasters");
-        if (filterBy!=null && filterBy.toUpperCase().equals("ALL")) {
-            return disasterRepository.findAll(pageable);
-        }else if (filterBy==null){
-        	return disasterRepository.findAll(pageable);
-        }
-        return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);
+		if (filterBy != null && filterBy.toUpperCase().equals("ALL")) {
+			return disasterRepository.findAll(pageable);
+		} else if (filterBy == null) {
+			return disasterRepository.findAll(pageable);
+		}
+		return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);
 	}
 
 	@Override
@@ -264,47 +275,46 @@ public class DisasterServiceImpl implements DisasterService {
 		return disasterRepository.findById(id);
 	}
 
-    @Override
-    public Page<Disaster> search(String searchText, Pageable pageable) {
-        return customDisasterRepository.search(searchText, pageable);
-    }
+	@Override
+	public Page<Disaster> search(String searchText, Pageable pageable) {
+		return customDisasterRepository.search(searchText, pageable);
+	}
 
-    @Override
-    public List<ICountGroupBy> groupByDisasterCategory() {
-        return disasterRepository.groupByDisasterCategory();
-    }
+	@Override
+	public List<ICountGroupBy> groupByDisasterCategory() {
+		return disasterRepository.groupByDisasterCategory();
+	}
 
-    @Override
-    public DisasterSimpleCountDTO simpleCounts() {
-        DisasterSimpleCountDTO counts = new DisasterSimpleCountDTO();
+	@Override
+	public DisasterSimpleCountDTO simpleCounts() {
+		DisasterSimpleCountDTO counts = new DisasterSimpleCountDTO();
 
-        Long total = disasterRepository.count();
-        Long declared = disasterRepository.countByIsDeclared(true);
-        Long approved = disasterRepository.countByApprovalStatus(APPROVALSTATUS.APPROVED);
-        Long notApproved = disasterRepository.countByApprovalStatus(APPROVALSTATUS.PENDING);
-        Long requestChanges= disasterRepository.countByApprovalStatus(APPROVALSTATUS.REQUESTCHANGES);
-        Long notDeclared = total - declared;
+		Long total = disasterRepository.count();
+		Long declared = disasterRepository.countByIsDeclared(true);
+		Long approved = disasterRepository.countByApprovalStatus(APPROVALSTATUS.APPROVED);
+		Long notApproved = disasterRepository.countByApprovalStatus(APPROVALSTATUS.PENDING);
+		Long requestChanges = disasterRepository.countByApprovalStatus(APPROVALSTATUS.REQUESTCHANGES);
+		Long notDeclared = total - declared;
 
-        counts.setTotal(total);
-        counts.setDeclared(declared);
-        counts.setNotDeclared(notDeclared);
-        counts.setApproved(approved);
-        counts.setNotApproved(notApproved);
-        counts.setRequestChanges(requestChanges);
+		counts.setTotal(total);
+		counts.setDeclared(declared);
+		counts.setNotDeclared(notDeclared);
+		counts.setApproved(approved);
+		counts.setNotApproved(notApproved);
+		counts.setRequestChanges(requestChanges);
 
-        return counts;
-    }
+		return counts;
+	}
 
-    @Override
-    public List<ICountGroupBy> groupByDisasterType() {
-        return disasterRepository.groupByDisasterType();
-    }
+	@Override
+	public List<ICountGroupBy> groupByDisasterType() {
+		return disasterRepository.groupByDisasterType();
+	}
 
-    @Override
+	@Override
 	public void delete(String id) {
 		log.debug("Request to delete Disaster : {}", id);
 		disasterRepository.deleteById(id);
 	}
 
-   
 }
