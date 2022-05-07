@@ -41,4 +41,8 @@ public interface DisasterRepository extends JpaRepository<Disaster, String> {
     Page<Disaster> findByApprovalStatus(APPROVALSTATUS approvalStatus, Pageable pageable);
 
     Disaster findByDisasterId(String disasterId);
+
+	Page<Disaster> findByDepartmentId(String departmentId, Pageable pageable);
+
+	Page<Disaster> findByApprovalStatusAndDepartmentId(APPROVALSTATUS valueOf, String departmentId, Pageable pageable);
 }

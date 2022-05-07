@@ -33,6 +33,8 @@ import disaster.loss.service.DepartmentService;
 import disaster.loss.service.DisasterService;
 import disaster.loss.service.HumanPopulationDisasterCategoryService;
 import disaster.loss.service.HumanPopulationService;
+import disaster.loss.service.UserService;
+import disaster.loss.service.dto.AdminUserDTO;
 import disaster.loss.service.dto.DepartmentDTO;
 import disaster.loss.service.dto.DisasterSimpleCountDTO;
 import disaster.loss.service.dto.IdServerTemplateDTO;
@@ -55,6 +57,9 @@ public class DisasterServiceImpl implements DisasterService {
 
 	@Autowired
 	DepartmentService departmentService;
+	
+	@Autowired
+	UserService userService;
 
 	private final DisasterRepository disasterRepository;
 
@@ -121,7 +126,7 @@ public class DisasterServiceImpl implements DisasterService {
 		}
 
 		DepartmentDTO dpt = departmentService.findOne(disaster.getDepartmentId()).map(DepartmentDTO::new)
-				.orElseThrow(() -> new DisasterServiceImplResourceException("User could not be found"));
+				.orElseThrow(() -> new DisasterServiceImplResourceException("Department could not be found"));
 
 		disaster.setEligibleForApproval(ELIGABLEFORVERIFICATION.valueOf(dpt.getVerification().toString()));
 
@@ -260,12 +265,26 @@ public class DisasterServiceImpl implements DisasterService {
 	@Transactional(readOnly = true)
 	public Page<Disaster> findAll(String filterBy, Pageable pageable) {
 		log.debug("Request to get all Disasters");
-		if (filterBy != null && filterBy.toUpperCase().equals("ALL")) {
-			return disasterRepository.findAll(pageable);
-		} else if (filterBy == null) {
-			return disasterRepository.findAll(pageable);
+		
+		AdminUserDTO user = userService.getUserWithAuthorities().map(AdminUserDTO::new)
+				.orElseThrow(() -> new DisasterServiceImplResourceException("User could not be found"));
+		
+		if(user.getAuthorities().contains("ROLE_ADMIN")) {
+			if (filterBy != null && filterBy.toUpperCase().equals("ALL")) {
+				return disasterRepository.findAll(pageable);
+			} else if (filterBy == null) {
+				return disasterRepository.findAll(pageable);
+			}
+			return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);	
+		}else {
+			if (filterBy != null && filterBy.toUpperCase().equals("ALL")) {
+				return disasterRepository.findByDepartmentId(user.getDepartmentId(), pageable);
+			} 
+			return disasterRepository.findByApprovalStatusAndDepartmentId(APPROVALSTATUS.valueOf(filterBy.toUpperCase()),user.getDepartmentId(), pageable);	
+			
 		}
-		return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);
+		
+		
 	}
 
 	@Override
