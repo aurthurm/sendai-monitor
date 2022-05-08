@@ -57,7 +57,7 @@ public class DisasterServiceImpl implements DisasterService {
 
 	@Autowired
 	DepartmentService departmentService;
-	
+
 	@Autowired
 	UserService userService;
 
@@ -120,13 +120,16 @@ public class DisasterServiceImpl implements DisasterService {
 	public Disaster save(Disaster disaster) {
 		log.debug("Request to save Disaster : {}", disaster);
 
-		if (disaster.getCaseId() == null && disaster.getCaseId() == null) {
-			IdServerTemplateDTO ids = generateDisasterCaseNumber();
-			disaster.setCaseId(ids.getPaddedNumber());
-		}
-
 		DepartmentDTO dpt = departmentService.findOne(disaster.getDepartmentId()).map(DepartmentDTO::new)
 				.orElseThrow(() -> new DisasterServiceImplResourceException("Department could not be found"));
+
+		if (disaster.getCaseId() == null && disaster.getDisasterId() == null) {
+			IdServerTemplateDTO ids = generateDisasterCaseNumber();
+			disaster.setCaseId(ids.getPaddedNumber());
+
+			disaster.setApprovalStatus(APPROVALSTATUS.valueOf("PENDING"));
+
+		}
 
 		disaster.setEligibleForApproval(ELIGABLEFORVERIFICATION.valueOf(dpt.getVerification().toString()));
 
@@ -265,26 +268,26 @@ public class DisasterServiceImpl implements DisasterService {
 	@Transactional(readOnly = true)
 	public Page<Disaster> findAll(String filterBy, Pageable pageable) {
 		log.debug("Request to get all Disasters");
-		
+
 		AdminUserDTO user = userService.getUserWithAuthorities().map(AdminUserDTO::new)
 				.orElseThrow(() -> new DisasterServiceImplResourceException("User could not be found"));
-		
-		if(user.getAuthorities().contains("ROLE_ADMIN")) {
+
+		if (user.getAuthorities().contains("ROLE_ADMIN")) {
 			if (filterBy != null && filterBy.toUpperCase().equals("ALL")) {
 				return disasterRepository.findAll(pageable);
 			} else if (filterBy == null) {
 				return disasterRepository.findAll(pageable);
 			}
-			return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);	
-		}else {
+			return disasterRepository.findByApprovalStatus(APPROVALSTATUS.valueOf(filterBy.toUpperCase()), pageable);
+		} else {
 			if (filterBy != null && filterBy.toUpperCase().equals("ALL")) {
 				return disasterRepository.findByDepartmentId(user.getDepartmentId(), pageable);
-			} 
-			return disasterRepository.findByApprovalStatusAndDepartmentId(APPROVALSTATUS.valueOf(filterBy.toUpperCase()),user.getDepartmentId(), pageable);	
-			
+			}
+			return disasterRepository.findByApprovalStatusAndDepartmentId(
+					APPROVALSTATUS.valueOf(filterBy.toUpperCase()), user.getDepartmentId(), pageable);
+
 		}
-		
-		
+
 	}
 
 	@Override

@@ -69,8 +69,9 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "approval_status")
-	private String approvalStatus;
+	private APPROVALSTATUS approvalStatus;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "eligible_for_approval")
@@ -448,11 +449,11 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		this.latitude = latitude;
 	}
 
-	public String getApprovalStatus() {
+	public APPROVALSTATUS getApprovalStatus() {
 		return approvalStatus;
 	}
 
-	public void setApprovalStatus(String approvalStatus) {
+	public void setApprovalStatus(APPROVALSTATUS approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 

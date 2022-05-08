@@ -43,7 +43,7 @@ public class DisasterApprovalServiceImpl implements DisasterApprovalService {
 
 		if (saved != null) {
 			Disaster dis = disasterRepository.findByDisasterId(disasterApproval.getDisasterId());
-			dis.setApprovalStatus(disasterApproval.getApproval().toString());
+			dis.setApprovalStatus(disasterApproval.getApproval());
 			disasterRepository.save(dis);
 
 		}
