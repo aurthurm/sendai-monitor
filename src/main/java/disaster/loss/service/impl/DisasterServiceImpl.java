@@ -24,6 +24,7 @@ import disaster.loss.domain.enumeration.APPROVALSTATUS;
 import disaster.loss.domain.enumeration.DISABILITY;
 import disaster.loss.domain.enumeration.ELIGABLEFORVERIFICATION;
 import disaster.loss.domain.enumeration.HUMAN_POPULATION;
+import disaster.loss.domain.enumeration.LOCATION;
 import disaster.loss.repository.CustomDisasterRepository;
 import disaster.loss.repository.DisasterRepository;
 import disaster.loss.repository.IdServerRepository;
@@ -131,6 +132,7 @@ public class DisasterServiceImpl implements DisasterService {
 
 		}
 
+		disaster.setLocation(disaster.getLocation() != null ? disaster.getLocation() : LOCATION.NATIONAL);
 		disaster.setEligibleForApproval(ELIGABLEFORVERIFICATION.valueOf(dpt.getVerification().toString()));
 
 		Disaster saved = disasterRepository.save(disaster);
