@@ -171,7 +171,7 @@ public class CasualtyServiceImpl implements CasualtyService {
             log.debug("Please select a file to upload !");
         } else {
             try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(csvFile.getInputStream(), StandardCharsets.UTF_8.name()))
+                BufferedReader reader = new BufferedReader(new InputStreamReader(csvFile.getInputStream(), StandardCharsets.UTF_8))
             ) {
                 CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
                 Iterable<CSVRecord> csvRecords = csvParser.getRecords();

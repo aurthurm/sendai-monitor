@@ -2,9 +2,12 @@ package disaster.loss.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -231,12 +234,14 @@ public class SendaiMonitorIndicatorsReportImpl {
 
 			String reportName = "patient-report(s)" + LocalDateTime.now().toString();
 
-			FileWriter filez = new FileWriter(reportName);
+			//FileWriter filez = new FileWriter(reportName);
+			
+			OutputStreamWriter filez = new OutputStreamWriter(new FileOutputStream(reportName), StandardCharsets.UTF_8);
 			filez.write(json.toString());
 			filez.close();
 			File wriiten = new File(reportName);
 
-			InputStream stream = new ByteArrayInputStream(rpt.toString().getBytes("UTF-8"));
+			InputStream stream = new ByteArrayInputStream(rpt.toString().getBytes(StandardCharsets.UTF_8));
 			JRDataSource jsonDataSource = new JsonDataSource(wriiten);
 			if (wriiten.delete()) {
 				System.out.println("Json File deleted successfully");

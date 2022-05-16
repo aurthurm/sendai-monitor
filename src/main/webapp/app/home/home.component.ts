@@ -10,7 +10,7 @@ import { LoginService } from 'app/login/login.service';
 import { DisasterService } from 'app/entities/disaster/service/disaster.service';
 import Highcharts from "highcharts/highmaps";
 import worldMap from "@highcharts/map-collection/custom/world.geo.json";
-//import proj4 from "proj4";
+import proj4 from "proj4";
 
 
 @Component({
@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   chartOptions: Highcharts.Options = {
     chart: {
-      map: worldMap
-      //proj4: proj4
+      map: worldMap,
+      proj4
     },
     title: {
       text: "Zimbabwe"
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     series: [
       {
         type: "map",
-        name: "Random data",
+        name: "Disaster data",
         states: {
           hover: {
             color: "#BADA55"
@@ -65,6 +65,34 @@ export class HomeComponent implements OnInit, OnDestroy {
           ["zw", 187]
         ]
         
+      } as Highcharts.SeriesMapOptions,
+      {
+        // Specify points using lat/lon
+        type: "mappoint",
+        name: "Zimbabwe cities",
+        marker: {
+          radius: 5,
+          fillColor: "tomato"
+        },
+        data: [
+          {
+            name: "Harare",
+            lat: -17.824858,
+            lon: 31.053028,
+             x:30,
+             y:800
+          },
+          {
+            name: "Quebec City",
+            lat: 46.829853,
+            lon: -71.254028
+          },
+          {
+            name: "Yellowknife",
+            lat: 62.454,
+            lon: -114.3718
+          }
+        ]
       }
     ]
   };

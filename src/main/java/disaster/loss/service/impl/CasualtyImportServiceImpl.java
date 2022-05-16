@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class CasualtyImportServiceImpl {
@@ -13,7 +14,7 @@ public class CasualtyImportServiceImpl {
 		String splitBy = ",";
 		try {
 			// parsing a CSV file into BufferedReader class constructor
-			BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Dell\\Desktop\\csvDemo.csv"));
+			BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Dell\\Desktop\\csvDemo.csv", StandardCharsets.UTF_8));
 			while ((line = br.readLine()) != null)
 			// returns a Boolean value
 			{
