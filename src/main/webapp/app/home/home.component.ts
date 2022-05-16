@@ -6,9 +6,11 @@ import { takeUntil } from 'rxjs/operators';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { FormBuilder, Validators } from '@angular/forms';
-
 import { LoginService } from 'app/login/login.service';
 import { DisasterService } from 'app/entities/disaster/service/disaster.service';
+import Highcharts from "highcharts/highmaps";
+import worldMap from "@highcharts/map-collection/custom/world.geo.json";
+//import proj4 from "proj4";
 
 
 @Component({
@@ -17,6 +19,55 @@ import { DisasterService } from 'app/entities/disaster/service/disaster.service'
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  Highcharts: typeof Highcharts = Highcharts;
+  chartConstructor = "mapChart";
+  chartData = [{ code3: "ABW", z: 105 }, { code3: "AFG", z: 35530 }];
+
+  chartOptions: Highcharts.Options = {
+    chart: {
+      map: worldMap
+      //proj4: proj4
+    },
+    title: {
+      text: "Zimbabwe"
+    },
+    subtitle: {
+      text:
+        'Distribution of disasters'
+    },
+    mapNavigation: {
+      enabled: true,
+      buttonOptions: {
+        alignTo: "spacingBox"
+      }
+    },
+    legend: {
+      enabled: true
+    },
+    colorAxis: {
+      min: 0
+    },
+    series: [
+      {
+        type: "map",
+        name: "Random data",
+        states: {
+          hover: {
+            color: "#BADA55"
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          format: "{point.name}"
+        },
+        allAreas: false,
+        data: [
+          ["zw", 187]
+        ]
+        
+      }
+    ]
+  };
   account: Account | null = null;
   @ViewChild('username', { static: false })
   username!: ElementRef;
