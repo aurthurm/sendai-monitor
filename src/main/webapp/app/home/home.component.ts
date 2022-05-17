@@ -9,7 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'app/login/login.service';
 import { DisasterService } from 'app/entities/disaster/service/disaster.service';
 import Highcharts from "highcharts/highmaps";
-import worldMap from "@highcharts/map-collection/custom/world.geo.json";
+import worldMap from "@highcharts/map-collection/countries/zw/zw-all.geo.json";
 import proj4 from "proj4";
 
 
@@ -21,7 +21,7 @@ import proj4 from "proj4";
 export class HomeComponent implements OnInit, OnDestroy {
   Highcharts: typeof Highcharts = Highcharts;
   chartConstructor = "mapChart";
-  chartData = [{ code3: "ABW", z: 105 }, { code3: "AFG", z: 35530 }];
+  chartData = [];
 
   chartOptions: Highcharts.Options = {
     chart: {
@@ -62,7 +62,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
         allAreas: false,
         data: [
-          ["zw", 187]
+          ['zw-ma', 0], ['zw-ms', 0], ['zw-bu', 12], ['zw-mv', 13],
+          ['zw-mw', 14], ['zw-mc', 15], ['zw-ha', 16], ['zw-mn', 17],
+          ['zw-mi', 18], ['zw-me', 19]
         ]
         
       } as Highcharts.SeriesMapOptions,
@@ -71,27 +73,22 @@ export class HomeComponent implements OnInit, OnDestroy {
         type: "mappoint",
         name: "Zimbabwe cities",
         marker: {
-          radius: 5,
+          radius: 7,
           fillColor: "tomato"
         },
         data: [
           {
-            name: "Harare",
             lat: -17.824858,
-            lon: 31.053028,
-             x:30,
-             y:800
+            lon: 31.053028
           },
           {
-            name: "Quebec City",
-            lat: 46.829853,
-            lon: -71.254028
+            lat: -20.153625,
+            lon: 28.568127
           },
           {
-            name: "Yellowknife",
-            lat: 62.454,
-            lon: -114.3718
-          }
+            lat: -20.899999,
+            lon: 28.800000000000068
+          } 
         ]
       }
     ]
