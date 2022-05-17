@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  disasterloss:
+    restart: unless-stopped
+    container_name: disasterloss
+    image: springboot-docker-compose-app:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - '/etc/timezone:/etc/timezone:ro'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.122.65:5432/sendai_monitor
+    ports:
+      - '80:80'
+    networks:
+      - disasterlossnet
+
+networks:
+  disasterlossnet:
+    driver: bridge
