@@ -42,14 +42,14 @@ public interface SendaiMonitorAggregateTartgetBRepository extends JpaRepository<
 	ISendaiAggregateDTO numberOfInjuredOrIllPeople();
 
 	// B-3 Number of people whose damaged dwellings were attributed to disasters.
-	@Query(value = "SELECT 'name' AS name, c.number_of_people_affected AS totalCount,\n"
+	@Query(value = "SELECT 'name' AS name, sum(c.number_of_people_affected) AS totalCount,\n"
 			+ "'B-3 Number of people whose damaged dwellings were attributed to disasters.' AS title\n"
 			+ "FROM public.household AS c \n" + "where household_type_id in "
 			+ "('85f753c8-a495-11ec-b375-90ccdfa85f11')", nativeQuery = true)
 	ISendaiAggregateDTO numberOfPeopleWhoseDwellingsWhereDamaged();
 
 	// B-4 Number of people whose destroyed dwellings were attributed to disasters.
-	@Query(value = "SELECT 'name' AS name, c.number_of_people_affected AS totalCount,\n"
+	@Query(value = "SELECT 'name' AS name, SUM(c.number_of_people_affected) AS totalCount,\n"
 			+ "'B-4	Number of people whose destroyed dwellings were attributed to disasters.' AS title\n"
 			+ "FROM public.household AS c \n" + "where household_type_id in "
 			+ "('85f753c8-a495-11ec-b375-90ccdfa85f12')", nativeQuery = true)
