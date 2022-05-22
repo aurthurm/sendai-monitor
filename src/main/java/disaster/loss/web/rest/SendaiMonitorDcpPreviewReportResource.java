@@ -22,8 +22,8 @@ import net.sf.jasperreports.engine.JRException;
 
 @RestController
 @RequestMapping("/api")
-public class SendaiMonitorDcpReportResource {
-	private final Logger log = LoggerFactory.getLogger(SendaiMonitorDcpReportResource.class);
+public class SendaiMonitorDcpPreviewReportResource {
+	private final Logger log = LoggerFactory.getLogger(SendaiMonitorDcpPreviewReportResource.class);
 
 	@Autowired
 	private SendaiMonitorIndicatorsReportImpl service;
