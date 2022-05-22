@@ -14,133 +14,139 @@ import org.hibernate.annotations.GenericGenerator;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Province extends AbstractAuditingEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "province_id", updatable = false, nullable = false)
-    private String provinceId;
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column(name = "province_id", updatable = false, nullable = false)
+	private String provinceId;
 
-    @Column(name = "country_id")
-    private String countryId;
+	@Column(name = "country_id")
+	private String countryId;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "latitude")
-    private String latitude;
+	@Column(name = "latitude")
+	private String latitude;
 
-    @Column(name = "longitude")
-    private String longitude;
+	@Column(name = "longitude")
+	private String longitude;
 
-    @Column(name = "level")
-    private Integer level;
+	@Column(name = "level")
+	private Integer level;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+	private String alias;
 
-    public String getCountryId() {
-        return this.countryId;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Province countryId(String countryId) {
-        this.setCountryId(countryId);
-        return this;
-    }
+	public String getCountryId() {
+		return this.countryId;
+	}
 
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
-    }
+	public Province countryId(String countryId) {
+		this.setCountryId(countryId);
+		return this;
+	}
 
-    public String getProvinceId() {
-        return this.provinceId;
-    }
+	public void setCountryId(String countryId) {
+		this.countryId = countryId;
+	}
 
-    public Province provinceId(String provinceId) {
-        this.setProvinceId(provinceId);
-        return this;
-    }
+	public String getProvinceId() {
+		return this.provinceId;
+	}
 
-    public void setProvinceId(String provinceId) {
-        this.provinceId = provinceId;
-    }
+	public Province provinceId(String provinceId) {
+		this.setProvinceId(provinceId);
+		return this;
+	}
 
-    public String getName() {
-        return this.name;
-    }
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
 
-    public Province name(String name) {
-        this.setName(name);
-        return this;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Province name(String name) {
+		this.setName(name);
+		return this;
+	}
 
-    public String getLatitude() {
-        return this.latitude;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Province latitude(String latitude) {
-        this.setLatitude(latitude);
-        return this;
-    }
+	public String getLatitude() {
+		return this.latitude;
+	}
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
+	public Province latitude(String latitude) {
+		this.setLatitude(latitude);
+		return this;
+	}
 
-    public String getLongitude() {
-        return this.longitude;
-    }
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
 
-    public Province longitude(String longitude) {
-        this.setLongitude(longitude);
-        return this;
-    }
+	public String getLongitude() {
+		return this.longitude;
+	}
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
+	public Province longitude(String longitude) {
+		this.setLongitude(longitude);
+		return this;
+	}
 
-    public Integer getLevel() {
-        return this.level;
-    }
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 
-    public Province level(Integer level) {
-        this.setLevel(level);
-        return this;
-    }
+	public Integer getLevel() {
+		return this.level;
+	}
 
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
+	public Province level(Integer level) {
+		this.setLevel(level);
+		return this;
+	}
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Province)) {
-            return false;
-        }
-        return provinceId != null && provinceId.equals(((Province) o).provinceId);
-    }
+	public String getAlias() {
+		return alias;
+	}
 
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof Province)) {
+			return false;
+		}
+		return provinceId != null && provinceId.equals(((Province) o).provinceId);
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 
 	@Override
 	public String toString() {
 		return "Province [provinceId=" + provinceId + ", countryId=" + countryId + ", name=" + name + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", level=" + level + "]";
+				+ latitude + ", longitude=" + longitude + ", level=" + level + ", alias=" + alias + "]";
 	}
-
 
 }

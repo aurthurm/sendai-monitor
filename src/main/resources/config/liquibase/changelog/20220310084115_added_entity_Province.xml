@@ -29,6 +29,9 @@
             <column name="longitude" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="alias" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
             <column name="level" type="integer">
                 <constraints nullable="true" />
             </column>

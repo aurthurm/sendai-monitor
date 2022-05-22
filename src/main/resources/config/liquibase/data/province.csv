@@ -1,11 +1,11 @@
-name,province_id,state,created_by,created_date,last_modified_by,last_modified_date,level,latitude,longitude,country_id
-Bulawayo ,ed4bfdc7-4843-42c2-b355-bce7fcfbe7d3,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Harare ,b13b3997-7131-4220-8975-63931e37bde3,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Manicaland ,094590a7-1588-478f-859f-318a8789af98,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Masvingo ,5dc70549-3b75-479d-a554-50344cd7e1d4,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Mashonaland Central ,b2c39cab-08e8-40e7-8e66-ac640b0b7b24,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Mashonaland East ,56b89496-1fb6-49a1-a69c-d632db03667c,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Midlands ,39ce0e37-9e7b-4bc1-882d-64846ba6821c,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Matabeleland North ,a5af845d-e14a-43a1-8337-f9d533941f0f,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Matabeleland South ,ce996046-d27c-4349-badb-beaf925d9b98,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
-Mashonaland West ,850570fb-1d86-4fe8-a4a6-9cd44a4dab1b,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+name,province_id,state,created_by,created_date,last_modified_by,last_modified_date,level,latitude,longitude,alias,country_id
+Bulawayo ,ed4bfdc7-4843-42c2-b355-bce7fcfbe7d3,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-bu,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Harare ,b13b3997-7131-4220-8975-63931e37bde3,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-ha,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Manicaland ,094590a7-1588-478f-859f-318a8789af98,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-ma,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Masvingo ,5dc70549-3b75-479d-a554-50344cd7e1d4,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,Zw-mv,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Mashonaland Central ,b2c39cab-08e8-40e7-8e66-ac640b0b7b24,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-mc,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Mashonaland East ,56b89496-1fb6-49a1-a69c-d632db03667c,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-me,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Midlands ,39ce0e37-9e7b-4bc1-882d-64846ba6821c,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-mi,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Matabeleland North ,a5af845d-e14a-43a1-8337-f9d533941f0f,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-mn,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Matabeleland South ,ce996046-d27c-4349-badb-beaf925d9b98,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-ms,5e433b9f-fd1a-4614-83fe-28dd81b0ddee
+Mashonaland West ,850570fb-1d86-4fe8-a4a6-9cd44a4dab1b,,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42,2,,,zw-mw,5e433b9f-fd1a-4614-83fe-28dd81b0ddee

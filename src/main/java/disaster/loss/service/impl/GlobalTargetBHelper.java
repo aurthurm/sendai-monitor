@@ -22,28 +22,29 @@ public class GlobalTargetBHelper {
 				"Global target B: Substantially reduce the number of affected people globally by 2030, aiming to lower the average global figure per 100,000 between 2020-2030 compared with 2005-2015.",
 				""));
 		beans.add(new CrossTab("", "", ""));
-		// Number of deaths and missing persons
-		ISendaiAggregateDTO deathsAndMissingPersons = sendaiMonitorGroupByMonthRepository
+		
+		// Number of directly affected people attributed to disasters, per 100,000 population.
+		ISendaiAggregateDTO numberOfDirectlyAffectedPeople = sendaiMonitorGroupByMonthRepository
 				.numberOfDirectlyAffectedPeople();
-		beans.add(new CrossTab("", deathsAndMissingPersons.getTitle(),
-				deathsAndMissingPersons.getTotalCount().toString()));
+		beans.add(new CrossTab("", numberOfDirectlyAffectedPeople.getTitle(),
+				numberOfDirectlyAffectedPeople.getTotalCount().toString()));
 
 		// number of deaths
 		ISendaiAggregateDTO numberOfDeaths = sendaiMonitorGroupByMonthRepository.numberOfInjuredOrIllPeople();
 		beans.add(new CrossTab("", numberOfDeaths.getTitle(), numberOfDeaths.getTotalCount().toString()));
 
-		// number of missing persons
-		ISendaiAggregateDTO numberOfMissingPersons = sendaiMonitorGroupByMonthRepository
+		// Number of people whose damaged dwellings were attributed to disasters
+		ISendaiAggregateDTO numberOfPeopleWhoseDwellingsWhereDamaged = sendaiMonitorGroupByMonthRepository
 				.numberOfPeopleWhoseDwellingsWhereDamaged();
 		beans.add(
-				new CrossTab("", numberOfMissingPersons.getTitle(), numberOfMissingPersons.getTotalCount().toString()));
+				new CrossTab("", numberOfPeopleWhoseDwellingsWhereDamaged.getTitle(), numberOfPeopleWhoseDwellingsWhereDamaged.getTotalCount()!=null ? numberOfPeopleWhoseDwellingsWhereDamaged.getTotalCount().toString(): "0"));
 
 
-		// number of missing persons
+		// Number of people whose destroyed dwellings were attributed to disasters.
 		ISendaiAggregateDTO numberOfPeopleWhoseDwellingsWhereDestroyed = sendaiMonitorGroupByMonthRepository
 				.numberOfPeopleWhoseDwellingsWhereDestroyed();
 		beans.add(
-				new CrossTab("", numberOfPeopleWhoseDwellingsWhereDestroyed.getTitle(), numberOfPeopleWhoseDwellingsWhereDestroyed.getTotalCount().toString()));
+				new CrossTab("", numberOfPeopleWhoseDwellingsWhereDestroyed.getTitle(), numberOfPeopleWhoseDwellingsWhereDestroyed.getTotalCount()!=null ? numberOfPeopleWhoseDwellingsWhereDestroyed.getTotalCount().toString(): "0"));
 
 		// number of missing persons
 		ISendaiAggregateDTO numberOfPeopleWhoseLivelihoodsWereDisrupted = sendaiMonitorGroupByMonthRepository
