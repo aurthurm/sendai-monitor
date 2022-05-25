@@ -15,13 +15,20 @@
         "question": "Are you sure you want to delete Donation {{ id }}?"
       },
       "detail": {
-        "title": "Donation"
+        "title": "Donation/Project"
       },
       "donorId": "Donor Id",
       "disasterId": "Disaster Id",
-      "name": "Name",
+      "name": "Name Of Donation/Project",
       "type": "Type",
-      "valueOfDonation": "Value Of Donation"
+      "valueOfDonation": "Value Of Donation",
+      "partnerId": "Partner",
+      "disaster": "Disaster",
+      "currency": "Currecny",
+      "valueUtelized": "Value Utelized",
+      "comment": "Comment",
+      "utelizationComment": "Utelization Comment",
+      "dateIssued": "Date Issued"
     }
   }
 }

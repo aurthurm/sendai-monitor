@@ -26,6 +26,24 @@
             <column name="value_of_donation" type="${floatType}">
                 <constraints nullable="true" />
             </column>
+            <column name="development_partner_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="comment" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_issued" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="value_utelized" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="utelization_comment" type="text">
+                <constraints nullable="true" />
+            </column>
             <column name="created_by" type="varchar(50)">
 				<constraints nullable="false" />
 			</column>

@@ -6,7 +6,14 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { IDonation, Donation } from '../donation.model';
+import { IDisaster } from '../../disaster/disaster.model';
 import { DonationService } from '../service/donation.service';
+import dayjs from 'dayjs/esm';
+import { DATE_FORMAT } from 'app/config/input.constants';
+import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { DisasterService } from 'app/entities/disaster/service/disaster.service';
+import { DepartmentService } from 'app/entities/department/service/department.service';
+import { IDepartment } from 'app/entities/department/department.model';
 
 @Component({
   selector: 'jhi-donation-update',
@@ -14,22 +21,79 @@ import { DonationService } from '../service/donation.service';
 })
 export class DonationUpdateComponent implements OnInit {
   isSaving = false;
-
+  departments: IDepartment[] = [];
+  dropdownList: any[] = [];
+  dropdownSettings: IDropdownSettings = {};
+  disasters: IDisaster[] = [];
+  selectedItems: Array<any> = [];
   editForm = this.fb.group({
     donorId: [],
     disasterId: [],
     name: [],
     type: [],
     valueOfDonation: [],
+    valueUtelized: [],
+    currency: [],
+    comment: [],
+    utelizationComment: [],
+    dateIssued: [],
+    developmentPartnerId: [],
   });
 
-  constructor(protected donationService: DonationService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(protected donationService: DonationService, protected activatedRoute: ActivatedRoute,
+     protected fb: FormBuilder, protected disasterService: DisasterService,
+     protected departmentService: DepartmentService) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ donation }) => {
       this.updateForm(donation);
     });
+
+    this.disasterService.query().subscribe(res => {
+      if (res.body) {
+        this.dropdownList = res.body;
+      }
+    })
+
+    this.departmentService.query().subscribe(res => {
+      if (res.body) {
+        this.departments = res.body;
+      }
+    })
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'disasterId',
+      textField: 'name',
+      allowSearchFilter: true,
+      selectAllText: "Select All",
+      unSelectAllText: "UnSelect All",
+      itemsShowLimit: 3,
+    };
   }
+
+
+onItemSelect(item: any): void {
+  this.disasters.push(item);
+}
+onItemDeSelect(item: any): void {
+  this.disasters.forEach((i, index) => {
+    if (i.disasterId === item.disasterId) {
+      this.disasters.splice(index, 1);
+    }
+  })
+  console.log(this.disasters) // eslint-disable-line
+}
+
+onSelectAll(items: any): void {
+  this.disasters = this.dropdownList;
+  console.log("onSelectAll", items); // eslint-disable-line
+}
+
+onDeSelectAll(item: any): void {
+  this.disasters = [];
+  console.log("onDeSelectAll", item); // eslint-disable-line
+}
 
   previousState(): void {
     window.history.back();
@@ -71,6 +135,12 @@ export class DonationUpdateComponent implements OnInit {
       name: donation.name,
       type: donation.type,
       valueOfDonation: donation.valueOfDonation,
+      valueUtelized:donation.valueUtelized,
+      currency: donation.currency,
+      comment: donation.comment,
+      utelizationComment: donation.utelizationComment,
+      dateIssued: donation.dateIssued ? donation.dateIssued.format(DATE_FORMAT) : null,
+      developmentPartnerId: donation.developmentPartnerId,
     });
   }
 
@@ -78,10 +148,19 @@ export class DonationUpdateComponent implements OnInit {
     return {
       ...new Donation(),
       donorId: this.editForm.get(['donorId'])!.value,
-      disasterId: this.editForm.get(['disasterId'])!.value,
+      disasterId: this.disasters[0].disasterId,
       name: this.editForm.get(['name'])!.value,
       type: this.editForm.get(['type'])!.value,
       valueOfDonation: this.editForm.get(['valueOfDonation'])!.value,
+      valueUtelized: this.editForm.get(['valueUtelized'])!.value,
+      currency: this.editForm.get(['currency'])!.value,
+      comment: this.editForm.get(['comment'])!.value,
+      utelizationComment: this.editForm.get(['utelizationComment'])!.value,
+      dateIssued: this.editForm.get(['dateIssued'])!.value
+      ? dayjs(this.editForm.get(['dateIssued'])!.value, DATE_FORMAT)
+      : undefined,
+
+      developmentPartnerId: this.editForm.get(['developmentPartnerId'])!.value,
     };
   }
 }

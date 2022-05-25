@@ -5,9 +5,10 @@ import { DonationDetailComponent } from './detail/donation-detail.component';
 import { DonationUpdateComponent } from './update/donation-update.component';
 import { DonationDeleteDialogComponent } from './delete/donation-delete-dialog.component';
 import { DonationRoutingModule } from './route/donation-routing.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
-  imports: [SharedModule, DonationRoutingModule],
+  imports: [SharedModule, DonationRoutingModule, NgMultiSelectDropDownModule.forRoot()],
   declarations: [DonationComponent, DonationDetailComponent, DonationUpdateComponent, DonationDeleteDialogComponent],
   entryComponents: [DonationDeleteDialogComponent],
 })
