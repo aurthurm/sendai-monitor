@@ -26,7 +26,7 @@ public class GlobalTargetCHelper {
 		// C-1 (compound) Direct economic loss attributed to disasters in relation to
 		// global gross domestic product.
 		ISendaiAggregateDTO economicLoss = sendaiMonitorGroupByMonthRepository.economicLoss();
-		beans.add(new CrossTab("", economicLoss.getTitle(), economicLoss.getTotalCount().toString()));
+		beans.add(new CrossTab("", economicLoss.getTitle(), economicLoss.getTotalCount()!=null ? economicLoss.getTotalCount().toString(): "0"));
 
 		// C-2 Direct agricultural loss attributed to disasters.
 		ISendaiAggregateDTO agriculturlLoss = sendaiMonitorGroupByMonthRepository.livestockLoss();

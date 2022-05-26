@@ -27,11 +27,11 @@ public interface SendaiMonitorAggregateTartgetDRepository extends JpaRepository<
 	ISendaiAggregateDTO destroyedOrDamagedHealthFacilities();
 
 	// D-3 Number of destroyed or damaged educational facilities attributed to disasters.
-	@Query(value = "SELECT SUM(c.damaged + c.destroyed)  AS totalCount,\n"
+	@Query(value = "SELECT GREATEST(0, SUM(c.damaged + c.destroyed)) AS totalCount,\n"
 			+ "'D-3 Number of destroyed or damaged educational facilities attributed to disasters.' AS title\n"
 			+ "FROM public.infrastructure AS c \n"
 			+ "where infractructure_type_id in "
-			+ "('85f753c8-a495-11ec-b375-90ccdfa85f20','85f753c8-a495-11ec-b375-90ccdfa85f11')", nativeQuery = true)
+			+ "('85f753c8-a495-11ec-b375-90ccdfa85f23','85f753c8-a495-11ec-b375-90ccdfa85f11')", nativeQuery = true)
 	ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities();
 
 	//Global target B: Substantially reduce the number of affected people globally by 2030, aiming to lower the average global figure per 100,000 between 2020-2030 compared with 2005-2015.

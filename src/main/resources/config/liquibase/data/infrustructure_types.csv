@@ -1,6 +1,7 @@
 infractructure_type_id,name,created_by,created_date,last_modified_by,last_modified_date
 85f753c8-a495-11ec-b375-90ccdfa85f11,Schools,admin,2021-04-07 12:00:42,admin,2021-04-07 12:00:42
 85f753c8-a495-11ec-b375-90ccdfa85f12,Houses,admin,2021-04-08 12:00:42,admin,2021-04-08 12:00:42
+85f753c8-a495-11ec-b375-90ccdfa85f23,Colleges,admin,2021-04-11 12:00:44,admin,2021-04-11 12:00:44
 85f753c8-a495-11ec-b375-90ccdfa85f13,Health Institutions,admin,2021-04-09 12:00:42,admin,2021-04-09 12:00:42
 85f753c8-a495-11ec-b375-90ccdfa85f14,Bridges,admin,2021-04-10 12:00:42,admin,2021-04-10 12:00:42
 85f753c8-a495-11ec-b375-90ccdfa85f15,Power,admin,2021-04-10 12:00:43,admin,2021-04-10 12:00:43
@@ -11,4 +12,3 @@ infractructure_type_id,name,created_by,created_date,last_modified_by,last_modifi
 85f753c8-a495-11ec-b375-90ccdfa85f21,Gravel Roads,admin,2021-04-11 12:00:46,admin,2021-04-11 12:00:46
 85f753c8-a495-11ec-b375-90ccdfa85f22,Small Drainages,admin,2021-04-11 12:00:47,admin,2021-04-11 12:00:47
 85f753c8-a495-11ec-b375-90ccdfa85f19,Other Critical Infrastructure,admin,2021-04-11 12:00:44,admin,2021-04-11 12:00:44
-85f753c8-a495-11ec-b375-90ccdfa85f23,Colleges,admin,2021-04-11 12:00:44,admin,2021-04-11 12:00:44
