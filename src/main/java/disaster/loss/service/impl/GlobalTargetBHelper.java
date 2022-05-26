@@ -30,7 +30,7 @@ public class GlobalTargetBHelper {
 		beans.add(new CrossTab("", numberOfDirectlyAffectedPeople.getTitle(),
 				resolveQueries(numberOfDirectlyAffectedPeople)));
 
-		// number of deaths
+		// B-2 Number of injured or ill people attributed to disasters, per 100,000 population
 		ISendaiAggregateDTO numberOfDeaths = sendaiMonitorGroupByMonthRepository.numberOfInjuredOrIllPeople();
 		beans.add(new CrossTab("", numberOfDeaths.getTitle(), numberOfDeaths.getTotalCount().toString()));
 
@@ -46,7 +46,7 @@ public class GlobalTargetBHelper {
 		beans.add(new CrossTab("", numberOfPeopleWhoseDwellingsWhereDestroyed.getTitle(),
 				resolveQueries(numberOfPeopleWhoseDwellingsWhereDestroyed)));
 
-		// number of missing persons
+		// B-5	Number of people whose livelihoods were disrupted or destroyed, attributed to disasters
 		ISendaiAggregateDTO numberOfPeopleWhoseLivelihoodsWereDisrupted = sendaiMonitorGroupByMonthRepository
 				.numberOfPeopleWhoseLivelihoodsWereDisrupted();
 		beans.add(new CrossTab("", numberOfPeopleWhoseLivelihoodsWereDisrupted.getTitle(),

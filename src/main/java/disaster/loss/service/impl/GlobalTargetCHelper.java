@@ -28,7 +28,7 @@ public class GlobalTargetCHelper {
 		beans.add(new CrossTab("", economicLoss.getTitle(),
 				economicLoss.getTotalCount().toString()));
 
-		// number of deaths
+		// C-2 Direct agricultural loss attributed to disasters
 		ISendaiAggregateDTO agriculturlLoss = sendaiMonitorGroupByMonthRepository.agriculturlLoss();
 		beans.add(new CrossTab("", agriculturlLoss.getTitle(), agriculturlLoss.getTotalCount().toString()));
 

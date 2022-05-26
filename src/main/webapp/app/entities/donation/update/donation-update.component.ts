@@ -46,7 +46,9 @@ export class DonationUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ donation }) => {
+
       this.updateForm(donation);
+      console.log(donation, "Donation") // eslint-disable-line
     });
 
     this.disasterService.query().subscribe(res => {
