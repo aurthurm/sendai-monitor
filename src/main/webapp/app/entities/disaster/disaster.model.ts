@@ -81,6 +81,7 @@ export interface IDisaster {
   targetPopulation?: string;
   targetPopulationEstimate?: string;
   affectedPopulation?: string;
+  directEconomicLoss?: number | null,
   dipTank?: string;
   longitude?: string;
   latitude?: string;
@@ -116,6 +117,8 @@ export class Disaster implements IDisaster {
     public targetPopulation?: string,
     public targetPopulationEstimate?: string,
     public affectedPopulation?: string,
+    public directEconomicLoss?: number | null,
+    public dipTank?: string,
     public longitude?: string,
     public latitude?: string,
     

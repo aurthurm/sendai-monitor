@@ -135,7 +135,7 @@
 
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_targetPopulation">Population</label>
-              <input type="number" class="form-control col" name="targetPopulation" id="field_targetPopulation"
+              <input type="number" min="0" class="form-control col" name="targetPopulation" id="field_targetPopulation"
                 data-cy="caseId" formControlName="targetPopulation" />
             </div>
 
@@ -148,13 +148,18 @@
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_affectedPopulation"
                 jhiTranslate="sendaiMonitorApp.disaster.affectedPopulation">Affected Population</label>
-              <input type="number" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+              <input type="number" min="0" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
                 data-cy="affectedPopulation" formControlName="affectedPopulation" />
             </div>
             <div class="row mb-3">
-              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Longitude</label>
-              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
-                data-cy="affectedPopulation" formControlName="longitude" />
+              <label class="form-label col-4 fw-bold" for="field_directEconomicLoss">Direct Economic Loss</label>
+              <input type="number" min="0" autocomplete="off" class="form-control col" name="directEconomicLoss" id="field_directEconomicLoss"
+                data-cy="directEconomicLoss" formControlName="directEconomicLoss" />
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_longitude">Deep Tank Longitude</label>
+              <input type="number"  autocomplete="off" class="form-control col" name="longitude" id="field_longitude"
+                data-cy="longitude" formControlName="longitude" />
             </div>
           </div>
 
@@ -228,9 +233,9 @@
                 data-cy="affectedPopulation" formControlName="dipTank" />
             </div>
             <div class="row mb-3">
-              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Latitude</label>
-              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
-                data-cy="affectedPopulation" formControlName="latitude" />
+              <label class="form-label col-4 fw-bold" for="field_latitude">Deep Tank Latitude</label>
+              <input type="number" autocomplete="off" class="form-control col" name="latitude" id="field_latitude"
+                data-cy="latitude" formControlName="latitude" />
             </div>
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.closureDate"

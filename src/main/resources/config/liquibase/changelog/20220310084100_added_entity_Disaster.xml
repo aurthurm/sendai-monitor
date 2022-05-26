@@ -83,6 +83,9 @@
             <column name="affected_population_estimated" type="boolean">
                 <constraints nullable="true" />
             </column>
+            <column name="direct_economic_loss" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
             <column name="dip_tank" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

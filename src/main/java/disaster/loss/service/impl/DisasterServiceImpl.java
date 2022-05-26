@@ -257,6 +257,10 @@ public class DisasterServiceImpl implements DisasterService {
 			if (disaster.getLongitude() != null) {
 				existingDisaster.setLongitude(disaster.getLongitude());
 			}
+			
+			if (disaster.getDirectEconomicLoss() != null) {
+				existingDisaster.setDirectEconomicLoss(disaster.getDirectEconomicLoss());
+			}
 
 			return existingDisaster;
 		}).map(disasterRepository::save);

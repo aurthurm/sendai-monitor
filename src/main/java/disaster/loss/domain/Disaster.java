@@ -133,6 +133,9 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "affected_population_estimated")
 	private Boolean affectedPopulationEstimated;
 
+	@Column(name = "direct_economic_loss")
+	private Float directEconomicLoss;
+
 	@Column(name = "dip_tank")
 	private String dipTank;
 
@@ -457,6 +460,14 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 		this.approvalStatus = approvalStatus;
 	}
 
+	public Float getDirectEconomicLoss() {
+		return directEconomicLoss;
+	}
+
+	public void setDirectEconomicLoss(Float directEconomicLoss) {
+		this.directEconomicLoss = directEconomicLoss;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -470,8 +481,6 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 
 	@Override
 	public int hashCode() {
-		// see
-		// https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
 		return getClass().hashCode();
 	}
 
@@ -495,10 +504,9 @@ public class Disaster extends AbstractAuditingEntity implements Serializable {
 				+ estimatedDamage + ", isDeclared=" + isDeclared + ", declarationDate=" + declarationDate
 				+ ", closureDate=" + closureDate + ", incidentDate=" + incidentDate + ", population=" + population
 				+ ", PopulationEstimated=" + PopulationEstimated + ", affectedPopulation=" + affectedPopulation
-				+ ", affectedPopulationEstimated=" + affectedPopulationEstimated + ", dipTank=" + dipTank
-				+ ", longitude=" + longitude + ", latitude=" + latitude + "]";
+				+ ", affectedPopulationEstimated=" + affectedPopulationEstimated + ", directEconomicLoss="
+				+ directEconomicLoss + ", dipTank=" + dipTank + ", longitude=" + longitude + ", latitude=" + latitude
+				+ "]";
 	}
-
-	
 
 }
