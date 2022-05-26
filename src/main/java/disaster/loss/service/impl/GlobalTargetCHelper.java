@@ -49,9 +49,9 @@ public class GlobalTargetCHelper {
 		beans.add(new CrossTab("", econonicLossInHousingSector.getTitle(),
 				econonicLossInHousingSector.getTotalCount()!=null ? econonicLossInHousingSector.getTotalCount().toString(): "0"));
 
-		// number of missing persons
+		// C-5 Direct economic loss resulting /from damaged or destroyed critical infrastructure attributed to disasters
 		ISendaiAggregateDTO economicLossToInfrastructure = sendaiMonitorGroupByMonthRepository
-				.economicLossToInfrastructure();
+				.economicLossFromCriticalInfrastructure();
 		beans.add(new CrossTab("", economicLossToInfrastructure.getTitle(),
 				economicLossToInfrastructure.getTotalCount().toString()));
 
