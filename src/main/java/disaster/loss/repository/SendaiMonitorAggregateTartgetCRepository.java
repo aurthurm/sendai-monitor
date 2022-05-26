@@ -12,12 +12,9 @@ import disaster.loss.service.dto.ISendaiAggregateDTO;
 @Repository
 public interface SendaiMonitorAggregateTartgetCRepository extends JpaRepository<HumanPopulation, Integer> {
 
-	// Global target A: Substantially reduce global disaster mortality by 2030, aiming to lower average per 100,000 global mortality between 2020-2030 compared with 2005-2015.
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(c.direct_economic_loss) AS totalCount,\n"
 			+ "'C-1 (compound) Direct economic loss attributed to disasters in relation to global gross domestic product.' AS title\n"
-			+ "FROM public.human_population AS c \n"
-			+ "where human_population_disaster_category_id in "
-			+ "('1edabdc2-a5b8-11ec-adfd-90ccdfa85f11','186894a2-a5b8-11ec-adfd-90ccdfa85f11')", nativeQuery = true)
+			+ "FROM public.disaster AS c \n", nativeQuery = true)
 	ISendaiAggregateDTO economicLoss();
 
 	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"

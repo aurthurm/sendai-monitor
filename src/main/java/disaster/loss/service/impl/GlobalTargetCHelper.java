@@ -22,6 +22,7 @@ public class GlobalTargetCHelper {
 				"Global target C: Reduce direct disaster economic loss in relation to global gross domestic product (GDP) by 2030.",
 				""));
 		beans.add(new CrossTab("", "", ""));
+		
 		// Number of deaths and missing persons
 		ISendaiAggregateDTO economicLoss = sendaiMonitorGroupByMonthRepository
 				.economicLoss();
