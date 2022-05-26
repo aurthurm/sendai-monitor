@@ -22,41 +22,44 @@ public class GlobalTargetCHelper {
 				"Global target C: Reduce direct disaster economic loss in relation to global gross domestic product (GDP) by 2030.",
 				""));
 		beans.add(new CrossTab("", "", ""));
-		
-		// Number of deaths and missing persons
-		ISendaiAggregateDTO economicLoss = sendaiMonitorGroupByMonthRepository
-				.economicLoss();
-		beans.add(new CrossTab("", economicLoss.getTitle(),
-				economicLoss.getTotalCount().toString()));
 
-		// C-2 Direct agricultural loss attributed to disasters
-		ISendaiAggregateDTO agriculturlLoss = sendaiMonitorGroupByMonthRepository.agriculturlLoss();
-		beans.add(new CrossTab("", agriculturlLoss.getTitle(), agriculturlLoss.getTotalCount().toString()));
+		// C-1 (compound) Direct economic loss attributed to disasters in relation to
+		// global gross domestic product.
+		ISendaiAggregateDTO economicLoss = sendaiMonitorGroupByMonthRepository.economicLoss();
+		beans.add(new CrossTab("", economicLoss.getTitle(), economicLoss.getTotalCount().toString()));
 
-		// number of missing persons
+		// C-2 Direct agricultural loss attributed to disasters.
+		ISendaiAggregateDTO agriculturlLoss = sendaiMonitorGroupByMonthRepository.livestockLoss();
+		ISendaiAggregateDTO cropLoss = sendaiMonitorGroupByMonthRepository.crops();
+		Long agricLoss = agriculturlLoss.getTotalCount() != null ? agriculturlLoss.getTotalCount() : 0L;
+		Long cropsLoss = cropLoss.getTotalCount() != null ? cropLoss.getTotalCount() : 0L;
+		Long totalAgricLoss = agricLoss + cropsLoss;
+
+		beans.add(new CrossTab("", agriculturlLoss.getTitle(), totalAgricLoss.toString()));
+
+		// C-3 Direct economic loss to all other damaged or destroyed productive assets attributed to disasters
 		ISendaiAggregateDTO damagedOrDestroyedProductiveAssets = sendaiMonitorGroupByMonthRepository
-				.damagedOrDestroyedProductiveAssets();
-		beans.add(
-				new CrossTab("", damagedOrDestroyedProductiveAssets.getTitle(), damagedOrDestroyedProductiveAssets.getTotalCount().toString()));
+				.infrastructureLoss();
 
+		beans.add(new CrossTab("", damagedOrDestroyedProductiveAssets.getTitle(), damagedOrDestroyedProductiveAssets.getTotalCount() !=null ? damagedOrDestroyedProductiveAssets.getTotalCount().toString():"0"));
 
-		// number of missing persons
+		// C-4 Direct economic loss in the housing sector attributed to disasters.
 		ISendaiAggregateDTO econonicLossInHousingSector = sendaiMonitorGroupByMonthRepository
 				.econonicLossInHousingSector();
-		beans.add(
-				new CrossTab("", econonicLossInHousingSector.getTitle(), econonicLossInHousingSector.getTotalCount().toString()));
+		beans.add(new CrossTab("", econonicLossInHousingSector.getTitle(),
+				econonicLossInHousingSector.getTotalCount()!=null ? econonicLossInHousingSector.getTotalCount().toString(): "0"));
 
 		// number of missing persons
 		ISendaiAggregateDTO economicLossToInfrastructure = sendaiMonitorGroupByMonthRepository
 				.economicLossToInfrastructure();
-		beans.add(
-				new CrossTab("", economicLossToInfrastructure.getTitle(), economicLossToInfrastructure.getTotalCount().toString()));
+		beans.add(new CrossTab("", economicLossToInfrastructure.getTitle(),
+				economicLossToInfrastructure.getTotalCount().toString()));
 
 		// number of missing persons
-				ISendaiAggregateDTO culturalHeritageEconomicLoss = sendaiMonitorGroupByMonthRepository
-						.culturalHeritageEconomicLoss();
-				beans.add(
-						new CrossTab("", culturalHeritageEconomicLoss.getTitle(), culturalHeritageEconomicLoss.getTotalCount().toString()));
+		ISendaiAggregateDTO culturalHeritageEconomicLoss = sendaiMonitorGroupByMonthRepository
+				.culturalHeritageEconomicLoss();
+		beans.add(new CrossTab("", culturalHeritageEconomicLoss.getTitle(),
+				culturalHeritageEconomicLoss.getTotalCount().toString()));
 	}
 
 }
