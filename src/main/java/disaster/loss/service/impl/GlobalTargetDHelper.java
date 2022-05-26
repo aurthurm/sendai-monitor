@@ -22,51 +22,55 @@ public class GlobalTargetDHelper {
 				""));
 		beans.add(new CrossTab("", "", ""));
 
-		// Number of deaths and missing persons
+		// D-1 (compound) Damage to critical infrastructure attributed to disasters.
 		ISendaiAggregateDTO damagedToCriticalInfrastucture = sendaiMonitorGroupByMonthRepository
 				.damagedToCriticalInfrastucture();
 		beans.add(new CrossTab("", damagedToCriticalInfrastucture.getTitle(),
-				damagedToCriticalInfrastucture.getTotalCount().toString()));
+				getQueryResult(damagedToCriticalInfrastucture)));
 
-		// number of deaths
-		ISendaiAggregateDTO destroyedOrDamagedHealthFacilities = sendaiMonitorGroupByMonthRepository.destroyedOrDamagedHealthFacilities();
-		beans.add(new CrossTab("", destroyedOrDamagedHealthFacilities.getTitle(), destroyedOrDamagedHealthFacilities.getTotalCount().toString()));
+		// D-2 Number of destroyed or damaged health facilities attributed to disasters.
+		ISendaiAggregateDTO destroyedOrDamagedHealthFacilities = sendaiMonitorGroupByMonthRepository
+				.destroyedOrDamagedHealthFacilities();
+		beans.add(new CrossTab("", destroyedOrDamagedHealthFacilities.getTitle(),
+				getQueryResult(destroyedOrDamagedHealthFacilities)));
 
-		// number of missing persons
+		// D-3 Number of destroyed or damaged educational facilities attributed to disasters.
 		ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities = sendaiMonitorGroupByMonthRepository
 				.damagedOrDestroyedEducationalFacilities();
-		beans.add(
-				new CrossTab("", damagedOrDestroyedEducationalFacilities.getTitle(), damagedOrDestroyedEducationalFacilities.getTotalCount().toString()));
-
+		beans.add(new CrossTab("", damagedOrDestroyedEducationalFacilities.getTitle(),
+				getQueryResult(damagedOrDestroyedEducationalFacilities)));
 
 		// number of missing persons
-		ISendaiAggregateDTO OtherdamagedOrDestroyed = sendaiMonitorGroupByMonthRepository
-				.OtherdamagedOrDestroyed();
-		beans.add(
-				new CrossTab("", OtherdamagedOrDestroyed.getTitle(), OtherdamagedOrDestroyed.getTotalCount().toString()));
+		ISendaiAggregateDTO OtherdamagedOrDestroyed = sendaiMonitorGroupByMonthRepository.OtherdamagedOrDestroyed();
+		beans.add(new CrossTab("", OtherdamagedOrDestroyed.getTitle(),
+				getQueryResult(OtherdamagedOrDestroyed)));
 
 		// number of missing persons
 		ISendaiAggregateDTO disruptionsToBasicDervices = sendaiMonitorGroupByMonthRepository
 				.disruptionsToBasicDervices();
-		beans.add(
-				new CrossTab("", disruptionsToBasicDervices.getTitle(), disruptionsToBasicDervices.getTotalCount().toString()));
+		beans.add(new CrossTab("", disruptionsToBasicDervices.getTitle(),
+				getQueryResult(disruptionsToBasicDervices)));
 
 		// number of missing persons
-				ISendaiAggregateDTO disruptionsToEducationalServices = sendaiMonitorGroupByMonthRepository
-						.disruptionsToEducationalServices();
-				beans.add(
-						new CrossTab("", disruptionsToEducationalServices.getTitle(), disruptionsToEducationalServices.getTotalCount().toString()));
+		ISendaiAggregateDTO disruptionsToEducationalServices = sendaiMonitorGroupByMonthRepository
+				.disruptionsToEducationalServices();
+		beans.add(new CrossTab("", disruptionsToEducationalServices.getTitle(),
+				getQueryResult(disruptionsToEducationalServices)));
 
-				// number of missing persons
-				ISendaiAggregateDTO disruptionsToHeathServices = sendaiMonitorGroupByMonthRepository
-						.disruptionsToEducationalServices();
-				beans.add(
-						new CrossTab("", disruptionsToHeathServices.getTitle(), disruptionsToHeathServices.getTotalCount().toString()));
+		// number of missing persons
+		ISendaiAggregateDTO disruptionsToHeathServices = sendaiMonitorGroupByMonthRepository
+				.disruptionsToEducationalServices();
+		beans.add(new CrossTab("", disruptionsToHeathServices.getTitle(),
+				getQueryResult(disruptionsToHeathServices)));
 
-				// number of missing persons
-				ISendaiAggregateDTO disruptionsToOtherBasicServices = sendaiMonitorGroupByMonthRepository
-						.disruptionsToEducationalServices();
-				beans.add(
-						new CrossTab("", disruptionsToOtherBasicServices.getTitle(), disruptionsToOtherBasicServices.getTotalCount().toString()));
+		// number of missing persons
+		ISendaiAggregateDTO disruptionsToOtherBasicServices = sendaiMonitorGroupByMonthRepository
+				.disruptionsToEducationalServices();
+		beans.add(new CrossTab("", disruptionsToOtherBasicServices.getTitle(),
+				getQueryResult(disruptionsToOtherBasicServices)));
+	}
+
+	private String getQueryResult(ISendaiAggregateDTO disruptionsToOtherBasicServices) {
+		return disruptionsToOtherBasicServices.getTotalCount()!=null ? disruptionsToOtherBasicServices.getTotalCount().toString():"0";
 	}
 }

@@ -53,13 +53,13 @@ public class GlobalTargetCHelper {
 		ISendaiAggregateDTO economicLossToInfrastructure = sendaiMonitorGroupByMonthRepository
 				.economicLossFromCriticalInfrastructure();
 		beans.add(new CrossTab("", economicLossToInfrastructure.getTitle(),
-				economicLossToInfrastructure.getTotalCount().toString()));
+				economicLossToInfrastructure.getTotalCount()!= null ? economicLossToInfrastructure.getTotalCount().toString():"0"));
 
 		// number of missing persons
 		ISendaiAggregateDTO culturalHeritageEconomicLoss = sendaiMonitorGroupByMonthRepository
 				.culturalHeritageEconomicLoss();
 		beans.add(new CrossTab("", culturalHeritageEconomicLoss.getTitle(),
-				culturalHeritageEconomicLoss.getTotalCount().toString()));
+				culturalHeritageEconomicLoss.getTotalCount()!=null ? culturalHeritageEconomicLoss.getTotalCount().toString():"0"));
 	}
 
 }

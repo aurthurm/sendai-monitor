@@ -11,25 +11,27 @@ import disaster.loss.service.dto.ISendaiAggregateDTO;
 public interface SendaiMonitorAggregateTartgetDRepository extends JpaRepository<Infrastructure, Integer> {
 
 	// Global target A: Substantially reduce global disaster mortality by 2030, aiming to lower average per 100,000 global mortality between 2020-2030 compared with 2005-2015.
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(c.value) AS totalCount,\n"
 			+ "'D-1 (compound) Damage to critical infrastructure attributed to disasters.' AS title\n"
-			+ "FROM public.human_population AS c \n"
-			+ "where human_population_disaster_category_id in "
-			+ "('1edabdc2-a5b8-11ec-adfd-90ccdfa85f11','186894a2-a5b8-11ec-adfd-90ccdfa85f11')", nativeQuery = true)
+			+ "FROM public.infrastructure AS c \n"
+			+ "where damaged is not null \n"
+			, nativeQuery = true)
 	ISendaiAggregateDTO damagedToCriticalInfrastucture();
 
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	// D-2 Number of destroyed or damaged health facilities attributed to disasters.
+	@Query(value = "SELECT SUM(c.value) AS totalCount,\n"
 			+ "'D-2 Number of destroyed or damaged health facilities attributed to disasters.' AS title\n"
-			+ "FROM public.human_population AS c \n"
-			+ "where human_population_disaster_category_id = '1edabdc2-a5b8-11ec-adfd-90ccdfa85f11'\n"
-			+ "GROUP BY name", nativeQuery = true)
+			+ "FROM public.infrastructure AS c \n" 
+			+ "where infractructure_type_id in \n"
+			+ "('85f753c8-a495-11ec-b375-90ccdfa85f13')", nativeQuery = true)
 	ISendaiAggregateDTO destroyedOrDamagedHealthFacilities();
 
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	// D-3 Number of destroyed or damaged educational facilities attributed to disasters.
+	@Query(value = "SELECT SUM(c.damaged + c.destroyed)  AS totalCount,\n"
 			+ "'D-3 Number of destroyed or damaged educational facilities attributed to disasters.' AS title\n"
-			+ "FROM public.human_population AS c \n"
-			+ "where human_population_disaster_category_id in "
-			+ "('186894a2-a5b8-11ec-adfd-90ccdfa85f11')", nativeQuery = true)
+			+ "FROM public.infrastructure AS c \n"
+			+ "where infractructure_type_id in "
+			+ "('85f753c8-a495-11ec-b375-90ccdfa85f20','85f753c8-a495-11ec-b375-90ccdfa85f11')", nativeQuery = true)
 	ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities();
 
 	//Global target B: Substantially reduce the number of affected people globally by 2030, aiming to lower the average global figure per 100,000 between 2020-2030 compared with 2005-2015.
