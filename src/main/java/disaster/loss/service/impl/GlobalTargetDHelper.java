@@ -40,7 +40,7 @@ public class GlobalTargetDHelper {
 		beans.add(new CrossTab("", damagedOrDestroyedEducationalFacilities.getTitle(),
 				getQueryResult(damagedOrDestroyedEducationalFacilities)));
 
-		// number of missing persons
+		// D-4 Number of other destroyed or damaged critical infrastructure units and facilities attributed to disasters.
 		ISendaiAggregateDTO OtherdamagedOrDestroyed = sendaiMonitorGroupByMonthRepository.OtherdamagedOrDestroyed();
 		beans.add(new CrossTab("", OtherdamagedOrDestroyed.getTitle(),
 				getQueryResult(OtherdamagedOrDestroyed)));

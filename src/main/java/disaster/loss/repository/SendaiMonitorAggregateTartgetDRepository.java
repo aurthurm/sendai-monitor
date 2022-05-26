@@ -34,14 +34,13 @@ public interface SendaiMonitorAggregateTartgetDRepository extends JpaRepository<
 			+ "('85f753c8-a495-11ec-b375-90ccdfa85f23','85f753c8-a495-11ec-b375-90ccdfa85f11')", nativeQuery = true)
 	ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities();
 
-	//Global target B: Substantially reduce the number of affected people globally by 2030, aiming to lower the average global figure per 100,000 between 2020-2030 compared with 2005-2015.
 
-	//B-1 (compound) Number of directly affected people attributed to disasters, per 100,000 population.
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
-			+ "'D-4 Number of other destroyed or damaged critical infrastructure units and facilities attributed to disasters.' AS title\n"
-			+ "FROM public.human_population AS c \n"
-			+ "where human_population_disaster_category_id in "
-			+ "('f026ee93-a5b7-11ec-adfd-90ccdfa85f11')", nativeQuery = true)
+	// D-4 Number of other destroyed or damaged critical infrastructure units and facilities attributed to disasters.
+		@Query(value = "SELECT GREATEST(0, SUM(c.damaged + c.destroyed)) AS totalCount,\n"
+				+ "'D-4 Number of other destroyed or damaged critical infrastructure units and facilities attributed to disasters.' AS title\n"
+				+ "FROM public.infrastructure AS c \n"
+				+ "where infractructure_type_id in "
+				+ "('85f753c8-a495-11ec-b375-90ccdfa85f19')", nativeQuery = true)
 	ISendaiAggregateDTO OtherdamagedOrDestroyed();
 
 	//B-2 Number of injured or ill people attributed to disasters, per 100,000 population.
