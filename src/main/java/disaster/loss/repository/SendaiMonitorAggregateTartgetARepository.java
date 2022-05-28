@@ -34,17 +34,18 @@ public interface SendaiMonitorAggregateTartgetARepository extends JpaRepository<
 			+ " and d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO numberOfDeathsAndMissingPersons(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(h.value) AS totalCount,\n"
 			+ "'A-2 Number of deaths attributed to disasters, per 100,000 population.' AS title\n"
-			+ "FROM public.human_population AS c \n"
+			+ "FROM public.human_population AS h inner join public.disaster AS d on d.disaster_id = h.disaster_id  \n" 
 			+ "where human_population_disaster_category_id = '1edabdc2-a5b8-11ec-adfd-90ccdfa85f11'\n"
-			+ "GROUP BY name", nativeQuery = true)
-	ISendaiAggregateDTO numberOfDeaths(LocalDate dateFrom, LocalDate dateTo);
+			+ " and d.incident_date BETWEEN :from AND :to", nativeQuery = true)
+	ISendaiAggregateDTO numberOfDeaths(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(h.value) AS totalCount,\n"
 			+ "'A-3 Number of missing persons attributed to disasters, per 100,000 population.' AS title\n"
-			+ "FROM public.human_population AS c \n" + "where human_population_disaster_category_id in "
-			+ "('186894a2-a5b8-11ec-adfd-90ccdfa85f11')", nativeQuery = true)
-	ISendaiAggregateDTO numberOfMissingPersons();
+			+ "FROM public.human_population AS h inner join public.disaster AS d on d.disaster_id = h.disaster_id  \n" 
+			+ "where human_population_disaster_category_id in ('186894a2-a5b8-11ec-adfd-90ccdfa85f11')"
+			+ " and d.incident_date BETWEEN :from AND :to", nativeQuery = true)
+	ISendaiAggregateDTO numberOfMissingPersons(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 }

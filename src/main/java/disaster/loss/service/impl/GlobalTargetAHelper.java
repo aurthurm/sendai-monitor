@@ -31,7 +31,7 @@ public class GlobalTargetAHelper {
 
 		// number of missing persons
 		ISendaiAggregateDTO numberOfMissingPersons = sendaiMonitorGroupByMonthRepository
-				.numberOfDeathsAndMissingPersons(dateFrom, dateTo);
+				.numberOfMissingPersons(dateFrom, dateTo);
 		beans.add(new CrossTab("", numberOfMissingPersons.getTitle(),
 				numberOfMissingPersons.getTotalCount() != null ? numberOfMissingPersons.getTotalCount().toString()
 						: "0"));
