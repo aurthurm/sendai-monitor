@@ -69,19 +69,19 @@ public class SendaiMonitorAggregateTargetAReportImpl {
 		/*
 		 * Global Target A calculation
 		 */
-		globalTargetAHelper.getGlobalTargetA(beans);
+		globalTargetAHelper.getGlobalTargetA(beans, filters.getDateFrom(), filters.getDateTo());
 
 		/*
 		 * Global Target B calculation
 		 */
-		globalTargetBHelper.getGlobalTargetB(beans);
+		globalTargetBHelper.getGlobalTargetB(beans, filters.getDateFrom(), filters.getDateTo());
 
 		/*
 		 * Global Target C calculation
 		 */
-		globalTargetCHelper.getGlobalTargetC(beans);
+		globalTargetCHelper.getGlobalTargetC(beans, filters.getDateFrom(), filters.getDateTo());
 
-		globalTargetDHelper.getGlobalTargetD(beans);
+		globalTargetDHelper.getGlobalTargetD(beans, filters.getDateFrom(), filters.getDateTo());
 
 		log.debug("Print beans ************************************.......... : {} ", beans);
 

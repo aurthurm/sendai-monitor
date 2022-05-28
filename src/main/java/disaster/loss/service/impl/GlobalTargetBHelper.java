@@ -1,5 +1,6 @@
 package disaster.loss.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class GlobalTargetBHelper {
 	@Autowired
 	SendaiMonitorAggregateTartgetBRepository sendaiMonitorGroupByMonthRepository;
 
-	public void getGlobalTargetB(ArrayList<CrossTab> beans) {
+	public void getGlobalTargetB(ArrayList<CrossTab> beans, LocalDate localDate, LocalDate localDate2) {
 
 		beans.add(new CrossTab("", "", ""));
 		beans.add(new CrossTab("",
