@@ -54,8 +54,6 @@ public class Donation extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "utelization_comment")
 	private String utelizationComment;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-
 	public String getDonorId() {
 		return this.donorId;
 	}

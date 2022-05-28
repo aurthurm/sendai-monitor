@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.0.final using JasperReports Library version 6.19.0-646c68931cebf1a58bc65c4359d1f0ca223c5e94  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="842" pageHeight="900" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d155cd7-304e-490e-8c2a-e5dd7d17ebea">
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.keep.first.band.1" value="columnHeader"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type=true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows=true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns=true"/>
+	<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.page.margins=true"/>
+	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet=false"/>
+	<property name="net.sf.jasperreports.export.xls.wrap.text" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.column.width.ratio" value="1.10f"/>
+	<property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+	<property name="net.sf.jasperreports.export.csv.write.bom" value="true"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dateIssued" class="java.lang.String">
+		<fieldDescription><![CDATA[dateIssued]]></fieldDescription>
+	</field>
+	<field name="developmentPartnerName" class="java.lang.String">
+		<fieldDescription><![CDATA[developmentPartnerName]]></fieldDescription>
+	</field>
+	<field name="projectName" class="java.lang.String">
+		<fieldDescription><![CDATA[projectName]]></fieldDescription>
+	</field>
+	<field name="disasterCode" class="java.lang.String">
+		<fieldDescription><![CDATA[disasterCode]]></fieldDescription>
+	</field>
+	<field name="value" class="java.lang.String">
+		<fieldDescription><![CDATA[value]]></fieldDescription>
+	</field>
+	<field name="valueUtelized" class="java.lang.String">
+		<fieldDescription><![CDATA[valueUtelized]]></fieldDescription>
+	</field>
+	<field name="comment" class="java.lang.String">
+		<fieldDescription><![CDATA[comment]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+			<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.detect.cell.type=true"/>
+			<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows=true"/>
+			<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns=true"/>
+			<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.ignore.page.margins=true"/>
+			<property name="net.sf.jasperreports.export.xls.one.page.per.sheet=true"/>
+			<property name="net.sf.jasperreports.export.xls.wrap.text" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.column.width.ratio" value="1.10f"/>
+			<property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="eceebb01-993a-4e6c-a8a4-8f4e37db109a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Partner/Organisation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="20" uuid="1a3219f5-a92a-4203-865e-ee41d5caae7a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Project Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="20" uuid="31d0d25b-01cf-415f-b7f7-e1663e9c8df5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Disaster Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="20" uuid="41b49546-5a7c-4dcf-81a9-4f0b0f131fe0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Date Issued]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="100" height="20" uuid="d4d9efb2-5fd4-4655-a3f7-40da6a89ab96">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="100" height="20" uuid="d1b51feb-a68f-450c-9264-62397ecd63a5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Amount Used]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="100" height="20" uuid="d7c3a9cb-61c1-4d22-991c-7786c88c1051">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Comment]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+			<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.detect.cell.type=true"/>
+			<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows=true"/>
+			<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns=true"/>
+			<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.ignore.page.margins=true"/>
+			<property name="net.sf.jasperreports.export.xls.one.page.per.sheet=true"/>
+			<property name="net.sf.jasperreports.export.xls.wrap.text" value="true"/>
+			<property name="net.sf.jasperreports.export.xls.column.width.ratio" value="1.10f"/>
+			<property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="80" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="e2aabfbd-c472-4e19-a87a-228aadc5a586">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e18ef037-77fb-4e0b-8306-a359bdd981d0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{projectName}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="180" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="e2aabfbd-c472-4e19-a87a-228aadc5a586">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e18ef037-77fb-4e0b-8306-a359bdd981d0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{disasterCode}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="e2aabfbd-c472-4e19-a87a-228aadc5a586">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e18ef037-77fb-4e0b-8306-a359bdd981d0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{dateIssued}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="380" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="e2aabfbd-c472-4e19-a87a-228aadc5a586">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e18ef037-77fb-4e0b-8306-a359bdd981d0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="580" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="e2aabfbd-c472-4e19-a87a-228aadc5a586">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e18ef037-77fb-4e0b-8306-a359bdd981d0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="80" height="20" uuid="b9d49d4e-de46-4e96-8100-1b49dbad247d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5c52a12-77b7-417a-a915-0a0149282451"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{developmentPartnerName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="480" y="0" width="100" height="20" uuid="59d2e08a-ad2b-44fb-85d5-6681d093b37d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b737e57-c7a0-4812-82cb-ef079d4b45f1"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{valueUtelized}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

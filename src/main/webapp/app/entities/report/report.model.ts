@@ -1,8 +1,11 @@
+import dayjs from 'dayjs/esm';
+
 export interface IReport {
   reportId?: string;
-  casualtyId?: string | null;
-  street?: string | null;
-  countryId?: string | null;
+  reportName?: string;
+  dateFrom?: dayjs.Dayjs | null;
+  dateTo?: dayjs.Dayjs | null;
+  fileFormat?: string | null;
   provinceId?: string | null;
   districtId?: string | null;
 }
@@ -10,9 +13,10 @@ export interface IReport {
 export class Report implements IReport {
   constructor(
     public reportId?: string,
-    public casualtyId?: string | null,
-    public street?: string | null,
-    public countryId?: string | null,
+    public reportName?: string,
+    public dateFrom?: dayjs.Dayjs | null,
+    public dateTo?: dayjs.Dayjs | null,
+    public fileFormat?: string | null,
     public provinceId?: string | null,
     public districtId?: string | null
   ) {}

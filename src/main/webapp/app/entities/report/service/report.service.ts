@@ -14,6 +14,7 @@ export class ReportService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/sendai-monitor');
   protected resourceAggregateUrl = this.applicationConfigService.getEndpointFor('api/sendai-monitor-dcp');
   protected resourceAggregateSendai = this.applicationConfigService.getEndpointFor('api/sendai-monitor-aggregate-target-a');
+  protected resourceDonationLineListing = this.applicationConfigService.getEndpointFor('api/donation-line-listing');
 
   
 
@@ -22,6 +23,15 @@ export class ReportService {
   download(type: string, req?: any): Observable<HttpResponse<{}>> {
     const options = createRequestOption(req);
     return this.http.get(`${this.resourceAggregateSendai}/${type}`, {
+      params: options, 
+      observe: 'response',
+      responseType: 'arraybuffer', // 'blob'
+    });
+  }
+
+  downloadDonationLineList(type: string, req?: any): Observable<HttpResponse<{}>> {
+    const options = createRequestOption(req);
+    return this.http.get(`${this.resourceDonationLineListing}/${type}`, {
       params: options, 
       observe: 'response',
       responseType: 'arraybuffer', // 'blob'
