@@ -16,7 +16,7 @@ public class GlobalTargetBHelper {
 	@Autowired
 	SendaiMonitorAggregateTartgetBRepository sendaiMonitorGroupByMonthRepository;
 
-	public void getGlobalTargetB(ArrayList<CrossTab> beans, LocalDate localDate, LocalDate localDate2) {
+	public void getGlobalTargetB(ArrayList<CrossTab> beans, LocalDate dateFrom, LocalDate dateTo) {
 
 		beans.add(new CrossTab("", "", ""));
 		beans.add(new CrossTab("",
@@ -27,29 +27,29 @@ public class GlobalTargetBHelper {
 		// Number of directly affected people attributed to disasters, per 100,000
 		// population.
 		ISendaiAggregateDTO numberOfDirectlyAffectedPeople = sendaiMonitorGroupByMonthRepository
-				.numberOfDirectlyAffectedPeople();
+				.numberOfDirectlyAffectedPeople(dateFrom, dateTo);
 		beans.add(new CrossTab("", numberOfDirectlyAffectedPeople.getTitle(),
 				resolveQueries(numberOfDirectlyAffectedPeople)));
 
 		// B-2 Number of injured or ill people attributed to disasters, per 100,000 population
-		ISendaiAggregateDTO numberOfDeaths = sendaiMonitorGroupByMonthRepository.numberOfInjuredOrIllPeople();
-		beans.add(new CrossTab("", numberOfDeaths.getTitle(), numberOfDeaths.getTotalCount().toString()));
+		ISendaiAggregateDTO numberOfDeaths = sendaiMonitorGroupByMonthRepository.numberOfInjuredOrIllPeople(dateFrom, dateTo);
+		beans.add(new CrossTab("", numberOfDeaths.getTitle(), numberOfDeaths.getTotalCount()!=null?numberOfDeaths.getTotalCount().toString():"0"));
 
 		// Number of people whose damaged dwellings were attributed to disasters
 		ISendaiAggregateDTO numberOfPeopleWhoseDwellingsWhereDamaged = sendaiMonitorGroupByMonthRepository
-				.numberOfPeopleWhoseDwellingsWhereDamaged();
+				.numberOfPeopleWhoseDwellingsWhereDamaged(dateFrom, dateTo);
 		beans.add(new CrossTab("", numberOfPeopleWhoseDwellingsWhereDamaged.getTitle(),
 				resolveQueries(numberOfPeopleWhoseDwellingsWhereDamaged)));
 
 		// Number of people whose destroyed dwellings were attributed to disasters.
 		ISendaiAggregateDTO numberOfPeopleWhoseDwellingsWhereDestroyed = sendaiMonitorGroupByMonthRepository
-				.numberOfPeopleWhoseDwellingsWhereDestroyed();
+				.numberOfPeopleWhoseDwellingsWhereDestroyed(dateFrom, dateTo);
 		beans.add(new CrossTab("", numberOfPeopleWhoseDwellingsWhereDestroyed.getTitle(),
 				resolveQueries(numberOfPeopleWhoseDwellingsWhereDestroyed)));
 
 		// B-5	Number of people whose livelihoods were disrupted or destroyed, attributed to disasters
 		ISendaiAggregateDTO numberOfPeopleWhoseLivelihoodsWereDisrupted = sendaiMonitorGroupByMonthRepository
-				.numberOfPeopleWhoseLivelihoodsWereDisrupted();
+				.numberOfPeopleWhoseLivelihoodsWereDisrupted(dateFrom, dateTo);
 		beans.add(new CrossTab("", numberOfPeopleWhoseLivelihoodsWereDisrupted.getTitle(),
 				resolveQueries(numberOfPeopleWhoseLivelihoodsWereDisrupted)));
 	}
