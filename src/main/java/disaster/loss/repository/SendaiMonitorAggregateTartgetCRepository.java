@@ -20,19 +20,20 @@ public interface SendaiMonitorAggregateTartgetCRepository extends JpaRepository<
 
 	@Query(value = "SELECT SUM(l.estimated_loss) AS totalCount,\n"
 			+ "'C-2 Direct agricultural loss attributed to disasters.' AS title\n"
-			+ "FROM public.live_stock AS l  inner join disaster As d on l.disaster_id = d.disaster_id \n"
+			+ "FROM public.live_stock AS l  inner join public.disaster As d on l.disaster_id = d.disaster_id \n"
 			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO livestockLoss(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 	@Query(value = "SELECT  SUM(c.estimated_loss) AS totalCount,\n"
 			+ "'C-2 Direct agricultural loss attributed to disasters.' AS title\n"
-			+ "FROM public.crop AS c  inner join disaster As d on c.disaster_id = d.disaster_id \n"
+			+ "FROM public.crop AS c  inner join public.disaster As d on c.disaster_id = d.disaster_id \n"
 			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO crops(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
-	@Query(value = "SELECT  SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT  SUM(i.value) AS totalCount,\n"
 			+ "'C-3 Direct economic loss to all other damaged or destroyed productive assets attributed to disasters.' AS title\n"
-			+ "FROM public.infrastructure AS c \n", nativeQuery = true)
+			+ "FROM public.infrastructure AS i inner join public.disaster AS d on d.disaster_id = i.disaster_id \n"
+			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO infrastructureLoss(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
