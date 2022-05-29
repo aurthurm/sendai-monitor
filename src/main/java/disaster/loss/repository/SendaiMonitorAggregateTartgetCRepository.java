@@ -36,7 +36,7 @@ public interface SendaiMonitorAggregateTartgetCRepository extends JpaRepository<
 			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO infrastructureLoss(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
-	@Query(value = "SELECT 'name' AS name, SUM(h.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(h.value) AS totalCount,\n"
 			+ "'C-3 Direct economic loss to all other damaged or destroyed productive assets attributed to disasters.' AS title\n"
 			+ "FROM public.human_population AS h inner join disaster AS d on d.disaster_id = h.disaster_id \n" 
 			+ "where h.human_population_disaster_category_id in ('186894a2-a5b8-11ec-adfd-90ccdfa85f11')"
@@ -44,7 +44,7 @@ public interface SendaiMonitorAggregateTartgetCRepository extends JpaRepository<
 	ISendaiAggregateDTO damagedOrDestroyedProductiveAssets(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 	// C-4 Direct economic loss in the housing sector attributed to disasters.
-	@Query(value = "SELECT 'name' AS name, SUM(i.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(i.value) AS totalCount,\n"
 			+ "'C-4 Direct economic loss in the housing sector attributed to disasters.' AS title\n"
 			+ "FROM public.infrastructure AS i inner join disaster AS d on d.disaster_id = i.disaster_id \n" 
 			+ "where infractructure_type_id in ('85f753c8-a495-11ec-b375-90ccdfa85f12') \n"
@@ -53,16 +53,18 @@ public interface SendaiMonitorAggregateTartgetCRepository extends JpaRepository<
 
 	// C-5 Direct economic loss resulting /from damaged or destroyed critical
 	// infrastructure attributed to disasters
-	@Query(value = "SELECT  SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT  SUM(i.value) AS totalCount,\n"
 			+ "'C-5 Direct economic loss resulting /from damaged or destroyed critical infrastructure attributed to disasters' AS title\n"
-			+ "FROM public.infrastructure AS c \n", nativeQuery = true)
+			+ "FROM public.infrastructure AS i inner join public.disaster AS d on d.disaster_id = i.disaster_id \n"
+			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO economicLossFromCriticalInfrastructure(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 	// C-6 Direct economic loss to cultural heritage damaged or destroyed attributed to disasters.
-	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount,\n"
+	@Query(value = "SELECT SUM(i.value) AS totalCount,\n"
 			+ "'C-6 Direct economic loss to cultural heritage damaged or destroyed attributed to disasters.' AS title\n"
-			+ "FROM public.infrastructure AS c \n" + "where infractructure_type_id in "
-			+ "('85f753c8-a495-11ec-b375-90ccdfa85f17')", nativeQuery = true)
+			+ "FROM public.infrastructure AS i inner join disaster AS d on d.disaster_id = i.disaster_id \n" 
+			+ "where i.infractructure_type_id in ('85f753c8-a495-11ec-b375-90ccdfa85f17') \n"
+			+ " and d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO culturalHeritageEconomicLoss(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 }
