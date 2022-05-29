@@ -18,14 +18,16 @@ public interface SendaiMonitorAggregateTartgetCRepository extends JpaRepository<
 			+ "FROM public.disaster AS d where d.incident_date BETWEEN :from AND :to  \n", nativeQuery = true)
 	ISendaiAggregateDTO economicLoss(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
-	@Query(value = "SELECT SUM(c.estimated_loss) AS totalCount,\n"
+	@Query(value = "SELECT SUM(l.estimated_loss) AS totalCount,\n"
 			+ "'C-2 Direct agricultural loss attributed to disasters.' AS title\n"
-			+ "FROM public.live_stock AS c \n", nativeQuery = true)
+			+ "FROM public.live_stock AS l  inner join disaster As d on l.disaster_id = d.disaster_id \n"
+			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO livestockLoss(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 	@Query(value = "SELECT  SUM(c.estimated_loss) AS totalCount,\n"
 			+ "'C-2 Direct agricultural loss attributed to disasters.' AS title\n"
-			+ "FROM public.crop AS c \n", nativeQuery = true)
+			+ "FROM public.crop AS c  inner join disaster As d on c.disaster_id = d.disaster_id \n"
+			+ "where  d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO crops(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 	@Query(value = "SELECT  SUM(c.value) AS totalCount,\n"
