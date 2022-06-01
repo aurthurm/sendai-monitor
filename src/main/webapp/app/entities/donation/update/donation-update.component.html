@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
+  <div class="col-12">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-donation-heading" data-cy="DonationCreateUpdateHeading" jhiTranslate="sendaiMonitorApp.donation.home.createOrEditLabel">
+      <h2 id="jhi-donation-heading" data-cy="DonationCreateUpdateHeading"
+        jhiTranslate="sendaiMonitorApp.donation.home.createOrEditLabel">
         Create or edit a Donation
       </h2>
 
@@ -9,110 +10,110 @@
         <jhi-alert-error></jhi-alert-error>
 
         <div class="row mb-3 d-none">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.donorId" for="field_donorId">Donor Id</label>
-          <input
-            type="text"
-            class="form-control col"
-            name="donorId"
-            id="field_donorId"
-            data-cy="donorId"
-            formControlName="donorId"
-            [readonly]="editForm.get('donorId')!.value != null"
-          />
-        </div>
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.partnerId"
-            for="field_departmentId">Department</label>
-          <select required class="form-control col" name="departmentId" formControlName="developmentPartnerId"
-            id="field_departmentId" data-cy="departmentId">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let department of departments" [value]="department?.departmentId">
-              {{ department.name }}
-            </option>
-
-          </select>
-        </div>
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.disaster"
-            for="field_disaster">Disaster/Hazard</label>
-          <ng-multiselect-dropdown rows="4" [settings]="dropdownSettings" [data]="dropdownList"
-            (onSelect)="onItemSelect($event)" [ngModel]="disasters"
-            [ngModelOptions]="{standalone: true}" (onDeSelect)="onItemDeSelect($event)"
-            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)" class="col p-0">
-          </ng-multiselect-dropdown>
+          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.donorId" for="field_donorId">Donor
+            Id</label>
+          <input type="text" class="form-control col" name="donorId" id="field_donorId" data-cy="donorId"
+            formControlName="donorId" [readonly]="editForm.get('donorId')!.value != null" />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.name" for="field_name">Name</label>
-          <input type="text" class="form-control col" name="name" id="field_name" data-cy="name" formControlName="name" />
-        </div>
+        <div class="row">
+          <!-- Left Column -->
+          <div class="col">
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.partnerId"
+                for="field_departmentId">Department</label>
+              <select required class="form-control col" name="departmentId" formControlName="developmentPartnerId"
+                id="field_departmentId" data-cy="departmentId">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let department of departments" [value]="department?.departmentId">
+                  {{ department.name }}
+                </option>
 
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.type" for="field_type">Type</label>
-          <input type="text" class="form-control col" name="type" id="field_type" data-cy="type" formControlName="type" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.valueOfDonation"
-            for="field_estimatedDamage">Value Of Donation</label>
-          <div class="col row">
-            <span class="col-3">
-              <select class="form-control col" name="currency" formControlName="currency" id="field_valueOfDonation"
-                data-cy="currency">
-                <option value="ZWD">ZW</option>
-                <option value="USD">USD</option>
               </select>
-            </span>
-            <div class="col">
-              <input type="number" class="form-control col" name="estimatedDamage" id="field_estimatedDamage"
-                data-cy="valueOfDonation" formControlName="valueOfDonation" autocomplete="off" />
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.disaster"
+                for="field_disaster">Disaster/Hazard</label>
+              <ng-multiselect-dropdown rows="4" [settings]="dropdownSettings" [data]="dropdownList"
+                (onSelect)="onItemSelect($event)" [ngModel]="disasters" [ngModelOptions]="{standalone: true}"
+                (onDeSelect)="onItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)" class="col p-0">
+              </ng-multiselect-dropdown>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.name"
+                for="field_name">Name</label>
+              <input type="text" class="form-control col" name="name" id="field_name" data-cy="name"
+                formControlName="name" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.type"
+                for="field_type">Type</label>
+              <input type="text" class="form-control col" name="type" id="field_type" data-cy="type"
+                formControlName="type" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.valueOfDonation"
+                for="field_estimatedDamage">Value Of Donation</label>
+              <div class="col row">
+                <span class="col-3">
+                  <select class="form-control col" name="currency" formControlName="currency" id="field_valueOfDonation"
+                    data-cy="currency">
+                    <option value="ZWD">ZW</option>
+                    <option value="USD">USD</option>
+                  </select>
+                </span>
+                <div class="col">
+                  <input type="number" class="form-control col" name="estimatedDamage" id="field_estimatedDamage"
+                    data-cy="valueOfDonation" formControlName="valueOfDonation" autocomplete="off" />
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.dateIssued"
+                for="field_dateIssued">Date Issued</label>
+              <input id="field_dateIssued" data-cy="dateIssued" type="date" class="form-control col" name="dateIssued"
+                formControlName="dateIssued" placeholder="YYYY-MM-DD" />
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.comment"
+                for="field_intervention">Commnet</label>
+              <textarea rows="4" class="form-control col" name="intervention" id="field_intervention"
+                data-cy="intervention" formControlName="comment"></textarea>
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.utelizationComment"
+                for="field_intervention">Utelization Comment</label>
+              <textarea rows="4" class="form-control col" name="intervention" id="field_intervention"
+                data-cy="intervention" formControlName="utelizationComment"></textarea>
+            </div>
+            <div class="row mb-3">
+              <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.valueUtelized"
+                for="field_valueOfDonation">Value Utelized</label>
+              <input type="number" class="form-control col" name="valueUtelized" id="field_valueUtelized"
+                data-cy="valueUtelized" formControlName="valueUtelized" />
             </div>
           </div>
         </div>
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.dateIssued"
-            for="field_dateIssued">Date Issued</label>
-          <input id="field_dateIssued" data-cy="dateIssued" type="date" class="form-control col"
-            name="dateIssued" formControlName="dateIssued" placeholder="YYYY-MM-DD" />
-        </div>
-        <div class="row mb-3">
-          <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.valueUtelized" for="field_valueOfDonation"
-            >Value Utelized</label
-          >
-          <input
-            type="number"
-            class="form-control col"
-            name="valueUtelized"
-            id="field_valueUtelized"
-            data-cy="valueUtelized"
-            formControlName="valueUtelized"
-          />
-        </div>
+
+
+
       </div>
-      <div class="row mb-3">
-        <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.comment"
-          for="field_intervention">Commnet</label>
-        <textarea rows="4" class="form-control col" name="intervention" id="field_intervention"
-          data-cy="intervention" formControlName="comment"></textarea>
-      </div>
-      <div class="row mb-3">
-        <label class="form-label col-2" jhiTranslate="sendaiMonitorApp.donation.utelizationComment"
-          for="field_intervention">Utelization Comment</label>
-        <textarea rows="4" class="form-control col" name="intervention" id="field_intervention"
-          data-cy="intervention" formControlName="utelizationComment"></textarea>
-      </div>
+
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary"
+          (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
 
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
       </div>
