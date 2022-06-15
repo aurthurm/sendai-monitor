@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import disaster.loss.service.dto.CrossTab;
 import disaster.loss.service.dto.ReportFiltersDTO;
-
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -36,9 +35,9 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 @Service
-public class SendaiMonitorAggregateTargetAReportImpl {
+public class SendaiMonitorFrameworkReportImpl {
 
-	private final Logger log = LoggerFactory.getLogger(SendaiMonitorAggregateTargetAReportImpl.class);
+	private final Logger log = LoggerFactory.getLogger(SendaiMonitorFrameworkReportImpl.class);
 
 	@Autowired
 	GlobalTargetAHelper globalTargetAHelper;
@@ -51,6 +50,9 @@ public class SendaiMonitorAggregateTargetAReportImpl {
 
 	@Autowired
 	GlobalTargetDHelper globalTargetDHelper;
+	
+	@Autowired
+	GlobalTargetEHelper globalTargetEHelper;
 
 	public ResponseEntity<InputStreamResource> exportReport(HttpServletResponse response, String reportFormat,
 			ReportFiltersDTO filters) throws JRException, IOException {
@@ -85,6 +87,9 @@ public class SendaiMonitorAggregateTargetAReportImpl {
 		 * Global Target D calculation
 		 */
 		globalTargetDHelper.getGlobalTargetD(beans, filters.getDateFrom(), filters.getDateTo());
+		
+		
+		globalTargetEHelper.getGlobalTargetE(beans, filters.getDateFrom(), filters.getDateTo());
 
 		log.debug("Print beans ************************************.......... : {} ", beans);
 

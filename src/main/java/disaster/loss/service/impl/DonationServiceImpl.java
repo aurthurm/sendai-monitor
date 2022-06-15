@@ -29,7 +29,14 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public Donation save(Donation donation) {
         log.debug("Request to save Donation : {}", donation);
-        return donationRepository.save(donation);
+        
+        Donation saved = donationRepository.save(donation);
+        
+        if(saved!=null) {
+        	
+        }
+        
+        return saved;
     }
 
     @Override

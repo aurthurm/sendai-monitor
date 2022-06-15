@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import disaster.loss.service.dto.ReportFiltersDTO;
-import disaster.loss.service.impl.SendaiMonitorAggregateTargetAReportImpl;
+import disaster.loss.service.impl.SendaiMonitorFrameworkReportImpl;
 import disaster.loss.service.impl.SendaiMonitorAggregateTargetBReportImpl;
 import disaster.loss.service.impl.SendaiMonitorAggregateTargetCReportImpl;
 
@@ -25,7 +25,7 @@ public class SendaiMponitorAggregateTargetReportResource {
     private final Logger log = LoggerFactory.getLogger(SendaiMponitorAggregateTargetReportResource.class);
 
     @Autowired
-    private SendaiMonitorAggregateTargetAReportImpl serviceA;
+    private SendaiMonitorFrameworkReportImpl sendaiMonitorFramewokReportImpl;
 
     @Autowired
     private SendaiMonitorAggregateTargetBReportImpl serviceB;
@@ -37,7 +37,7 @@ public class SendaiMponitorAggregateTargetReportResource {
     public ResponseEntity<InputStreamResource> generateReportTargertA(HttpServletResponse response, @PathVariable String format, ReportFiltersDTO filters)
         throws JRException, IOException {
         log.debug("sendai-monitor-aggregate target a: {}", filters);
-        return serviceA.exportReport(response, format, filters);
+        return sendaiMonitorFramewokReportImpl.exportReport(response, format, filters);
     }
 
     @GetMapping("/api/sendai-monitor-aggregate-target-b/{format}")

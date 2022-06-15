@@ -46,7 +46,7 @@ export class DisasterUpdateComponent implements OnInit {
   disasterTypes: IDisasterType[] = [];
   disasterCategories: IDisasterCategory[] = [];
   treeData!: ITreeData;
-  treeNode!: ITreeData | IProvince | IDistrict | IWard | IVillage
+  treeNode!: ITreeData | IProvince | IDistrict | IWard | IVillage;
 
   editForm = this.fb.group({
     disasterId: [],

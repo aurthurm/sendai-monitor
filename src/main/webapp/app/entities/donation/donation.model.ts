@@ -1,5 +1,14 @@
 import dayjs from 'dayjs/esm';
 
+export interface IDonationItem {
+  donorItemId?: string;
+  itemName?: string | null;
+  currency?: string | null;
+  quantityReceived?: string | null;
+  quantityIssued?: string | null;
+  value?: string | null;
+}
+
 export interface IDonation {
   donorId?: string;
   disasterId?: string | null;
@@ -11,7 +20,8 @@ export interface IDonation {
   comment?: string | null,
   utelizationComment?: string | null,
   dateIssued?: dayjs.Dayjs | null,
-  developmentPartnerId?: string | null
+  developmentPartnerId?: string | null,
+  donationItem?: IDonationItem[]
 }
 
 export class Donation implements IDonation {
@@ -26,7 +36,8 @@ export class Donation implements IDonation {
     public comment?: string | null,
     public utelizationComment?: string | null,
     public dateIssued?: dayjs.Dayjs | null,
-    public developmentPartnerId?: string | null
+    public developmentPartnerId?: string | null,
+    public donationItem?: IDonationItem[],
   ) {}
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -40,9 +40,19 @@ export class DonationUpdateComponent implements OnInit {
     developmentPartnerId: [],
   });
 
+  productForm: FormGroup;
+
   constructor(protected donationService: DonationService, protected activatedRoute: ActivatedRoute,
-     protected fb: FormBuilder, protected disasterService: DisasterService,
-     protected departmentService: DepartmentService) {}
+    protected fb: FormBuilder, protected disasterService: DisasterService,
+    protected departmentService: DepartmentService) {
+    this.productForm = this.fb.group({
+      
+      name: '',
+      quantities:
+        this.fb.array([]),
+    });
+  }
+
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ donation }) => {
@@ -74,28 +84,50 @@ export class DonationUpdateComponent implements OnInit {
     };
   }
 
+  quantities(): FormArray {
+    return this.productForm.get("quantities") as FormArray
+  }
 
-onItemSelect(item: any): void {
-  this.disasters.push(item);
-}
-onItemDeSelect(item: any): void {
-  this.disasters.forEach((i, index) => {
-    if (i.disasterId === item.disasterId) {
-      this.disasters.splice(index, 1);
-    }
-  })
-  console.log(this.disasters) // eslint-disable-line
-}
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      id: '',
+      name: '',
+      qty: '',
+      price: '',
+    })
+  }
 
-onSelectAll(items: any): void {
-  this.disasters = this.dropdownList;
-  console.log("onSelectAll", items); // eslint-disable-line
-}
+  addQuantity(): void {
+    this.quantities().push(this.newQuantity());
+  }
 
-onDeSelectAll(item: any): void {
-  this.disasters = [];
-  console.log("onDeSelectAll", item); // eslint-disable-line
-}
+  removeQuantity(i: number): void {
+    this.quantities().removeAt(i);
+  }
+
+
+
+  onItemSelect(item: any): void {
+    this.disasters.push(item);
+  }
+  onItemDeSelect(item: any): void {
+    this.disasters.forEach((i, index) => {
+      if (i.disasterId === item.disasterId) {
+        this.disasters.splice(index, 1);
+      }
+    })
+    console.log(this.disasters) // eslint-disable-line
+  }
+
+  onSelectAll(items: any): void {
+    this.disasters = this.dropdownList;
+    console.log("onSelectAll", items); // eslint-disable-line
+  }
+
+  onDeSelectAll(item: any): void {
+    this.disasters = [];
+    console.log("onDeSelectAll", item); // eslint-disable-line
+  }
 
   previousState(): void {
     window.history.back();
@@ -103,6 +135,10 @@ onDeSelectAll(item: any): void {
 
   save(): void {
     this.isSaving = true;
+
+    this.quantities().controls.forEach(element => {
+      console.log("onDeSelectAll", element); // eslint-disable-line
+    });
     const donation = this.createFromForm();
     if (donation.donorId !== undefined) {
       this.subscribeToSaveResponse(this.donationService.update(donation));
@@ -137,7 +173,7 @@ onDeSelectAll(item: any): void {
       name: donation.name,
       type: donation.type,
       valueOfDonation: donation.valueOfDonation,
-      valueUtelized:donation.valueUtelized,
+      valueUtelized: donation.valueUtelized,
       currency: donation.currency,
       comment: donation.comment,
       utelizationComment: donation.utelizationComment,
@@ -159,8 +195,8 @@ onDeSelectAll(item: any): void {
       comment: this.editForm.get(['comment'])!.value,
       utelizationComment: this.editForm.get(['utelizationComment'])!.value,
       dateIssued: this.editForm.get(['dateIssued'])!.value
-      ? dayjs(this.editForm.get(['dateIssued'])!.value, DATE_FORMAT)
-      : undefined,
+        ? dayjs(this.editForm.get(['dateIssued'])!.value, DATE_FORMAT)
+        : undefined,
 
       developmentPartnerId: this.editForm.get(['developmentPartnerId'])!.value,
     };
