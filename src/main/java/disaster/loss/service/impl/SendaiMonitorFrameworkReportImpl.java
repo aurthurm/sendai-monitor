@@ -53,6 +53,9 @@ public class SendaiMonitorFrameworkReportImpl {
 	
 	@Autowired
 	GlobalTargetEHelper globalTargetEHelper;
+	
+	@Autowired
+	GlobalTargetFHelper globalTargetFHelper;
 
 	public ResponseEntity<InputStreamResource> exportReport(HttpServletResponse response, String reportFormat,
 			ReportFiltersDTO filters) throws JRException, IOException {
@@ -90,6 +93,8 @@ public class SendaiMonitorFrameworkReportImpl {
 		
 		
 		globalTargetEHelper.getGlobalTargetE(beans, filters.getDateFrom(), filters.getDateTo());
+		
+		globalTargetFHelper.getGlobalTargetF(beans, filters.getDateFrom(), filters.getDateTo());
 
 		log.debug("Print beans ************************************.......... : {} ", beans);
 
