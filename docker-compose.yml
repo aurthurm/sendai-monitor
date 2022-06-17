@@ -14,7 +14,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.76.15:5432/sendai_monitor
     ports:
-      - '80:80'
+      - '81:81'
     networks:
       - disasterlossnet
 
