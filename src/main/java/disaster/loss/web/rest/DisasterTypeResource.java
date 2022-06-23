@@ -154,7 +154,7 @@ public class DisasterTypeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of disasterTypes in body.
      */
     @GetMapping("/disaster-types")
-    public ResponseEntity<List<DisasterType>> getAllDisasterTypes(@org.springdoc.api.annotations.ParameterObject @PageableDefault(size = 50) Pageable pageable) {
+    public ResponseEntity<List<DisasterType>> getAllDisasterTypes(@org.springdoc.api.annotations.ParameterObject @PageableDefault(size = 70) Pageable pageable) {
         log.debug("REST request to get a page of DisasterTypes");
         Page<DisasterType> page = disasterTypeService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

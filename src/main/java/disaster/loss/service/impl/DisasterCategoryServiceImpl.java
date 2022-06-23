@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +51,7 @@ public class DisasterCategoryServiceImpl implements DisasterCategoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<DisasterCategory> findAll(Pageable pageable) {
+    public Page<DisasterCategory> findAll(@org.springdoc.api.annotations.ParameterObject @PageableDefault(size = 70) Pageable pageable) {
         log.debug("Request to get all DisasterCategories");
         return disasterCategoryRepository.findAll(pageable);
     }
