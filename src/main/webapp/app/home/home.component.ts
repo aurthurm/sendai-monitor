@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { DisasterService } from 'app/entities/disaster/service/disaster.service'
 import Highcharts from "highcharts/highmaps";
 import worldMap from "@highcharts/map-collection/countries/zw/zw-all.geo.json";
 import proj4 from "proj4";
+import { Bar } from '@antv/g2plot';
 
 
 @Component({
@@ -18,7 +19,46 @@ import proj4 from "proj4";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+
+
+  data =  [
+    {
+      type: 'Fish',
+      sales: 38,
+    },
+    {
+      type: 'Chicken',
+      sales: 52,
+    },
+    {
+      type: '生鲜水果',
+      sales: 61,
+    },
+    {
+      type: '美容洗护',
+      sales: 1458,
+    },
+    {
+      type: '母婴用品',
+      sales: 48,
+    },
+    {
+      type: '进口食品',
+      sales: 38,
+    },
+    {
+      type: '食品饮料',
+      sales: 38,
+    },
+    {
+      type: '家庭清洁',
+      sales: 38,
+    },
+  ];
+  
+ 
+
   Highcharts: typeof Highcharts = Highcharts;
   chartConstructor = "mapChart";
   chartData = [];
@@ -104,7 +144,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     password: [null, [Validators.required]],
     rememberMe: [false],
   });
-
+  
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -130,7 +170,30 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.disasterService.countSimpleStats().subscribe(res => {
       this.simpleStats = res.body;
     })
+
     
+    
+  }
+  ngAfterViewInit(): void {
+    const barPlot = new Bar('chart-view', {
+      data: this.data ,
+      xField: 'sales',
+      yField: 'type',
+      meta: {
+        type: {
+          alias: '类别',
+        },
+        sales: {
+          alias: '销售额',
+        },
+      },
+      minBarWidth: 20,
+      maxBarWidth: 20,
+    });
+    
+    barPlot.render();
+
+     
   }
 
   ngOnDestroy(): void {
