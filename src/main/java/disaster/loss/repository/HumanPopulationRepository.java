@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import disaster.loss.domain.HumanPopulation;
 import disaster.loss.domain.enumeration.DISABILITY;
 import disaster.loss.domain.enumeration.HUMAN_POPULATION;
+import disaster.loss.repository.interfaces.ICountGroupBy;
 
 /**
  * Spring Data SQL repository for the HumanPopulation entity.
@@ -33,4 +34,8 @@ public interface HumanPopulationRepository extends JpaRepository<HumanPopulation
 			HUMAN_POPULATION populationType, DISABILITY disablity, String disasterId, Integer value);
 
 	HumanPopulation findByPopulationTypeAndDisasterId(String populationType, String disasterId);
+
+	@Query(value = "SELECT sum(h.value) AS count ,h.human_population_disaster_category_name AS group  FROM human_population AS h \n"
+			+ "group by h.human_population_disaster_category_name", nativeQuery = true)
+	List<ICountGroupBy> humanPopulationDisasterEffects();
 }

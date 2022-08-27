@@ -8,6 +8,10 @@ import { Account } from 'app/core/auth/account.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'app/login/login.service';
 import { DisasterService } from 'app/entities/disaster/service/disaster.service';
+import { DashboardStatisticsService } from 'app/entities/dashboard-statistics/service/dashboard-statistics.service';
+
+import { IDashboardStatistics } from 'app/entities/dashboard-statistics/dashboard-statistics.model';
+
 import Highcharts from "highcharts/highmaps";
 import worldMap from "@highcharts/map-collection/countries/zw/zw-all.geo.json";
 import proj4 from "proj4";
@@ -19,45 +23,11 @@ import { Bar } from '@antv/g2plot';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
 
-  data =  [
-    {
-      type: 'Fish',
-      sales: 38,
-    },
-    {
-      type: 'Chicken',
-      sales: 52,
-    },
-    {
-      type: '生鲜水果',
-      sales: 61,
-    },
-    {
-      type: '美容洗护',
-      sales: 1458,
-    },
-    {
-      type: '母婴用品',
-      sales: 48,
-    },
-    {
-      type: '进口食品',
-      sales: 38,
-    },
-    {
-      type: '食品饮料',
-      sales: 38,
-    },
-    {
-      type: '家庭清洁',
-      sales: 38,
-    },
-  ];
-  
- 
+  barData: IDashboardStatistics[] = [];
+  isLoading = "hide";
 
   Highcharts: typeof Highcharts = Highcharts;
   chartConstructor = "mapChart";
@@ -152,7 +122,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private loginService: LoginService,
     private disasterService: DisasterService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dashboardStatisticsService: DashboardStatisticsService
   ) {}
 
   ngOnInit(): void {
@@ -169,22 +140,42 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.disasterService.countSimpleStats().subscribe(res => {
       this.simpleStats = res.body;
-    })
+    });
 
+    
+    
     
     
   }
   ngAfterViewInit(): void {
+    this.dashboardStatisticsService.getHumanPopulationDisasterEffects().subscribe(res=>{
+      //console.log(res.body)
+      //this.barData = res.body;
+      this.plotDisasterByCategory(res.body);
+   if(res.body){
+    this.isLoading = "show";
+    this.barData = res.body;
+    //this.ngAfterViewInit()
+   }
+   
+    
+  
+  })
+  } 
+
+  plotDisasterByCategory(barData: any): void {
+    // eslint-disable-next-line no-console
+    console.log(barData)
     const barPlot = new Bar('chart-view', {
-      data: this.data ,
-      xField: 'sales',
-      yField: 'type',
+      data: barData ,
+      xField: 'count',
+      yField: 'group',
       meta: {
         type: {
-          alias: '类别',
+          alias: 'count',
         },
         sales: {
-          alias: '销售额',
+          alias: 'Number',
         },
       },
       minBarWidth: 20,
@@ -192,8 +183,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     
     barPlot.render();
-
-     
   }
 
   ngOnDestroy(): void {
