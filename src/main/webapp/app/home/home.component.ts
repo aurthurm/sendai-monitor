@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,12 +10,12 @@ import { LoginService } from 'app/login/login.service';
 import { DisasterService } from 'app/entities/disaster/service/disaster.service';
 import { DashboardStatisticsService } from 'app/entities/dashboard-statistics/service/dashboard-statistics.service';
 
-import { IDashboardStatistics } from 'app/entities/dashboard-statistics/dashboard-statistics.model';
+import { IDashboardStatistics, InfrastructureStatisticsList } from 'app/entities/dashboard-statistics/dashboard-statistics.model';
 
 import Highcharts from "highcharts/highmaps";
 import worldMap from "@highcharts/map-collection/countries/zw/zw-all.geo.json";
 import proj4 from "proj4";
-import { Bar } from '@antv/g2plot';
+import { Bar, Column } from '@antv/g2plot';
 
 
 @Component({
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           ['zw-mw', 14], ['zw-mc', 15], ['zw-ha', 16], ['zw-mn', 17],
           ['zw-mi', 18], ['zw-me', 19]
         ]
-        
+
       } as Highcharts.SeriesMapOptions,
       {
         // Specify points using lat/lon
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           {
             lat: -20.899999,
             lon: 28.800000000000068
-          } 
+          }
         ]
       }
     ]
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     password: [null, [Validators.required]],
     rememberMe: [false],
   });
-  
+
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -124,14 +124,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private dashboardStatisticsService: DashboardStatisticsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
-  
+
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
         this.router.navigate(['']);
@@ -142,32 +142,79 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.simpleStats = res.body;
     });
 
-    
-    
-    
-    
+
+
+
+
   }
   ngAfterViewInit(): void {
-    this.dashboardStatisticsService.getHumanPopulationDisasterEffects().subscribe(res=>{
+    this.dashboardStatisticsService.getHumanPopulationDisasterEffects().subscribe(res => {
       //console.log(res.body)
       //this.barData = res.body;
       this.plotDisasterByCategory(res.body);
-   if(res.body){
-    this.isLoading = "show";
-    this.barData = res.body;
-    //this.ngAfterViewInit()
-   }
-   
-    
-  
-  })
-  } 
+      if (res.body) {
+        this.isLoading = "show";
+        this.barData = res.body;
+        //this.ngAfterViewInit()
+      }
+    })
 
+    this.dashboardStatisticsService.getDamagedDestroyedInfrastructureValue().subscribe(res => {
+      this.plotInfrastructure(res.body);
+    })
+  }
+
+  plotInfrastructure(columnData: any): void {
+    const data = [{}]
+    columnData.forEach((element: any) => {
+      
+
+      if(element.damaged>0){
+        const res = {type:"damaged", number:element.damaged, name:element.name, value:element.value};
+        data.push(res);
+      }
+
+      if(element.destroyed>0){
+        const res = {type:"destroyed", number:element.destroyed, name:element.name, value:element.value};
+        data.push(res);
+      }
+      
+    });
+
+     // eslint-disable-next-line no-console
+     console.log(data)
+    
+    const stackedColumnPlot = new Column('chart-infra', {
+      data,
+      isGroup: true,
+      xField: 'name',
+      yField: 'number',
+      seriesField: 'type',
+      /** 设置颜色 */
+      //color: ['#1ca9e6', '#f88c24'],
+      /** 设置间距 */
+      // marginRatio: 0.1,
+      label: {
+        // 可手动配置 label 数据标签位置
+        position: 'middle', // 'top', 'middle', 'bottom'
+        // 可配置附加的布局方法
+        layout: [
+          // 柱形图数据标签位置自动调整
+          { type: 'interval-adjust-position' },
+          // 数据标签防遮挡
+          { type: 'interval-hide-overlap' },
+          // 数据标签文颜色自动调整
+          { type: 'adjust-color' },
+        ],
+      },
+    });
+
+    stackedColumnPlot.render();
+  }
   plotDisasterByCategory(barData: any): void {
-    // eslint-disable-next-line no-console
-    console.log(barData)
+    
     const barPlot = new Bar('chart-view', {
-      data: barData ,
+      data: barData,
       xField: 'count',
       yField: 'group',
       meta: {
@@ -181,7 +228,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       minBarWidth: 20,
       maxBarWidth: 20,
     });
-    
+
     barPlot.render();
   }
 

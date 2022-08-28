@@ -16,3 +16,21 @@ export class DashboardStatistics implements IDashboardStatistics {
 }
 
 
+export interface InfrastructureStatisticsList {
+  name?: string,
+  damaged?: number;
+  destroyed?: number | null;
+  value?: number | null;
+}
+
+export interface InfrastructureStatistics {
+  data?: InfrastructureStatisticsList[];
+}
+
+export class InfrastructureStatistics implements InfrastructureStatistics {
+  constructor(
+    public data?: InfrastructureStatisticsList[]
+  ) {}
+}
+
+

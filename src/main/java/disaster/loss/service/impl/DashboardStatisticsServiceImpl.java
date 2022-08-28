@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import disaster.loss.domain.Disaster;
 import disaster.loss.repository.HumanPopulationRepository;
 import disaster.loss.repository.interfaces.ICountGroupBy;
+import disaster.loss.repository.interfaces.IInfrastuctureStatistics;
 import disaster.loss.service.DashboardStatisticsService;
 
 /**
@@ -35,6 +36,11 @@ public class DashboardStatisticsServiceImpl implements DashboardStatisticsServic
 	@Override
 	public List<ICountGroupBy> humanPopulationDisasterEffects() {
 		return humanPopulationRepository.humanPopulationDisasterEffects();
+	}
+
+	@Override
+	public List<IInfrastuctureStatistics> damagedDestroyedInfrastructureValue() {
+		return humanPopulationRepository.damagedDestroyedInfrastructureValue();
 	}
 
 }

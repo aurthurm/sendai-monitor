@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import disaster.loss.repository.interfaces.ICountGroupBy;
+import disaster.loss.repository.interfaces.IInfrastuctureStatistics;
 import disaster.loss.service.DashboardStatisticsService;
 
 /**
@@ -45,5 +46,18 @@ public class DashboardStatisticsResource {
 		List<ICountGroupBy> counts = dashboardService.humanPopulationDisasterEffects();
 		return ResponseEntity.ok().body(counts);
 	}
+	
+	/**
+	 * {@code GET  /dashboard/statistics/damaged-destroyed-infrastructure-value} : simple disaster counts.
+	 *
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)}
+	 */
+	@GetMapping("/dashboard/statistics/damaged-destroyed-infrastructure-value")
+	public ResponseEntity<List<IInfrastuctureStatistics>> damagedDestroyedInfrastructureValue() {
+		log.debug("get human-population-disaster-effects");
+		List<IInfrastuctureStatistics> counts = dashboardService.damagedDestroyedInfrastructureValue();
+		return ResponseEntity.ok().body(counts);
+	}
+	
 
 }
