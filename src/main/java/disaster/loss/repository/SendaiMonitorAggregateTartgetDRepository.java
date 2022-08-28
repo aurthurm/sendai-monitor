@@ -51,8 +51,8 @@ public interface SendaiMonitorAggregateTartgetDRepository extends JpaRepository<
 	@Query(value = "SELECT 'name' AS name, SUM(c.value) AS totalCount, \n "
 			+ "'D-5 (compound) Number of disruptions to basic services attributed to disasters.' AS title \n"
 			+ "FROM public.human_population AS c \n"
-			+ "where human_population_disaster_category_id in "
-			+ "('f026ee93-a5b7-11ec-adfd-90ccdfa85f11')", nativeQuery = true)
+			+ "where human_population_disaster_category_id in ('f026ee93-a5b7-11ec-adfd-90ccdfa85f11') \n"
+			+ " and d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO disruptionsToBasicDervices(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 
