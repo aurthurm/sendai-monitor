@@ -33,8 +33,8 @@ public interface SendaiMonitorAggregateTartgetDRepository extends JpaRepository<
 			+ "'D-3 Number of destroyed or damaged educational facilities attributed to disasters.' AS title\n"
 			+ "FROM public.infrastructure AS i inner join disaster AS d on d.disaster_id = i.disaster_id \n" 
 			+ "where infractructure_type_id in "
-			+ "('85f753c8-a495-11ec-b375-90ccdfa85f23','85f753c8-a495-11ec-b375-90ccdfa85f11')"
-			+ "", nativeQuery = true)
+			+ "('85f753c8-a495-11ec-b375-90ccdfa85f23','85f753c8-a495-11ec-b375-90ccdfa85f11') \n"
+			+ " and d.incident_date BETWEEN :from AND :to", nativeQuery = true)
 	ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities(@Param("from") LocalDate dateFrom, @Param("to") LocalDate dateTo);
 
 
