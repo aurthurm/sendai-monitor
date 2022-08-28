@@ -23,55 +23,93 @@ public class GlobalTargetDHelper {
 				""));
 		beans.add(new CrossTab("", "", ""));
 
-		// D-1 (compound) Damage to critical infrastructure attributed to disasters.
-		ISendaiAggregateDTO damagedToCriticalInfrastucture = sendaiMonitorGroupByMonthRepository
-				.damagedToCriticalInfrastucture(dateFrom, dateTo);
-		beans.add(new CrossTab("", damagedToCriticalInfrastucture.getTitle(),
-				getQueryResult(damagedToCriticalInfrastucture)));
-
 		// D-2 Number of destroyed or damaged health facilities attributed to disasters.
 		ISendaiAggregateDTO destroyedOrDamagedHealthFacilities = sendaiMonitorGroupByMonthRepository
 				.destroyedOrDamagedHealthFacilities(dateFrom, dateTo);
-		beans.add(new CrossTab("", destroyedOrDamagedHealthFacilities.getTitle(),
-				getQueryResult(destroyedOrDamagedHealthFacilities)));
 
-		// D-3 Number of destroyed or damaged educational facilities attributed to disasters.
+		String numberDestroyedOrDamagedHealthFacilities = getQueryResult(destroyedOrDamagedHealthFacilities);
+		int numberDestroyedOrDamagedHealthFacilitiesToInt = Integer.parseInt(numberDestroyedOrDamagedHealthFacilities);
+
+		// D-3 Number of destroyed or damaged educational facilities attributed to
+		// disasters.
+
 		ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities = sendaiMonitorGroupByMonthRepository
 				.damagedOrDestroyedEducationalFacilities(dateFrom, dateTo);
+
+		String numberDamagedOrDestroyedEducationalFacilities = getQueryResult(damagedOrDestroyedEducationalFacilities);
+		int numberDamagedOrDestroyedEducationalFacilitiesToInt = Integer
+				.parseInt(numberDamagedOrDestroyedEducationalFacilities);
+
+		// D-4 Number of other destroyed or damaged critical infrastructure units and
+		// facilities attributed to disasters.
+		ISendaiAggregateDTO otherdamagedOrDestroyed = sendaiMonitorGroupByMonthRepository
+				.OtherdamagedOrDestroyed(dateFrom, dateTo);
+		String numberOtherdamagedOrDestroyed = getQueryResult(otherdamagedOrDestroyed);
+		int numberOtherdamagedOrDestroyedToInt = Integer.parseInt(numberOtherdamagedOrDestroyed);
+
+		// D-1 (compound) Damage to critical infrastructure attributed to disasters.
+		/**
+		 * D1 is a compound indicator therefore it gets data from 2, 3, 4 that is why it
+		 * is located at the bottom
+		 */
+		/*
+		 * ISendaiAggregateDTO damagedToCriticalInfrastucture =
+		 * sendaiMonitorGroupByMonthRepository .damagedToCriticalInfrastucture(dateFrom,
+		 * dateTo);
+		 */
+
+		int compoundD1 = numberDestroyedOrDamagedHealthFacilitiesToInt
+				+ numberDamagedOrDestroyedEducationalFacilitiesToInt + numberOtherdamagedOrDestroyedToInt;
+
+		beans.add(new CrossTab("", "D-1 (compound) Damage to critical infrastructure attributed to disasters.",
+				String.valueOf(compoundD1)));
+
+		beans.add(new CrossTab("", destroyedOrDamagedHealthFacilities.getTitle(),
+				numberDestroyedOrDamagedHealthFacilities));
+
 		beans.add(new CrossTab("", damagedOrDestroyedEducationalFacilities.getTitle(),
-				getQueryResult(damagedOrDestroyedEducationalFacilities)));
+				numberDamagedOrDestroyedEducationalFacilities));
 
-		// D-4 Number of other destroyed or damaged critical infrastructure units and facilities attributed to disasters.
-		ISendaiAggregateDTO OtherdamagedOrDestroyed = sendaiMonitorGroupByMonthRepository.OtherdamagedOrDestroyed(dateFrom, dateTo);
-		beans.add(new CrossTab("", OtherdamagedOrDestroyed.getTitle(),
-				getQueryResult(OtherdamagedOrDestroyed)));
+		beans.add(new CrossTab("", otherdamagedOrDestroyed.getTitle(), numberOtherdamagedOrDestroyed));
 
-		// number of missing persons
-		ISendaiAggregateDTO disruptionsToBasicDervices = sendaiMonitorGroupByMonthRepository
-				.disruptionsToBasicDervices(dateFrom, dateTo);
-		beans.add(new CrossTab("", disruptionsToBasicDervices.getTitle(),
-				getQueryResult(disruptionsToBasicDervices)));
+		// D-6 Number of disruptions to educational services attributed to disasters.
+		/*
+		 * ISendaiAggregateDTO disruptionsToEducationalServices =
+		 * sendaiMonitorGroupByMonthRepository
+		 * .disruptionsToEducationalServices(dateFrom, dateTo);
+		 */
 
-		// number of missing persons
-		ISendaiAggregateDTO disruptionsToEducationalServices = sendaiMonitorGroupByMonthRepository
-				.disruptionsToEducationalServices(dateFrom, dateTo);
-		beans.add(new CrossTab("", disruptionsToEducationalServices.getTitle(),
-				getQueryResult(disruptionsToEducationalServices)));
+		// D-7 Number of disruptions to health services attributed to disasters.
+		/*
+		 * ISendaiAggregateDTO disruptionsToHeathServices =
+		 * sendaiMonitorGroupByMonthRepository
+		 * .disruptionsToEducationalServices(dateFrom, dateTo);
+		 */
 
-		// number of missing persons
-		ISendaiAggregateDTO disruptionsToHeathServices = sendaiMonitorGroupByMonthRepository
-				.disruptionsToEducationalServices(dateFrom, dateTo);
-		beans.add(new CrossTab("", disruptionsToHeathServices.getTitle(),
-				getQueryResult(disruptionsToHeathServices)));
-
-		// number of missing persons
+		// D-8 Number of disruptions to other basic services attributed to disasters.
 		ISendaiAggregateDTO disruptionsToOtherBasicServices = sendaiMonitorGroupByMonthRepository
 				.disruptionsToEducationalServices(dateFrom, dateTo);
-		beans.add(new CrossTab("", disruptionsToOtherBasicServices.getTitle(),
-				getQueryResult(disruptionsToOtherBasicServices)));
+
+		// D- 5(compound) Number of disruptions to basic services attributed to
+		// disasters.
+		/**
+		 * D5 is a compound indicator therefore it gets data from 2, 3, 4 that is why it
+		 * is located at the bottom
+		 */
+		beans.add(new CrossTab("", "D- 5(compound) Number of disruptions to basic services attributed to disasters.",
+				"-"));
+
+		beans.add(new CrossTab("", "D-6 Number of disruptions to educational services attributed to disasters.", "-"));
+
+		beans.add(new CrossTab("", "D-7 Number of disruptions to health services attributed to disasters.", "-"));
+
+		beans.add(new CrossTab("", "D-8 Number of disruptions to other basic services attributed to disasters.", "-"));
+
 	}
 
 	private String getQueryResult(ISendaiAggregateDTO disruptionsToOtherBasicServices) {
-		return disruptionsToOtherBasicServices.getTotalCount()!=null ? disruptionsToOtherBasicServices.getTotalCount().toString():"0";
+		return disruptionsToOtherBasicServices.getTotalCount() != null
+				? disruptionsToOtherBasicServices.getTotalCount().toString()
+				: "0";
 	}
 }
