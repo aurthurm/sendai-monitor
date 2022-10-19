@@ -156,11 +156,7 @@
               <input type="number" min="0" autocomplete="off" class="form-control col" name="directEconomicLoss" id="field_directEconomicLoss"
                 data-cy="directEconomicLoss" formControlName="directEconomicLoss" />
             </div>
-            <div class="row mb-3">
-              <label class="form-label col-4 fw-bold" for="field_longitude">Deep Tank Longitude</label>
-              <input type="number"  autocomplete="off" class="form-control col" name="longitude" id="field_longitude"
-                data-cy="longitude" formControlName="longitude" />
-            </div>
+            
           </div>
 
 
@@ -226,23 +222,36 @@
                 </div>
               </div>
             </div>
-
-            <div class="row mb-3">
-              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Name</label>
-              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
-                data-cy="affectedPopulation" formControlName="dipTank" />
-            </div>
-            <div class="row mb-3">
-              <label class="form-label col-4 fw-bold" for="field_latitude">Deep Tank Latitude</label>
-              <input type="number" autocomplete="off" class="form-control col" name="latitude" id="field_latitude"
-                data-cy="latitude" formControlName="latitude" />
-            </div>
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" jhiTranslate="sendaiMonitorApp.disaster.closureDate"
                 for="field_closureDate">Closure Date</label>
               <input id="field_closureDate" data-cy="closureDate" type="date" class="form-control col"
                 name="closureDate" formControlName="closureDate" placeholder="YYYY-MM-DD" />
             </div>
+            <pre>{{deepTank}}</pre>
+            <div class="row mb-3">
+              <label class="form-label col-4 fw-bold" for="field_deepTank">Deep Tanks</label>
+              <input type="checkbox" [(ngModel)]="deepTank" class="form-check col" name="deepTank"
+                id="field_deepTank" data-cy="deepTank"
+                formControlName="deepTank" />
+            </div>
+            <div class="row mb-3" *ngIf="deepTank">
+              <label class="form-label col-4 fw-bold" for="field_affectedPopulation">Deep Tank Name</label>
+              <input type="text" autocomplete="off" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+                data-cy="affectedPopulation" formControlName="dipTank" />
+            </div>
+
+            <div class="row mb-3" *ngIf="deepTank">
+              <label class="form-label col-4 fw-bold" for="field_longitude">Deep Tank Longitude</label>
+              <input type="number"  autocomplete="off" class="form-control col" name="longitude" id="field_longitude"
+                data-cy="longitude" formControlName="longitude" />
+            </div>
+            <div class="row mb-3" *ngIf="deepTank">
+              <label class="form-label col-4 fw-bold" for="field_latitude">Deep Tank Latitude</label>
+              <input type="number" autocomplete="off" class="form-control col" name="latitude" id="field_latitude"
+                data-cy="latitude" formControlName="latitude" />
+            </div>
+            
           </div>
 
           <div class="d-flex">

@@ -39,6 +39,7 @@ export class DisasterUpdateComponent implements OnInit {
   disasterInterventions: IDisasterIntervention[] = [];
   selectedItems: Array<any> = [];
   isSaving = false;
+  deepTank = false;
   lOCATIONValues = Object.keys(LOCATION);
   departments: IDepartment[] = [];
   hazards: IHazard[] = [];
@@ -79,6 +80,7 @@ export class DisasterUpdateComponent implements OnInit {
     dipTank: [],
     longitude:[],
     latitude:[],
+    deepTank:[],
   });
 
   constructor(
