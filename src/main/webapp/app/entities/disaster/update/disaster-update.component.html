@@ -4,7 +4,7 @@
     <ul class="listree">
       <li (click)="toggleTree($event, 'national', treeData)">
         <div class="listree-submenu-heading collapsed" style="font-weight: bolder; font-style:italic"
-          [class.listree-selected]="treeData?.id === treeNode?.id">{{ treeData?.name }}</div>
+          [class.listree-selected]="treeData?.id === treeNode?.id"><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">{{ treeData?.name }}</div>
         <ul class="listree-submenu-items" style="display: none;">
           <li *ngFor="let province of treeData?.provinces; trackBy: trackId"
             (click)="toggleTree($event, 'province', province)">
@@ -58,7 +58,7 @@
         <div class="row">
           <!-- Left Column -->
           <div class="col">
-
+<pre>{{editForm.get('targetPopulation')!.value}}</pre>
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_caseId">Location</label>
               <input required type="text" class="form-control col" name="caseId" id="field_caseId" data-cy="caseId"
@@ -136,7 +136,7 @@
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_targetPopulation">Population</label>
               <input type="number" min="0" class="form-control col" name="targetPopulation" id="field_targetPopulation"
-                data-cy="caseId" formControlName="targetPopulation" />
+                data-cy="targetPopulation" formControlName="targetPopulation" />
             </div>
 
             <div class="row mb-3">
@@ -148,8 +148,11 @@
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_affectedPopulation"
                 jhiTranslate="sendaiMonitorApp.disaster.affectedPopulation">Affected Population</label>
-              <input type="number" min="0" class="form-control col" name="affectedPopulation" id="field_affectedPopulation"
+              <input type="number" min="0" class="form-control col"  name="affectedPopulation" id="field_affectedPopulation"
                 data-cy="affectedPopulation" formControlName="affectedPopulation" />
+                <!-- <span style="color:red" *ngIf="editForm.get('targetPopulation').$dirty && editForm.get('targetPopulation').$invalid">
+                 
+              </span> -->
             </div>
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_directEconomicLoss">Direct Economic Loss</label>
