@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
 
-      <h2 data-cy="reportDetailsHeading"><span jhiTranslate="sendaiMonitorApp.report.detail.title">Reports</span></h2>
+      <h2 data-cy="reportDetailsHeading"><span >Custom Reports</span></h2>
 
       <hr />
       <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="form">
@@ -15,8 +15,14 @@
             <label class="form-label col-4 fw-bold"  for="field_reportName"
               >Choose Report</label>  
             <select class="form-control col" name="reportName" formControlName="reportName" id="field_reportName" data-cy="reportName">
-              <option value="sendai-report">Sendai Report</option>
-              <option value="donation-report">Donation(s) Report</option>
+              <option value=""></option>
+              <option value="crop-report">Crops Report</option>
+              <option value="dwelling-report">Dwellings Report</option>
+              <option value="human-population-report">Human Population Report</option>
+              <option value="infrastructure-report">Infrastructure Report</option>
+              <option value="live-stock-report">Live Stock Report</option>
+              <option value="event-by-categories-report">Events by Categories  Report</option>
+              <option value="event-by-types-report">Events by types Report</option>
             </select>
           </div>
           

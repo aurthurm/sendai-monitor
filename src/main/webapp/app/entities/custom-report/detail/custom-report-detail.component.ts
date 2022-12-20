@@ -41,8 +41,8 @@ export class CustomReportDetailComponent implements OnInit {
     }
     console.log("data.reportName", data); // eslint-disable-line
     
-    if(data.reportName==="sendai-report"){
-      this.reportService.download(data?.fileFormat, data).subscribe(res => {
+    if(data.reportName==="crop-report"){
+      this.reportService.downloadCrops(data?.fileFormat, data).subscribe(res => {
         const buffer: any = res.body;
         const filed = new Blob([buffer], { 
           type: data?.fileFormat === "pdf" ? 'application/pdf' : 'application/vnd.ms-excel'

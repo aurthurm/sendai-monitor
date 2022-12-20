@@ -13,16 +13,16 @@ export type EntityArrayResponseType = HttpResponse<IReport[]>;
 export class CustomReportService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/sendai-monitor');
   protected resourceAggregateUrl = this.applicationConfigService.getEndpointFor('api/sendai-monitor-dcp');
-  protected resourceAggregateSendai = this.applicationConfigService.getEndpointFor('api/sendai-monitor-aggregate-target-a');
+  protected resourceCrops = this.applicationConfigService.getEndpointFor('api/sendai-monitor-crops');
   protected resourceDonationLineListing = this.applicationConfigService.getEndpointFor('api/donation-line-listing');
 
   
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  download(type: string, req?: any): Observable<HttpResponse<{}>> {
+  downloadCrops(type: string, req?: any): Observable<HttpResponse<{}>> {
     const options = createRequestOption(req);
-    return this.http.get(`${this.resourceAggregateSendai}/${type}`, {
+    return this.http.get(`${this.resourceCrops}/${type}`, {
       params: options, 
       observe: 'response',
       responseType: 'arraybuffer', // 'blob'
