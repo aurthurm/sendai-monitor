@@ -80,8 +80,8 @@ public class SendaiMonitorCustomReportImpl {
 
 			if (crop != null) {
 				dn.setName(crop.getName() != null ? crop.getName().toString() : "Unknown");
-				//dn.setHecterageAffected(crop.getHecterageAffected());
-				//dn.setEstimatedLoss(crop.getEstimatedLoss());
+				dn.setHecterageAffected(crop.getHecterageAffected());
+				dn.setEstimatedLoss(crop.getEstimatedLoss());
 
 				flattenedDonations.add(dn);
 			}
