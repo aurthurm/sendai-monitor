@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+
+      <h2 data-cy="reportDetailsHeading"><span jhiTranslate="sendaiMonitorApp.report.detail.title">Reports</span></h2>
+
+      <hr />
+      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="form">
+        <jhi-alert-error></jhi-alert-error>
+
+<!--         <jhi-alert></jhi-alert>
+ -->
+        <section class="mb-4">
+
+          <div class="row mb-3">
+            <label class="form-label col-4 fw-bold"  for="field_reportName"
+              >Choose Report</label>  
+            <select class="form-control col" name="reportName" formControlName="reportName" id="field_reportName" data-cy="reportName">
+              <option value="sendai-report">Sendai Report</option>
+              <option value="donation-report">Donation(s) Report</option>
+            </select>
+          </div>
+          
+          <div class="row mb-3">
+            <label class="form-label col-4 fw-bold"
+              for="field_dateFrom">Date From</label>
+            <input id="field_dateFrom" data-cy="dateFrom" type="date" class="form-control col"
+              name="dateFrom" formControlName="dateFrom" placeholder="YYYY-MM-DD" />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label col-4 fw-bold"
+              for="field_dateTo">Date To</label>
+            <input id="field_dateTo" data-cy="dateTo" type="date" class="form-control col"
+              name="dateTo" formControlName="dateTo" placeholder="YYYY-MM-DD" />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label col-4 fw-bold" for="field_fileFormat">File Type</label>
+            <select class="form-control col" required name="fileFormat" formControlName="fileFormat" id="field_fileFormat" data-cy="fileFormat">
+              <option value="pdf">PDF</option>
+              <option value="xlsx">XLSX</option>
+            </select>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4"></div>
+            <div class="col p-0">      
+              <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="form.invalid"
+              class="btn btn-primary"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Generate</span>
+            </button>
+            </div>
+          </div>
+
+        </section>
+      </form>
+
+      <hr>
+
+      <section>
+        <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 800px; height: 500px"
+        ></pdf-viewer>
+      </section>
+
+      <hr>
+
+    </div>
+  </div>

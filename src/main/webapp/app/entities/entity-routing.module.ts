@@ -18,6 +18,11 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./report/report.module').then(m => m.ReportModule),
       },
       {
+        path: 'custom-report',
+        data: { pageTitle: 'sendaiMonitorApp.report.home.title' },
+        loadChildren: () => import('./custom-report/custom-report.module').then(m => m.CustomReportModule),
+      },
+      {
         path: 'project',
         data: { pageTitle: 'sendaiMonitorApp.project.home.title' },
         loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
