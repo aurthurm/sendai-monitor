@@ -32,12 +32,12 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="donorId">
+          <!-- <th scope="col" jhiSortBy="donorId">
             <span jhiTranslate="sendaiMonitorApp.donation.donorId">Donor Id</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="disasterId">
             <span jhiTranslate="sendaiMonitorApp.donation.disasterId">Disaster Id</span> <fa-icon icon="sort"></fa-icon>
-          </th>
+          </th> -->
           <th scope="col" jhiSortBy="name">
             <span jhiTranslate="sendaiMonitorApp.donation.name">Name</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -52,11 +52,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let donation of donations; trackBy: trackDonorId" data-cy="entityTable">
-          <td>
+          <!-- <td>
             <a [routerLink]="['/donation', donation.donorId, 'view']">{{ donation.donorId }}</a>
           </td>
-          <td>{{ donation.disasterId }}</td>
-          <td>{{ donation.name }}</td>
+          <td>{{ donation.disasterId }}</td> -->
+          <td><a [routerLink]="['/donation', donation.donorId, 'view']">{{ donation.name }}</a></td>
           <td>{{ donation.type }}</td>
           <td>{{ donation.valueOfDonation }}</td>
           <td class="text-end">

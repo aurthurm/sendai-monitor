@@ -57,6 +57,22 @@ export class CustomReportDetailComponent implements OnInit {
       })
     }
 
+    if(data.reportName==="dwelling-report"){
+      this.reportService.downloadHousehold(data?.fileFormat, data).subscribe(res => {
+        const buffer: any = res.body;
+        const filed = new Blob([buffer], { 
+          type: data?.fileFormat === "pdf" ? 'application/pdf' : 'application/vnd.ms-excel'
+        });
+        const fileURL = URL.createObjectURL(filed);
+        if(data?.fileFormat === "pdf"){
+          this.pdfSrc = fileURL;
+          window.open(fileURL, '', '');
+        } else {
+          window.open(fileURL, '', '');
+        }
+      })
+    }
+
     if(data.reportName==="donation-report"){
       this.reportService.downloadDonationLineList(data.fileFormat, data).subscribe(res => {
         const buffer: any = res.body;

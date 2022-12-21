@@ -14,6 +14,8 @@ export class CustomReportService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/sendai-monitor');
   protected resourceAggregateUrl = this.applicationConfigService.getEndpointFor('api/sendai-monitor-dcp');
   protected resourceCrops = this.applicationConfigService.getEndpointFor('api/sendai-monitor-crops');
+  protected resourceHousehold = this.applicationConfigService.getEndpointFor('api/sendai-monitor-household');
+
   protected resourceDonationLineListing = this.applicationConfigService.getEndpointFor('api/donation-line-listing');
 
   
@@ -23,6 +25,15 @@ export class CustomReportService {
   downloadCrops(type: string, req?: any): Observable<HttpResponse<{}>> {
     const options = createRequestOption(req);
     return this.http.get(`${this.resourceCrops}/${type}`, {
+      params: options, 
+      observe: 'response',
+      responseType: 'arraybuffer', // 'blob'
+    });
+  }
+
+  downloadHousehold(type: string, req?: any): Observable<HttpResponse<{}>> {
+    const options = createRequestOption(req);
+    return this.http.get(`${this.resourceHousehold}/${type}`, {
       params: options, 
       observe: 'response',
       responseType: 'arraybuffer', // 'blob'
