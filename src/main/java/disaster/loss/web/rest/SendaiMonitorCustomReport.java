@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import disaster.loss.service.dto.LineListingFiltersDTO;
 import disaster.loss.service.impl.SendaiMonitorCustomReportImpl;
 import disaster.loss.service.impl.SendaiMonitorHouseholdCustomReportImpl;
+import disaster.loss.service.impl.SendaiMonitorInfrastructureCustomReportImpl;
 import net.sf.jasperreports.engine.JRException;
 
 @RestController
@@ -27,6 +28,9 @@ public class SendaiMonitorCustomReport {
     
     @Autowired
     private SendaiMonitorHouseholdCustomReportImpl sendaiMonitorHouseholdCustomReportImpl;
+    
+    @Autowired
+    private SendaiMonitorInfrastructureCustomReportImpl sendaiMonitorInfrastructureCustomReportImpl;
 
     @GetMapping("/api/sendai-monitor-crops/{format}")
     public ResponseEntity<InputStreamResource> generateReportCrops(HttpServletResponse response, @PathVariable String format, LineListingFiltersDTO filters)
@@ -40,6 +44,13 @@ public class SendaiMonitorCustomReport {
         throws JRException, IOException {
         log.debug("sendai-monitor-house hold: {}", filters);
         return sendaiMonitorHouseholdCustomReportImpl.exportReport(response, format, filters);
+    }
+    
+    @GetMapping("/api/sendai-monitor-infra/{format}")
+    public ResponseEntity<InputStreamResource> generateReportInfra(HttpServletResponse response, @PathVariable String format, LineListingFiltersDTO filters)
+        throws JRException, IOException {
+        log.debug("sendai-monitor-house hold: {}", filters);
+        return sendaiMonitorInfrastructureCustomReportImpl.exportReport(response, format, filters);
     }
     
 }
