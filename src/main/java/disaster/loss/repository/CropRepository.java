@@ -18,4 +18,7 @@ public interface CropRepository extends JpaRepository<Crop, String> {
 	Page<Crop> findByDisasterId(String disasterId, Pageable pageable);
 
 	List<Crop> findByDisasterIdAndHecterageAffectedIsNotNullOrEstimatedLossIsNotNull(String disasterId);
+	
+	List<Crop> findByDisasterIdOrderByCropTypeName(String disasterId);
+
 }

@@ -1,5 +1,6 @@
 package disaster.loss.repository;
 
+import disaster.loss.domain.Disaster;
 import disaster.loss.domain.LiveStock;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LiveStockRepository extends JpaRepository<LiveStock, String> {
     Page<LiveStock> findByDisasterId(String disasterId, Pageable pageable);
+
+	List<LiveStock> findByDisasterIdOrderByLiveStockTypeName(String disasterId);
 
 	//List<LiveStock> findByDisasterIdAndLiveStockAffectedIsNotNullOrEstimatedLossIsNotNull(String disasterId);
 }

@@ -85,7 +85,7 @@ public class SendaiMonitorIndicatorsReportImpl {
 	HelperUtils helperUtils;
 
 	public ResponseEntity<InputStreamResource> exportReport(HttpServletResponse response, String reportFormat,
-			List<String> disasterIds) throws JRException, IOException {
+			String disasterId) throws JRException, IOException {
 
 		try {
 			log.debug("Request to generate report");
@@ -99,91 +99,94 @@ public class SendaiMonitorIndicatorsReportImpl {
 			rpt.setDate(LocalDate.now().toString());
 
 			List<DisasterDetailListDTO> co = new ArrayList<DisasterDetailListDTO>();
-			List<Disaster> disasters = disasterRepository.findByDisasterIdIn(disasterIds);
+			Disaster disaster = disasterRepository.findByDisasterId(disasterId);
 
-			for (Disaster disaster : disasters) {
-				DisasterDetailListDTO res = new DisasterDetailListDTO();
+			DisasterDetailListDTO res = new DisasterDetailListDTO();
 
-				res.setDisasterName(disaster.getName());
-				res.setCaseNumber(disaster.getCaseId());
-				log.debug("Request to generate report before helper {}:", disaster.getCaseId());
+			res.setDisasterName(disaster.getName());
+			res.setCaseNumber(disaster.getCaseId());
+			log.debug("Request to generate report before helper {}:", disaster.getCaseId());
 
-				if (disaster.getLocation() != null) {
-					res.setLocationName(
-							helperUtils.getLocationName(disaster.getLocation().toString(), disaster.getLocationId()));
-				}
+			if (disaster.getLocation() != null) {
+				res.setLocationName(
+						helperUtils.getLocationName(disaster.getLocation().toString(), disaster.getLocationId()));
+			}
 
-				res.setDisasterCategory(disaster.getDisasterCategory().getName());
-				res.setDisasterType(disaster.getDisasterType().getName());
+			res.setDisasterCategory(disaster.getDisasterCategory().getName());
+			res.setDisasterType(disaster.getDisasterType().getName());
 
-				if (disaster.getCause() != null) {
-					res.setCause(disaster.getCause());
-				}
+			if (disaster.getCause() != null) {
+				res.setCause(disaster.getCause());
+			}
 
-				if (disaster.getDescription() != null) {
-					res.setDescription(disaster.getDescription());
-				}
+			if (disaster.getDescription() != null) {
+				res.setDescription(disaster.getDescription());
+			}
 
-				log.debug("Request to disaster details");
-				List<HumanPopulationFaltenerDTO> flattened = new ArrayList<>();
+			log.debug("Request to disaster details");
+			List<HumanPopulationFaltenerDTO> flattened = new ArrayList<>();
 
-				List<HumanPopulation> hm = humanPopulationRepository
-						.findAllByDisasterIdOrderByPopulationTypeAscDisabledAsc(disaster.getDisasterId());
+			/*
+			 * List<HumanPopulation> hm = humanPopulationRepository
+			 * .findAllByDisasterIdOrderByPopulationTypeAscDisabledAsc(disaster.
+			 * getDisasterId());
+			 */
 
-				List<PopulationDisabilityCategoryDTO> categories = helperUtils.getHumanPopulationCategories();
+			List<PopulationDisabilityCategoryDTO> categories = helperUtils.getHumanPopulationCategories();
 
-				for (PopulationDisabilityCategoryDTO cat : categories) {
+			for (PopulationDisabilityCategoryDTO cat : categories) {
 
-					Integer value = 0;
-					List<HumanPopulation> humanP = humanPopulationRepository
-							.getHumanPopulationByTypeDisabilityAndDisasterId(cat.getPopulationType().toString(),
-									cat.getDisablity(), disaster.getDisasterId(), value);
+				Integer value = 0;
+				List<HumanPopulation> humanP = humanPopulationRepository
+						.getHumanPopulationByTypeDisabilityAndDisasterId(cat.getPopulationType().toString(),
+								cat.getDisablity(), disaster.getDisasterId(), value);
 
-					HumanPopulationFaltenerDTO hDto = new HumanPopulationFaltenerDTO();
-					for (HumanPopulation p : humanP) {
-						String populationName = cat.getPopulationType().toString().replace("_", " ");
-						String ageGroup = cat.getAgeRange();
-						String populationType = populationName + " " + ageGroup;
-						hDto.setPopulationType(populationType);
-						hDto.setDisability(cat.getDisablity());
+				HumanPopulationFaltenerDTO hDto = new HumanPopulationFaltenerDTO();
+				for (HumanPopulation p : humanP) {
+					String populationName = cat.getPopulationType().toString().replace("_", " ");
+					String ageGroup = cat.getAgeRange();
+					String populationType = populationName + " " + ageGroup;
+					hDto.setPopulationType(populationType);
+					hDto.setDisability(cat.getDisablity());
 
-						if (p.getHumanPopulationDisasterCategoryName().equals("deaths")) {
-							hDto.setDeathsValue(p.getValue());
-						}
-
-						if (p.getHumanPopulationDisasterCategoryName().equals("ill")) {
-							hDto.setMissingValue(p.getValue());
-						}
-
-						if (p.getHumanPopulationDisasterCategoryName().equals("missing")) {
-							hDto.setDisplacedValue(p.getValue());
-						}
-
-						if (p.getHumanPopulationDisasterCategoryName().equals("displaced")) {
-							hDto.setIllValue(p.getValue());
-						}
-
-						if (p.getHumanPopulationDisasterCategoryName().equals("injuries")) {
-							hDto.setInjuriesValue(p.getValue());
-						}
-
+					if (p.getHumanPopulationDisasterCategoryName().equals("deaths")) {
+						hDto.setDeathsValue(p.getValue());
 					}
-					flattened.add(hDto);
+
+					if (p.getHumanPopulationDisasterCategoryName().equals("ill")) {
+						hDto.setMissingValue(p.getValue());
+					}
+
+					if (p.getHumanPopulationDisasterCategoryName().equals("missing")) {
+						hDto.setDisplacedValue(p.getValue());
+					}
+
+					if (p.getHumanPopulationDisasterCategoryName().equals("displaced")) {
+						hDto.setIllValue(p.getValue());
+					}
+
+					if (p.getHumanPopulationDisasterCategoryName().equals("injuries")) {
+						hDto.setInjuriesValue(p.getValue());
+					}
 
 				}
+				flattened.add(hDto);
 
-				flattened.sort(Comparator.comparing(HumanPopulationFaltenerDTO::getPopulationType)
-						.thenComparing(HumanPopulationFaltenerDTO::getDisability));
+			}
 
-				res.setHumanPopulation(flattened);
+			flattened.sort(Comparator.comparing(HumanPopulationFaltenerDTO::getPopulationType)
+					.thenComparing(HumanPopulationFaltenerDTO::getDisability));
 
-				List<Infrastructure> inf = infrastructureRepository
-						.findByDisasterIdAndDamagedIsNotNullOrDestroyedIsNotNullOrValueIsNotNullOrderByInfractructureType(
-								disaster.getDisasterId());
+			res.setHumanPopulation(flattened);
 
-				List<InfrastructureDTO> infList = new ArrayList<>();
-				for (Infrastructure i : inf) {
-					InfrastructureDTO infDTO = new InfrastructureDTO();
+			List<Infrastructure> inf = infrastructureRepository
+					.findByDisasterIdOrderByInfractructureTypeName(disaster.getDisasterId());
+
+			List<InfrastructureDTO> infList = new ArrayList<>();
+			for (Infrastructure i : inf) {
+				InfrastructureDTO infDTO = new InfrastructureDTO();
+
+				if (i.getDamaged() != null || i.getDestroyed() != null || i.getValue() != null) {
 					infDTO.setDamaged(i.getDamaged());
 					infDTO.setDestroyed(i.getDestroyed());
 					infDTO.setValue(i.getValue());
@@ -191,41 +194,50 @@ public class SendaiMonitorIndicatorsReportImpl {
 					infList.add(infDTO);
 				}
 
-				res.setInfrastructure(infList);
+			}
 
-				/*
-				 * List<LiveStock> lv = liveStockRepository
-				 * .findByDisasterIdAndLiveStockAffectedIsNotNullOrEstimatedLossIsNotNull(
-				 * disaster.getDisasterId());
-				 */
+			res.setInfrastructure(infList);
 
-				List<LiveStockDTO> lvList = new ArrayList<>();
-				/*
-				 * for (LiveStock l : lv) { LiveStockDTO lvDTO = new LiveStockDTO();
-				 * lvDTO.setEstimatedLoss(l.getEstimatedLoss()); lvDTO.setDied(l.getDied());
-				 * lvDTO.setLiveStockTypeId(l.getLiveStockType().getName()); lvList.add(lvDTO);
-				 * }
-				 */
+			List<LiveStock> lv = liveStockRepository.findByDisasterIdOrderByLiveStockTypeName(disasterId);
 
-				res.setLiveStocks(lvList);
+			log.debug("liveStock Repository ********************: {} ", lv);
 
-				List<Crop> crops = cropRepository.findByDisasterIdAndHecterageAffectedIsNotNullOrEstimatedLossIsNotNull(
-						disaster.getDisasterId());
+			List<LiveStockDTO> lvList = new ArrayList<>();
 
-				List<CropDTO> cpList = new ArrayList<>();
-				for (Crop crop : crops) {
-					CropDTO cropDTO = new CropDTO();
+			for (LiveStock l : lv) {
+				LiveStockDTO lvDTO = new LiveStockDTO();
+				if (l.getEstimatedLoss() != null || l.getDied() != null) {
+
+					lvDTO.setEstimatedLoss(l.getEstimatedLoss());
+					lvDTO.setDied(l.getDied());
+					lvDTO.setLiveStockTypeId(l.getLiveStockType().getName());
+					lvList.add(lvDTO);
+				}
+
+			}
+
+			res.setLiveStocks(lvList);
+
+			List<Crop> crops = cropRepository.findByDisasterIdOrderByCropTypeName(disasterId);
+
+			log.debug("crop Repository ********************: {} ", crops);
+
+			List<CropDTO> cpList = new ArrayList<>();
+			for (Crop crop : crops) {
+				CropDTO cropDTO = new CropDTO();
+
+				if (crop.getEstimatedLoss() != null || crop.getHecterageAffected() != null) {
 					cropDTO.setEstimatedLoss(crop.getEstimatedLoss());
 					cropDTO.setHecterageAffected(crop.getHecterageAffected());
 					cropDTO.setCropTypeId(crop.getCropType().getName());
 					cpList.add(cropDTO);
 				}
 
-				res.setCrops(cpList);
-
-				co.add(res);
-
 			}
+
+			res.setCrops(cpList);
+
+			co.add(res);
 
 			rpt.setDocumentList(co);
 
@@ -234,8 +246,8 @@ public class SendaiMonitorIndicatorsReportImpl {
 
 			String reportName = "patient-report(s)" + LocalDateTime.now().toString();
 
-			//FileWriter filez = new FileWriter(reportName);
-			
+			// FileWriter filez = new FileWriter(reportName);
+
 			OutputStreamWriter filez = new OutputStreamWriter(new FileOutputStream(reportName), StandardCharsets.UTF_8);
 			filez.write(json.toString());
 			filez.close();

@@ -21,6 +21,9 @@ public interface InfrastructureRepository extends JpaRepository<Infrastructure, 
 
 	List<Infrastructure> findByDisasterIdAndDamagedIsNotNullOrDestroyedIsNotNullOrValueIsNotNullOrderByInfractructureType(
 			String disasterId);
+	
+	List<Infrastructure> findByDisasterIdOrderByInfractructureTypeName(
+			String disasterId);
 
 	Infrastructure findByDisasterIdAndInfractructureTypeId(String disasterId, String infractructureTypeId);
 

@@ -30,9 +30,9 @@ public class SendaiMonitorDcpReportResource {
 
 	@PostMapping("/sendai-monitor-dcp/{disasterId}/{format}")
 	public ResponseEntity<InputStreamResource> generateReport(HttpServletResponse response, @PathVariable String format,
-			@RequestBody List<String> dosasterIds) throws JRException, IOException {
-		log.debug("Disaster filters: {}", dosasterIds);
-		return service.exportReport(response, format, dosasterIds);
+			@PathVariable String disasterId) throws JRException, IOException {
+		log.debug("Disaster filters: {}", disasterId);
+		return service.exportReport(response, format, disasterId);
 	}
 
 }
