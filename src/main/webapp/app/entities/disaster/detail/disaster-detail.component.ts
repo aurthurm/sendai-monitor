@@ -178,7 +178,7 @@ export class DisasterDetailComponent implements OnInit {
 
   downloadAggregateReport(fileType: string, id: string): void {
     this.fetchingReport = true;
-    this.reportService.downloadAggregate(fileType, [id]).subscribe(res => {
+    this.reportService.downloadAggregate(fileType,id, [id]).subscribe(res => {
       this.fetchingReport = false;
       const buffer: any = res.body;
       const filed = new Blob([buffer], { 

@@ -38,8 +38,8 @@ export class ReportService {
     });
   }
 
-  downloadAggregate(type: string, copy: any): Observable<HttpResponse<{}>> {
-    return this.http.post(`${this.resourceAggregateUrl}/${type}`, copy, {
+  downloadAggregate(type: string, id: string, copy: any): Observable<HttpResponse<{}>> {
+    return this.http.post(`${this.resourceAggregateUrl+"/"+id}/${type}`, copy, {
       observe: 'response',
       responseType: 'arraybuffer', // 'blob'
     });
