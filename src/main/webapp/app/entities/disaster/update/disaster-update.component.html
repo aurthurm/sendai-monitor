@@ -58,7 +58,6 @@
         <div class="row">
           <!-- Left Column -->
           <div class="col">
-<pre>{{editForm.get('targetPopulation')!.value}}</pre>
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_caseId">Location</label>
               <input required type="text" class="form-control col" name="caseId" id="field_caseId" data-cy="caseId"
@@ -148,11 +147,14 @@
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_affectedPopulation"
                 jhiTranslate="sendaiMonitorApp.disaster.affectedPopulation">Affected Population</label>
-              <input type="number" min="0" class="form-control col"  name="affectedPopulation" id="field_affectedPopulation"
+              <input type="number" min="0" max="{{editForm.get('targetPopulation')!.value}}" class="form-control col"  name="affectedPopulation" id="field_affectedPopulation"
                 data-cy="affectedPopulation" formControlName="affectedPopulation" />
-                <!-- <span style="color:red" *ngIf="editForm.get('targetPopulation').$dirty && editForm.get('targetPopulation').$invalid">
+                <!-- <span style="color:red" *ngIf="editForm.get('affectedPopulation')!.value>editForm.get('targetPopulation')!.value">
                  
               </span> -->
+              <div class="errors" *ngIf="editForm.get('targetPopulation')?.invalid && editForm.get('targetPopulation')?.dirty">
+                Problem detected
+            </div>
             </div>
             <div class="row mb-3">
               <label class="form-label col-4 fw-bold" for="field_directEconomicLoss">Direct Economic Loss</label>
