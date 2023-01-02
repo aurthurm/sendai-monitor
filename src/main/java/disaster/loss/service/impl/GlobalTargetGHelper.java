@@ -27,37 +27,37 @@ public class GlobalTargetGHelper {
 		ISendaiAggregateDTO damagedToCriticalInfrastucture = sendaiMonitorGroupByMonthRepository
 				.damagedToCriticalInfrastucture(dateFrom, dateTo);
 		beans.add(new CrossTab("", damagedToCriticalInfrastucture.getTitle(),
-				getQueryResult(damagedToCriticalInfrastucture)));
+				"0"));
 
 		// D-2 Number of destroyed or damaged health facilities attributed to disasters.
 		ISendaiAggregateDTO destroyedOrDamagedHealthFacilities = sendaiMonitorGroupByMonthRepository
 				.destroyedOrDamagedHealthFacilities(dateFrom, dateTo);
 		beans.add(new CrossTab("", destroyedOrDamagedHealthFacilities.getTitle(),
-				getQueryResult(destroyedOrDamagedHealthFacilities)));
+				"0"));
 
 		// D-3 Number of destroyed or damaged educational facilities attributed to
 		// disasters.
 		ISendaiAggregateDTO damagedOrDestroyedEducationalFacilities = sendaiMonitorGroupByMonthRepository
 				.damagedOrDestroyedEducationalFacilities(dateFrom, dateTo);
 		beans.add(new CrossTab("", damagedOrDestroyedEducationalFacilities.getTitle(),
-				getQueryResult(damagedOrDestroyedEducationalFacilities)));
+				"0"));
 
 		// D-4 Number of other destroyed or damaged critical infrastructure units and
 		// facilities attributed to disasters.
 		ISendaiAggregateDTO OtherdamagedOrDestroyed = sendaiMonitorGroupByMonthRepository
 				.OtherdamagedOrDestroyed(dateFrom, dateTo);
-		beans.add(new CrossTab("", OtherdamagedOrDestroyed.getTitle(), getQueryResult(OtherdamagedOrDestroyed)));
+		beans.add(new CrossTab("", OtherdamagedOrDestroyed.getTitle(), "0"));
 
 		// number of missing persons
 		ISendaiAggregateDTO disruptionsToBasicDervices = sendaiMonitorGroupByMonthRepository
 				.disruptionsToBasicDervices(dateFrom, dateTo);
-		beans.add(new CrossTab("", disruptionsToBasicDervices.getTitle(), getQueryResult(disruptionsToBasicDervices)));
+		beans.add(new CrossTab("", disruptionsToBasicDervices.getTitle(), "0"));
 
 		// number of missing persons
 		ISendaiAggregateDTO disruptionsToEducationalServices = sendaiMonitorGroupByMonthRepository
 				.disruptionsToEducationalServices(dateFrom, dateTo);
 		beans.add(new CrossTab("", disruptionsToEducationalServices.getTitle(),
-				getQueryResult(disruptionsToEducationalServices)));
+				"0"));
 
 	}
 

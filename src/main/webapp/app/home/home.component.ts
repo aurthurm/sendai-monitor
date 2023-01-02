@@ -72,9 +72,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
         allAreas: false,
         data: [
-          ['zw-ma', 0], ['zw-ms', 0], ['zw-bu', 12], ['zw-mv', 13],
-          ['zw-mw', 14], ['zw-mc', 15], ['zw-ha', 16], ['zw-mn', 17],
-          ['zw-mi', 18], ['zw-me', 19]
+          ['zw-ma', 26], ['zw-ms', 0], ['zw-bu', 12], ['zw-mv', 0],
+          ['zw-mw', 0], ['zw-mc', 0], ['zw-ha', 17], ['zw-mn', 0],
+          ['zw-mi', 0], ['zw-me', 0]
         ]
 
       } as Highcharts.SeriesMapOptions,
@@ -88,16 +88,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
         data: [
           {
-            lat: -17.824858,
-            lon: 31.053028
-          },
-          {
-            lat: -20.153625,
-            lon: 28.568127
-          },
-          {
-            lat: -20.899999,
-            lon: 28.800000000000068
+            lat: -18.97476000,
+            lon: 32.65556000
           }
         ]
       }
