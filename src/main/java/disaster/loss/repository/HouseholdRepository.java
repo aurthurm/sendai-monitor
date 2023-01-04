@@ -1,5 +1,7 @@
 package disaster.loss.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +19,7 @@ public interface HouseholdRepository extends JpaRepository<Household, String> {
 	Page<Household> findByDisasterId(String disasterId, Pageable pageable);
 
 	Household findByDisasterIdAndHouseholdTypeId(String disasterId, String householdTypeId);
+
+	List<Household> findByDisasterIdOrderByHouseholdTypeName(String disasterId);
 
 }

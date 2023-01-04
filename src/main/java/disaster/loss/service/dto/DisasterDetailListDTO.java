@@ -2,6 +2,8 @@ package disaster.loss.service.dto;
 
 import java.util.List;
 
+import disaster.loss.domain.Household;
+
 public class DisasterDetailListDTO {
 
 	private String disasterName;
@@ -27,6 +29,8 @@ public class DisasterDetailListDTO {
 	private List<LiveStockDTO> liveStocks;
 
 	private List<CropDTO> crops;
+
+	private List<HouseholdDTO> households;
 
 	public String getDisasterName() {
 		return disasterName;
@@ -122,6 +126,23 @@ public class DisasterDetailListDTO {
 
 	public void setCrops(List<CropDTO> crops) {
 		this.crops = crops;
+	}
+
+	public List<HouseholdDTO> getHouseholds() {
+		return households;
+	}
+
+	public void setHouseholds(List<HouseholdDTO> households) {
+		this.households = households;
+	}
+
+	@Override
+	public String toString() {
+		return "DisasterDetailListDTO [disasterName=" + disasterName + ", caseNumber=" + caseNumber + ", locationName="
+				+ locationName + ", disasterCategory=" + disasterCategory + ", disasterType=" + disasterType
+				+ ", cause=" + cause + ", interventions=" + interventions + ", description=" + description
+				+ ", humanPopulation=" + humanPopulation + ", infrastructure=" + infrastructure + ", liveStocks="
+				+ liveStocks + ", crops=" + crops + ", households=" + households + "]";
 	}
 
 }

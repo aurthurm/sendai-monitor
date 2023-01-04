@@ -3,7 +3,6 @@ package disaster.loss.service.impl;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -27,13 +26,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import disaster.loss.domain.Crop;
 import disaster.loss.domain.Disaster;
+import disaster.loss.domain.Household;
 import disaster.loss.domain.HumanPopulation;
 import disaster.loss.domain.Infrastructure;
 import disaster.loss.domain.LiveStock;
 import disaster.loss.repository.CropRepository;
 import disaster.loss.repository.DisasterRepository;
+import disaster.loss.repository.HouseholdRepository;
 import disaster.loss.repository.HumanPopulationRepository;
 import disaster.loss.repository.InfrastructureRepository;
 import disaster.loss.repository.LiveStockRepository;
@@ -41,12 +43,12 @@ import disaster.loss.repository.UserRepository;
 import disaster.loss.service.dto.CropDTO;
 import disaster.loss.service.dto.DisasterDetailListDTO;
 import disaster.loss.service.dto.DisasterReportDTO;
+import disaster.loss.service.dto.HouseholdDTO;
 import disaster.loss.service.dto.HumanPopulationFaltenerDTO;
 import disaster.loss.service.dto.InfrastructureDTO;
 import disaster.loss.service.dto.LiveStockDTO;
 import disaster.loss.service.dto.PopulationDisabilityCategoryDTO;
 import disaster.loss.utils.HelperUtils;
-
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
@@ -77,6 +79,9 @@ public class SendaiMonitorIndicatorsReportImpl {
 
 	@Autowired
 	LiveStockRepository liveStockRepository;
+
+	@Autowired
+	HouseholdRepository householdRepository;
 
 	@Autowired
 	CropRepository cropRepository;
@@ -125,12 +130,6 @@ public class SendaiMonitorIndicatorsReportImpl {
 
 			log.debug("Request to disaster details");
 			List<HumanPopulationFaltenerDTO> flattened = new ArrayList<>();
-
-			/*
-			 * List<HumanPopulation> hm = humanPopulationRepository
-			 * .findAllByDisasterIdOrderByPopulationTypeAscDisabledAsc(disaster.
-			 * getDisasterId());
-			 */
 
 			List<PopulationDisabilityCategoryDTO> categories = helperUtils.getHumanPopulationCategories();
 
@@ -236,6 +235,25 @@ public class SendaiMonitorIndicatorsReportImpl {
 			}
 
 			res.setCrops(cpList);
+
+			List<Household> houseHolds = householdRepository.findByDisasterIdOrderByHouseholdTypeName(disasterId);
+
+			List<HouseholdDTO> houseHoldsList = new ArrayList<>();
+
+			for (Household h : houseHolds) {
+				HouseholdDTO household = new HouseholdDTO();
+
+				household.setHouseholdTypeName(h.getHouseholdType().getName());
+				household.setNumberOfHouseholds(h.getNumberOfHouseholds());
+				household.setNumberChildHeaded(h.getNumberChildHeaded());
+				household.setNumberFemaleHeaded(h.getNumberFemaleHeaded());
+				household.setNumberOfPeopleAffected(h.getNumberOfPeopleAffected());
+				
+				houseHoldsList.add(household);
+
+			}
+			
+			res.setHouseholds(houseHoldsList);
 
 			co.add(res);
 
