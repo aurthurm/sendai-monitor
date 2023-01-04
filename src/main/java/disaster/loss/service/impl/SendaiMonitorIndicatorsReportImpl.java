@@ -248,11 +248,11 @@ public class SendaiMonitorIndicatorsReportImpl {
 				household.setNumberChildHeaded(h.getNumberChildHeaded());
 				household.setNumberFemaleHeaded(h.getNumberFemaleHeaded());
 				household.setNumberOfPeopleAffected(h.getNumberOfPeopleAffected());
-				
+
 				houseHoldsList.add(household);
 
 			}
-			
+
 			res.setHouseholds(houseHoldsList);
 
 			co.add(res);
