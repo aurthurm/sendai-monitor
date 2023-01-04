@@ -914,7 +914,15 @@ Harare, Zimbabwe.]]></text>
 					</datasetRun>
 					<jr:column width="180" uuid="3a8c338c-7df3-48d6-8cf1-36263dc51c58">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-						<jr:tableHeader style="Table 4_TH" height="30" rowSpan="1"/>
+						<jr:tableHeader style="Table 4_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="180" height="30" uuid="cb4542af-5e0e-4406-9a50-1917e9bbd7c1"/>
+								<textElement textAlignment="Center">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Dwellings]]></text>
+							</staticText>
+						</jr:tableHeader>
 						<jr:tableFooter style="Table 4_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table 4_CH" height="30" rowSpan="1">
 							<staticText>
